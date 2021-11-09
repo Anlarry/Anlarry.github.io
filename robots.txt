@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: Anlarry.github.io/sitemap.xml
+Sitemap: https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/sitemap.xml

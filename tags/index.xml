@@ -2,89 +2,89 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Hi-^_^</title>
-    <link>Anlarry.github.io/tags/</link>
+    <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/</link>
     <description>Recent content in Tags on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="Anlarry.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Active Learning</title>
-      <link>Anlarry.github.io/tags/active-learning/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/active-learning/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/active-learning/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/active-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ML for Sys</title>
-      <link>Anlarry.github.io/tags/ml-for-sys/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/ml-for-sys/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/ml-for-sys/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/ml-for-sys/</guid>
       <description></description>
     </item>
     
     <item>
       <title>IPC</title>
-      <link>Anlarry.github.io/tags/ipc/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/ipc/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
       
-      <guid>Anlarry.github.io/tags/ipc/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/ipc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>搬家</title>
-      <link>Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%90%AC%E5%AE%B6/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
       
-      <guid>Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%90%AC%E5%AE%B6/</guid>
       <description></description>
     </item>
     
     <item>
       <title>计算几何</title>
-      <link>Anlarry.github.io/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</link>
       <pubDate>Thu, 27 Aug 2020 00:01:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</guid>
       <description></description>
     </item>
     
     <item>
       <title>STRING</title>
-      <link>Anlarry.github.io/tags/string/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/string/</link>
       <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/string/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/string/</guid>
       <description></description>
     </item>
     
     <item>
       <title>数论</title>
-      <link>Anlarry.github.io/tags/%E6%95%B0%E8%AE%BA/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%95%B0%E8%AE%BA/</link>
       <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/%E6%95%B0%E8%AE%BA/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%95%B0%E8%AE%BA/</guid>
       <description></description>
     </item>
     
     <item>
       <title>FFT</title>
-      <link>Anlarry.github.io/tags/fft/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/fft/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/fft/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/fft/</guid>
       <description></description>
     </item>
     
     <item>
       <title>POLYA</title>
-      <link>Anlarry.github.io/tags/polya/</link>
+      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/polya/</link>
       <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
       
-      <guid>Anlarry.github.io/tags/polya/</guid>
+      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/polya/</guid>
       <description></description>
     </item>
     
