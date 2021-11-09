@@ -11,8 +11,12 @@
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/Anlarry.github.io/assets/css/stylesheet.min.5e2b4101351c21e906f398ae96901791830f58d430f96f2659dab7eaef7b3cb7.css integrity="sha256-XitBATUcIekG85iulpAXkYMPWNQw+W8mWdq36u97PLc=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/Anlarry.github.io/assets/css/stylesheet.min.385897152d1020541031b34f0bce4211dae827514dbddb6e6707a26925762302.css integrity="sha256-OFiXFS0QIFQQMbNPC85CEdroJ1FNvdtuZweiaSV2IwI=" rel="preload stylesheet" as=style>
 <link rel=preload href=/icon/ai512.png as=image>
+<link ref=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css>
+<script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js></script>
+<script>hljs.highlightAll()</script>
+<link href="https://fonts.googleapis.com/css?family=Source Code Pro" rel=stylesheet>
 <link rel=icon href=Anlarry.github.io/icon/ai512.png>
 <link rel=icon type=image/png sizes=16x16 href=Anlarry.github.io/icon/ai16.png>
 <link rel=icon type=image/png sizes=32x32 href=Anlarry.github.io/icon/ai32.png>
@@ -33,6 +37,10 @@
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="ACM/ICPC">
 <meta name=twitter:description content="this is Jiali's Tech Blog">
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 </head>
 <body class=list id=top>
 <script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
@@ -94,7 +102,7 @@ $$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简�
 为了确保复杂度不会太高，需要用点分治
 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>#include &lt;memory.h>#include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>// #include &lt;unordered_map> #define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
 </section>
-<footer class=entry-footer>📝 March 1, 2020&nbsp;·&nbsp;4 min</footer>
+<footer class=entry-footer>📝 March 1, 2020&nbsp;·&nbsp;⌛ 4 min</footer>
 <a class=entry-link aria-label="post link to CodeChef - PRIMEDST" href=Anlarry.github.io/posts/acm-icpc/codechef-primedst/></a>
 </article>
 <article class="post-entry tag-entry">
@@ -121,7 +129,7 @@ $a$和$b$有关系$S$,可以记为$aSb$
 2 置换群 2.1 置换群的定义 假设$A={1,2,\dotsc, n}$，通过置换，将$A$中的元素重新排列，得到另一个排列$a_1, a_2, \dotsc, a_n$，可以把这个过程写成
 $$ \left ( \begin{matrix} 1 & 2 & \dotsc & n \ a_1 & a_2 & \dotsc & a_n \end{matrix} \right ) $$...</p>
 </section>
-<footer class=entry-footer>📝 February 14, 2020&nbsp;·&nbsp;5 min</footer>
+<footer class=entry-footer>📝 February 14, 2020&nbsp;·&nbsp;⌛ 5 min</footer>
 <a class=entry-link aria-label="post link to 波里亚计数" href=Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/></a>
 </article>
 <article class="post-entry tag-entry">
@@ -137,7 +145,7 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>#include &lt;memory.h>#include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>#include &lt;unordered_map>#define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
 </section>
-<footer class=entry-footer>📝 February 11, 2020&nbsp;·&nbsp;3 min</footer>
+<footer class=entry-footer>📝 February 11, 2020&nbsp;·&nbsp;⌛ 3 min</footer>
 <a class=entry-link aria-label="post link to Rock Paper Scissors Lizard Spock" href=Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/></a>
 </article>
 <article class="post-entry tag-entry">
@@ -151,7 +159,7 @@ Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP
 记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b'$, 在此处的的代价为 $$ \sum_{i+j=pos+m-1} [a_i \ne b'j ] $$ 而 $$ \sum{i+j=posm-1} a_j * b'_j $$ 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>#include &lt;memory.h>#include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>#include &lt;unordered_map>#define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
 </section>
-<footer class=entry-footer>📝 February 11, 2020&nbsp;·&nbsp;3 min</footer>
+<footer class=entry-footer>📝 February 11, 2020&nbsp;·&nbsp;⌛ 3 min</footer>
 <a class=entry-link aria-label="post link to URAL - 1996" href=Anlarry.github.io/posts/acm-icpc/ural-1996/></a>
 </article>
 <footer class=page-footer>
@@ -161,7 +169,7 @@ Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP
 </footer>
 </main>
 <footer class=footer>
-<span>Jiali Wang</span>
+<span>&copy; 2021 <a href=Anlarry.github.io>Jiali Wang</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
