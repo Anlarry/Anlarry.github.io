@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Hi-^_^</title>
+    <link>/</link>
+    <description>Recent content on Hi-^_^</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Jiali Wang</copyright>
+    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Active Learning for ML Enhanced Database Systems</title>
+      <link>/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/active-learning-for-ml-enhanced-database-systems/</link>
+      <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
+      
+      <guid>/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/active-learning-for-ml-enhanced-database-systems/</guid>
+      <description>figcaption { text-align: center; }  Intro &amp;amp; Background ML模型会因为训练和测试时的数据分布不同，导致很多预测错误。将ML模型优化database也面对这个问题。
+Active learning Active leraning  主动学习采用的方法是，可以在unlabled的数据中再选出一些数据，从orcale得到数据的lable，从新的知识中学习。
+An illustrative example of pool-based active learning  ## Execution cost prediction &amp; Plan regression prediction  ECP是一个回归任务，需要预测执行plan需要的时间。在优化查询中，可以用ECP来寻找最优的plan PRP是一个分类任务，给出两个plan，需要找到哪个plan代价更高  Architecture 在这里oracle可以用database的副本执行plan，获取plan的执行时间。因此不同的plan就有不同的cost。
+ 开始，用户指定budget，之后ADCP获取lable数据时会消耗budget。ADCP获取target data，选出unlabeled data给交给副本执行。获得新知识后retrain ML模型，再对target data数据进行预测，这时错误就会降低。 但是新的环境就有新的问题。active learning需要选出要标注的数据，noise会带来一些问题。因此需要综合考虑cost、robust、以及active learning是最不确定的unlabel数据。 $$ w_x=\frac{u(x)}{c(x)} $$ $c(x)$表示cost，$u(x)$表示uncertainty，因此x的权重可以理解成“uncertainty per cost”。
+同时为了解决noise，转化为概率并加入Gumbel噪音 $$ p(x)=\frac{w_x}{\sum_{x&#39;}w_{x&#39;}} \
+{\rm arg}\ \max\limits_{x} \log p(x)+G_x $$
+另外，还需要减少sample时的冗余。
+Algo &amp; Example  -- Image Render</description>
+    </item>
+    
+    <item>
+      <title>SkyBridge &amp; XPC: two ways for fast IPC</title>
+      <link>/posts/paper-reading/skybridge-xpc/skybridge-xpc/</link>
+      <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
+      
+      <guid>/posts/paper-reading/skybridge-xpc/skybridge-xpc/</guid>
+      <description>Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
+另外在宏内核中也会经常使用IPC，如Android Binder。
+Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
+ seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
+ 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
+在seL4上测试负载，IPC占用的时间是很多的。
+SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
+但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
+ 在虚拟机中运行的进程，如果要访问内存会经过
+GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
+这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
+ 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
+从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
+Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
+在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+something else RootKernel &amp;amp; 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
+illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
+XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+XPC从两个方面提高IPC性能，
+ 让IPC不经过kernel 不复制传递消息  和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Round #664</title>
+      <link>/posts/acm-icpc/codeforces-round-664/</link>
+      <pubDate>Tue, 01 Sep 2020 19:40:00 +0000</pubDate>
+      
+      <guid>/posts/acm-icpc/codeforces-round-664/</guid>
+      <description>Codeforces Round #664  https://codeforces.com/contest/1395
+ A 题意
+给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;//#include &amp;lt;memory.h&amp;gt; #include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;cassert&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout &amp;lt;&amp;lt; #x &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG 	freopen(&amp;#34;in&amp;#34;, &amp;#34;r&amp;#34;, stdin); // freopen(&amp;#34;out&amp;#34;, &amp;#34;w&amp;#34;, stdout); #endif } int main() { file_read(); int T; LL a, b, c, d; scanf(&amp;#34;%d&amp;#34;, &amp;amp;T); while (T--) { cin &amp;gt;&amp;gt; a &amp;gt;&amp;gt; b &amp;gt;&amp;gt; c &amp;gt;&amp;gt; d; LL tot = a + b + c + d; if(tot &amp;amp; 1) { int odd = (a &amp;amp; 1) + (b &amp;amp; 1) + (c &amp;amp; 1) + (d &amp;amp; 1); if(odd == 1) { puts(&amp;#34;Yes&amp;#34;); continue; } if(a &amp;gt; 0 and b &amp;gt; 0 and c &amp;gt; 0) { a--, b--, c--, d+=3; odd = (a &amp;amp; 1) + (b &amp;amp; 1) + (c &amp;amp; 1) + (d &amp;amp; 1); if(odd == 1) { puts(&amp;#34;Yes&amp;#34;); continue; } } puts(&amp;#34;No&amp;#34;); continue; }	else { int odd = (a &amp;amp; 1) + (b &amp;amp; 1) + (c &amp;amp; 1) + (d &amp;amp; 1); if(odd == 0 ) { puts(&amp;#34;Yes&amp;#34;); continue; } if(a &amp;gt; 0 and b &amp;gt; 0 and c &amp;gt; 0 and d &amp;gt; 0) { a--, b--, c--, d += 3; odd = (a &amp;amp; 1) + (b &amp;amp; 1) + (c &amp;amp; 1) + (d &amp;amp; 1); if(odd == 0) { puts(&amp;#34;Yes&amp;#34;); continue; } }	puts(&amp;#34;No&amp;#34;); } } return 0; } B 题意</description>
+    </item>
+    
+    <item>
+      <title>Gym 102501部分题解</title>
+      <link>/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</link>
+      <pubDate>Mon, 31 Aug 2020 21:18:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</guid>
+      <description>Gym - 102501D Gnalcats  https://codeforces.com/gym/102501/problem/D
+ 题意 给两种栈操作判断是否相等,如果两个操作都fail，也认为相等
+Solution 模拟，每个氨基酸一个hash值。通过判断最后栈元素是否对应hash相等，判断操作是否相等
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;//#include &amp;lt;memory.h&amp;gt; #include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;cassert&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout &amp;lt;&amp;lt; #x &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 1e6 + 50; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG 	freopen(&amp;#34;in&amp;#34;, &amp;#34;r&amp;#34;, stdin); // freopen(&amp;#34;out&amp;#34;, &amp;#34;w&amp;#34;, stdout); #endif } #define ULL unsigned long long  struct DNA { struct Node { int l, r; unsigned LL val; Node(){} Node(int l, int r, unsigned LL val) : l(l), r(r), val(val) {} bool complex() const { return l and r; } }tr[MAX]; stack&amp;lt;int&amp;gt; stk; int tot; int num; DNA() : tot(1), num(1) { for(int i = 1; i &amp;lt;= (int)1e5; i++) { tr[tot] = Node(0, 0, num++); stk.</description>
+    </item>
+    
+    <item>
+      <title>Gym 102460L Largest Quadrilateral </title>
+      <link>/posts/acm-icpc/gym-102460l-largest-quadrilateral/</link>
+      <pubDate>Thu, 27 Aug 2020 00:01:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/gym-102460l-largest-quadrilateral/</guid>
+      <description>Gym 102460L Largest Quadrilateral  Largest Quadrilateral
+ 题意 给$n$个点从中选出四个点，使得面积最大
+Solution  首先，肯定是求凸包，要求的点一定在凸包上。 不难联想到凸包对每个边求最大三角形面积的问题，也就是旋转卡壳。 可以将问题转化为，对凸包的每一个对角线$A_iA_j$，求最大面积的两个三角形，$\triangle{A_iA_jP}$, $\triangle{A_iA_jQ}$, 然后就可以枚举对角线，旋转卡壳算最大面积   细节
+ 输出的格式 凸包上应该留下共线的点   #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;//#include &amp;lt;memory.h&amp;gt; #include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;cassert&amp;gt;// #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Round #663</title>
+      <link>/posts/acm-icpc/codeforces-round-663/</link>
+      <pubDate>Mon, 17 Aug 2020 22:42:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/codeforces-round-663/</guid>
+      <description>Codeforces Round #663  http://codeforces.com/contest/1391
+ C 题意
+对于一个排列${p_1, p_2, \dots, p_n}$，对于每个数字$p_i$，向前找第一个大于$p_i$的$p_j$，$i$和$j$连一条边，向后同理。求多少种排列生成的图是有环的
+Solution
+ 对于$p_i$，如果存在$p_j&amp;gt;p_i(j&amp;lt;i)$, $p_k&amp;gt;p_i(k&amp;gt;i)$，那么就是存在环的 那么对于$\forall i$都不成立时，就没有环 此时就是序列的特点就是,数字$n$左边和右边向两边递减 因此排列数就是$n!-2^{n-1}$  #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;cassert&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>Codeforces Round #660</title>
+      <link>/posts/acm-icpc/codeforces-round-660/</link>
+      <pubDate>Wed, 12 Aug 2020 01:01:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/codeforces-round-660/</guid>
+      <description>Codeforces Round #660  https://codeforces.com/contest/1388
+ E 题意
+平面上有一些线段，将他们投影到$x$轴上，使得彼此不想交(但是可以挨着)，设最左边的点和最右边的点的横坐标分别是$x_l, x_r$， 求$min{x_r-x_l}$
+Solution
+首先对于两个线段$s_1, s_2$, 并且$s_1.y &amp;lt; s_2.y$, 交叉连接他们的左右端点，得到一个向量集合$bound$，对投影向量限制限制。 因此先两两枚举，得到投影向量的可行的取值。
+而且最优的投影向量，是集合$bound$中的某一项
+因此，对剩下的可行的投影向量, 假设当前枚举的方向是$k_i$，计算
+$$ max{x_j+y_jKi}-min{x_j+y_jk_i} $$
+计算这个式子可以用Convex hull trick, 然后不断更新ans
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;bitset&amp;gt;#include &amp;lt;unordered_map&amp;gt;#include &amp;lt;assert.h&amp;gt;#include &amp;lt;list&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>nowcoder 2020 多校 第三场</title>
+      <link>/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</link>
+      <pubDate>Tue, 11 Aug 2020 16:08:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</guid>
+      <description>nowcoder 2020 多校 第三场 E Two Matchings 题意
+可以简化题意为，每个点有个权重$w$，两个点$i,j$相连的代价$abs(w_i-w_j)$,找两个没有重叠的匹配使得代价最小
+Solution
+其实就是在将数字用长度为偶数的环连起来，求最小代价。进一步可以发现，环用长度为4或6，长度更长的环可以被分解达到更小的代价
+LL n; LL a[MAX]; LL dp[MAX][2]; LL four(const vector&amp;lt;LL&amp;gt; &amp;amp;a){ return 2LL * (a[3]-a[0]); } LL six(const vector&amp;lt;LL&amp;gt; &amp;amp;a){ return 2LL * (a[5]-a[0]); } int main(){ #ifdef DEBUG  freopen(&amp;#34;in&amp;#34;, &amp;#34;r&amp;#34;, stdin); #endif  int T; scanf(&amp;#34;%d&amp;#34;, &amp;amp;T); while (T--) { cin &amp;gt;&amp;gt; n; for(int i = 0; i &amp;lt; n; i++) cin &amp;gt;&amp;gt; a[i]; sort(a, a+n); for(LL i = 0; i &amp;lt;= n; i++ ) dp[i][0] = dp[i][1] = __64inf; dp[3][0] = 2LL * (a[3]-a[0]); dp[5][0] = 2LL * (a[5]-a[0]); dp[7][0] = 2LL * (a[7]-a[4] + a[3] - a[0]); for(LL i = 9; i &amp;lt; n; i+=2){ dp[i][0] = min(dp[i-4][0], dp[i-4][1]) + four(vector&amp;lt;LL&amp;gt;({a[i-3], a[i-2], a[i-1], a[i]})); dp[i][1] = min(dp[i-6][0], dp[i-6][1]) + six(vector&amp;lt;LL&amp;gt;({a[i-5], a[i-4], a[i-3], a[i-2], a[i-1], a[i]})); } printf(&amp;#34;%d\n&amp;#34;, min(dp[n-1][0], dp[n-1][1])); } } F Fraction Construction Problem 题意</description>
+    </item>
+    
+    <item>
+      <title>nowcoder 2020 多校 第五场</title>
+      <link>/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</link>
+      <pubDate>Fri, 07 Aug 2020 16:34:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</guid>
+      <description>nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670
+ B Graph  tire树，最小生成树
+ 题意：
+给一个带有边权的树，可以删除或添加边，但要保证：
+ 图联通 环上边权异或为0  Solution
+不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$, 将他们联通的代价是
+$$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
+可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\log n)$
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;bitset&amp;gt;#include &amp;lt;unordered_map&amp;gt;#include &amp;lt;assert.h&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>POJ 3376</title>
+      <link>/posts/acm-icpc/poj-3376/</link>
+      <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/poj-3376/</guid>
+      <description>POJ 3376  tire + manacher
+ 题意  http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
+ Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
+首先考虑什么情况下，两个串拼接会是一个回文串。
+case 1： s=reverse(t)
+$$ \begin{cases} s = a_0\dots a_{n-1} \
+t = a_{n-1}\dots a_0 \end{cases} $$
+case 2
+$$ \begin{cases} \begin{matrix} &amp;amp;\mathrm{palindrome} \
+s = a_0\dots a_i &amp;amp;\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \ \
+t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \
+\begin{matrix} \ \ \ \ \ \mathrm{palindrome} &amp;amp;\</description>
+    </item>
+    
+    <item>
+      <title>nowcoder 2020 多校 第二场</title>
+      <link>/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</link>
+      <pubDate>Tue, 14 Jul 2020 23:18:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</guid>
+      <description>nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
+ A All with Pairs 题意
+给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$
+Solution
+先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重
+const unsigned long long base = 131; // vector&amp;lt;string&amp;gt; str; string str[MAX]; unordered_map&amp;lt;unsigned long long, int&amp;gt; mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &amp;amp;s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i &amp;gt;= 0; i--){ // unsigned long long x = s[i] - &amp;#39;a&amp;#39;+1;  res += (s[i]-&amp;#39;a&amp;#39;+1) * p; p *= base; mp[res]++; } } void get_next(const string &amp;amp;t){ nex[0] = -1; int k = -1; for(int i = 1; i &amp;lt; t.</description>
+    </item>
+    
+    <item>
+      <title>AtCoder-Sum of gcd of Tuples</title>
+      <link>/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
+      <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
+      <description>AtCoder-Sum of gcd of Tuples (Hard) 题意  https://atcoder.jp/contests/abc162/tasks/abc162_e
+ 求$\sum\gcd(a_1,a_2,\cdots,a_n)$,其中$a_i\in[1,K]$
+Solution 直接计算肯定是不好计算的，可以考虑按$gcd$的值进行分类，问题就转化为一个计数问题
+ $\displaystyle \gcd(a,b)=d\Rightarrow\gcd(\frac{a}{d},\frac{b}{d})=1$
+$\displaystyle {\gcd(a_1,\cdots, a_n)=d的数量}={\gcd(\frac{a_1}{d},\cdots,\frac{a_n}{d})=1的数量}$
+ 那么，
+$$ Ans=\sum_{d=1}^{K}dF(\lfloor\frac{K}{d}\rfloor, N) $$
+其中$F(K,N)$表示$\gcd(a_1,\cdots,a_N)=1$的个数，$a_i\in[1,K]$
+可以用容斥算出$\displaystyle F(K,N)=K^N-\sum_{i=1}^{K}F(\lfloor\frac{K}{i}\rfloor)$
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;// #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>CSAPP arch lab</title>
+      <link>/posts/csapp-arch-lab/</link>
+      <pubDate>Mon, 16 Mar 2020 21:24:00 +0800</pubDate>
+      
+      <guid>/posts/csapp-arch-lab/</guid>
+      <description>arch lab Download archlab-handout
+ 安装模拟器 解决undefined reference to ’matherr‘
+参考 Y86-64模拟器的安装与出现对&amp;rsquo;matherr&amp;rsquo;未定义引用问题的解决
+ Part A 在这部分要在sim/misc中完成，我们要编写和模拟三个Y86-64程序
+sum.ys： 遍历链表求和
+# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .</description>
+    </item>
+    
+    <item>
+      <title>CodeChef - PRIMEDST</title>
+      <link>/posts/acm-icpc/codechef-primedst/</link>
+      <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/codechef-primedst/</guid>
+      <description>Prime Distance On Tree 题意  Prime Distance On Tree
+ 给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
+Solution 可以从生成函数的角度考虑
+假设rt是一个树的树根，而且rt的深度是d，将树中节点的深度统计出来，记为$f_{rt，d}$，如果$u,v&amp;hellip;$是rt的子节点，那么rt对答案的贡献就是生成函数中素数项的系数，那么问题就是怎么计算生成函数了
+$$ \sum_{u,v \in son(rt)} f_{u,1} * f_{v, 1}
+$$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简单的 $$ \Big(f_{rt,0}^2 - \sum_{u \in son(rt) }f_{u,1}^2\Big) / 2 $$
+为了确保复杂度不会太高，需要用点分治
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;// #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>波里亚计数</title>
+      <link>/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</link>
+      <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</guid>
+      <description>Polya计数  将波利亚计数定理整理在这里，作为一个总结和介绍，也方便以后复习
+ 为什么学习Polya计数定理
+通过Polya计数定理，我们可以计算等价类的数量，比如下面这个问题：
+用$m$种颜色给一个正方形染色，如果正方形可以自由转动，求染色方案数
+ 让我们从一些概念开始
+ 1 等价关系 1.1 等价关系的定义 假设$V$是一个集合，$S$是定义在$V$上的一个关系，若$S$有如下性质：
+ 自反性 传递性 对称性  那么， $S$就是一个等价关系
+$a$和$b$有关系$S$,可以记为$aSb$
+ 假设定义关系$S$，图形$a$可以旋转得到$b$ $\Leftrightarrow$ $aSb$
+例如图中的$方块_1$和$方块_2$具有关系$S$，即他们可以通过旋转得到彼此，而$方块_1$和$方块_2$则没有关系$S$
+ 1.2 等价类 通过上图，可以看出来：$方块_1$和$方块_2$是同一类的，而$方块_1$和$方块_2$则是另外两类，于是可以想到集合$V$上的等价关系$S$将集合的元素划分到不同的类中，我们把它称为等价类
+而包含元素$a$的等价类则是由满足$aSb$的所有元素$b$组成的(当然也包含元素$a$),即$C(a)={b\in V | \ aSb}$
+仔细想一想，不难发现两个不同等价类是不相交的
+2 置换群 2.1 置换群的定义 假设$A={1,2,\dotsc, n}$，通过置换，将$A$中的元素重新排列，得到另一个排列$a_1, a_2, \dotsc, a_n$，可以把这个过程写成
+$$ \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; \dotsc &amp;amp; n \
+a_1 &amp;amp; a_2 &amp;amp; \dotsc &amp;amp; a_n \end{matrix} \right ) $$</description>
+    </item>
+    
+    <item>
+      <title>Rock Paper Scissors Lizard Spock</title>
+      <link>/posts/acm-icpc/rock-paper-scissors-lizard-spock/</link>
+      <pubDate>Tue, 11 Feb 2020 15:40:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
+      <description>Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock
+ 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
+Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
+枚举可以得分的手势,假设当前手势为$op$, $$ \begin{aligned} t&#39;i &amp;amp;=(reverse_t{i} == op ? 1 : 0) \
+s&#39;_i &amp;amp;= G[op][s_i] \end{aligned} $$
+将$t&#39;,s&#39;$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    <item>
+      <title>URAL - 1996</title>
+      <link>/posts/acm-icpc/ural-1996/</link>
+      <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/ural-1996/</guid>
+      <description>URAL - 1996 题意：  URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
+ Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
+记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&#39;$, 在此处的的代价为 $$ \sum_{i+j=pos+m-1} [a_i \ne b&#39;_j ] $$ 而 $$ \sum_{i+j=posm-1} a_j * b&#39;_j $$ 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+    
+    <item>
+      <title>Links</title>
+      <link>/links/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/links/</guid>
+      <description>Friends   🐳 Wang Shuai, and his Github.
+  🐳 SHEN Haiyang, and his Github.
+  🐳 Peng Guanwen, and his Github.
+  </description>
+    </item>
+    
+    
+  </channel>
+</rss>

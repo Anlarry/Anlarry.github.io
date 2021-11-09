@@ -1,0 +1,288 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>SkyBridge & XPC: two ways for fast IPC | Hi-^_^</title>
+<meta name=keywords content="IPC">
+<meta name=description content="Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
+另外在宏内核中也会经常使用IPC，如Android Binder。
+Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
+ seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
+ 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
+在seL4上测试负载，IPC占用的时间是很多的。
+SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
+但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
+ 在虚拟机中运行的进程，如果要访问内存会经过
+GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
+这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
+ 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
+从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
+Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
+在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+something else RootKernel & 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
+illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
+XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+XPC从两个方面提高IPC性能，
+ 让IPC不经过kernel 不复制传递消息  和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。">
+<meta name=author content>
+<link rel=canonical href=/posts/paper-reading/skybridge-xpc/skybridge-xpc/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.5e2b4101351c21e906f398ae96901791830f58d430f96f2659dab7eaef7b3cb7.css integrity="sha256-XitBATUcIekG85iulpAXkYMPWNQw+W8mWdq36u97PLc=" rel="preload stylesheet" as=style>
+<link rel=preload href=/icon/ai512.png as=image>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=icon/ai512.png>
+<link rel=icon type=image/png sizes=16x16 href=icon/ai16.png>
+<link rel=icon type=image/png sizes=32x32 href=icon/ai32.png>
+<link rel=apple-touch-icon href=apple-touch-icon.png>
+<link rel=mask-icon href=safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.88.1">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="SkyBridge & XPC: two ways for fast IPC">
+<meta property="og:description" content="Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
+另外在宏内核中也会经常使用IPC，如Android Binder。
+Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
+ seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
+ 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
+在seL4上测试负载，IPC占用的时间是很多的。
+SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
+但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
+ 在虚拟机中运行的进程，如果要访问内存会经过
+GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
+这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
+ 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
+从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
+Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
+在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+something else RootKernel & 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
+illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
+XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+XPC从两个方面提高IPC性能，
+ 让IPC不经过kernel 不复制传递消息  和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/posts/paper-reading/skybridge-xpc/skybridge-xpc/">
+<meta property="og:image" content="/SkyBridge%20&%20XPC.assets/cover.png"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2021-09-16T19:17:00+00:00">
+<meta property="article:modified_time" content="2021-09-16T19:17:00+00:00"><meta property="og:site_name" content="Hi~, ^_^">
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:image content="/SkyBridge%20&%20XPC.assets/cover.png">
+<meta name=twitter:title content="SkyBridge & XPC: two ways for fast IPC">
+<meta name=twitter:description content="Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
+另外在宏内核中也会经常使用IPC，如Android Binder。
+Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
+ seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
+ 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
+在seL4上测试负载，IPC占用的时间是很多的。
+SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
+但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
+ 在虚拟机中运行的进程，如果要访问内存会经过
+GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
+这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
+ 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
+从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
+Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
+在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+something else RootKernel & 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
+illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
+XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+XPC从两个方面提高IPC性能，
+ 让IPC不经过kernel 不复制传递消息  和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":3,"name":"SkyBridge \u0026 XPC: two ways for fast IPC","item":"/posts/paper-reading/skybridge-xpc/skybridge-xpc/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"SkyBridge \u0026 XPC: two ways for fast IPC","name":"SkyBridge \u0026 XPC: two ways for fast IPC","description":"Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。\n另外在宏内核中也会经常使用IPC，如Android Binder。\nOptimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。\n seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。\n 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。\n\r在seL4上测试负载，IPC占用的时间是很多的。\nSkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。\n但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）\n 在虚拟机中运行的进程，如果要访问内存会经过\nGVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)\n这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA\n 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。\n\r\r从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。\n首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。\nSubkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。\n\r在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。\nsomething else RootKernel \u0026amp; 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。\nillegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。\n\rXPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\\rightarrow$B$\\rightarrow$C）这样出现消息被多次复制的情况。\nXPC从两个方面提高IPC性能，\n 让IPC不经过kernel 不复制传递消息  \r和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。","keywords":["IPC"],"articleBody":"Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。\n另外在宏内核中也会经常使用IPC，如Android Binder。\nOptimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。\n seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。\n 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。\n\r在seL4上测试负载，IPC占用的时间是很多的。\nSkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。\n但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）\n 在虚拟机中运行的进程，如果要访问内存会经过\nGVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)\n这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA\n 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。\n\r\r从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。\n首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。\nSubkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。\n\r在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。\nsomething else RootKernel \u0026 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。\nillegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。\n\rXPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\\rightarrow$B$\\rightarrow$C）这样出现消息被多次复制的情况。\nXPC从两个方面提高IPC性能，\n 让IPC不经过kernel 不复制传递消息  \r和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。\nXPC engine提供了两个硬件原语：User-level Cross Process Call，Lightweight Message Transfer\nCross Procss Call x-entry, 和其他进程的procedure绑定。每个进程可以创建多个x-entry,所有的x-entry都存在x-entry-table（x-entry-table-reg指向的一个全局内存空间）中。通过x-entry-table-size控制x-entry-table的大小。xcall-cap(XPC call capability)记录每个entry的capability。\nlink stack \u0026 linkage record, linkage record用来维护调用时的信息，存在link stack中。link stack是存在link-reg指向的进程内存中。可以考虑使用非阻塞的方法优化压栈，减少延迟。\nx-call, 用来调在用一个x-entry。XPC engine去检查caller的xcall-cap、加载x-entry并检查、在link stack中压入linkage record、加载新的页表指针。\nx-reg, 从link stack中弹出一个record,返回之前的进程。CPU会首先检查linkage record中的有效位，然后恢复caller。\nXPC Engine Cache, 可以用cache优化XPC engine取x-entry和capability。因为对单线程IPC具有高局部性、IPC是可预测的。\nRelay Segment relay-seg, 有四个字段，虚地址基址、物理地址基址、长度、权限。地址翻译时，seg-reg的比页表有更高的优先级。\nseg-mask, 虽然不能改变seg-reg的映射，但是可以通过seg-mask缩小relay-seg\nseg-list-reg, 存放seg-reg的列表，存放在进程内存。一个进程可以创建多个relay-seg。可以通过swapseg #reg切换seg-reg\n\r每个时刻每个relay-seg只能有一个线程所有，同一个时刻只能有一个核对relay-reg进行操作，不然有会导致TOCTTOC攻击。\n在x-ret时，seg-reg需要和调用时一样，因为有可能恶意的程序会去修改seg-reg。\nReference\n[1] Mi, Zeyu, et al. “Skybridge: Fast and secure inter-process communication for microkernels.” Proceedings of the Fourteenth EuroSys Conference 2019. 2019.\n[2] Du, Dong, et al. “Xpc: Architectural support for secure and efficient cross process call.” Proceedings of the 46th International Symposium on Computer Architecture. 2019.\n[3] KVM硬件辅助虚拟化之 EPT(Extended Page Table)\n","wordCount":"162","inLanguage":"en","image":"/SkyBridge%20\u0026%20XPC.assets/cover.png","datePublished":"2021-09-16T19:17:00Z","dateModified":"2021-09-16T19:17:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/paper-reading/skybridge-xpc/skybridge-xpc/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"icon/ai512.png"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href accesskey=h title="Jiali's Blog (Alt + H)">
+<img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=/archives/ title="Archives 📦">
+<span>Archives 📦</span>
+</a>
+</li>
+<li>
+<a href=/categories/ title="Categories 📂">
+<span>Categories 📂</span>
+</a>
+</li>
+<li>
+<a href=/tags/ title="Tags 🏷">
+<span>Tags 🏷</span>
+</a>
+</li>
+<li>
+<a href=/links/ title="Links 🔗">
+<span>Links 🔗</span>
+</a>
+</li>
+<li>
+<a href=/search/ title="Search 🔍 (Alt + /)" accesskey=/>
+<span>Search 🔍</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/posts/>Posts</a></div>
+<h1 class=post-title>
+SkyBridge & XPC: two ways for fast IPC
+</h1>
+<div class=post-meta>📝 September 16, 2021&nbsp;·&nbsp;⌛ 1 min&nbsp;|&nbsp;<a href=https://github.com/%3cpath_to_repo%3e/content/posts/PAPER-READING/SkyBridge%20&%20XPC/SkyBridge%20&%20XPC.md rel="noopener noreferrer" target=_blank>Suggest Changes</a>
+</div>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#inter-process-communication aria-label="Inter-Process Communication">Inter-Process Communication</a></li>
+<li>
+<a href=#optimize-synchronous-ipc aria-label="Optimize synchronous IPC">Optimize synchronous IPC</a></li>
+<li>
+<a href=#skybridge aria-label=SkyBridge>SkyBridge</a><ul>
+<li>
+<a href=#something-else aria-label="something else">something else</a></li></ul>
+</li>
+<li>
+<a href=#xpc aria-label=XPC>XPC</a><ul>
+<li>
+<a href=#cross-procss-call aria-label="Cross Procss Call">Cross Procss Call</a></li>
+<li>
+<a href=#relay-segment aria-label="Relay Segment">Relay Segment</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h2 id=inter-process-communication>Inter-Process Communication<a hidden class=anchor aria-hidden=true href=#inter-process-communication>#</a></h2>
+<p>微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。</p>
+<p>另外在宏内核中也会经常使用IPC，如Android Binder。</p>
+<h2 id=optimize-synchronous-ipc>Optimize synchronous IPC<a hidden class=anchor aria-hidden=true href=#optimize-synchronous-ipc>#</a></h2>
+<p>一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。</p>
+<blockquote>
+<p><a href=https://sel4.systems/>seL4</a>用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。</p>
+</blockquote>
+<p>另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。</p>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<p>在seL4上测试负载，IPC占用的时间是很多的。</p>
+<h2 id=skybridge>SkyBridge<a hidden class=anchor aria-hidden=true href=#skybridge>#</a></h2>
+<p>为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，<strong>EPT(extended page table)</strong> 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。</p>
+<p>但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）</p>
+<blockquote>
+<p>在虚拟机中运行的进程，如果要访问内存会经过</p>
+<p>GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)</p>
+<p>这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA</p>
+</blockquote>
+<p>同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。</p>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<p>从上图可以看到SkyBridge的两个kernel：<code>RootKernel</code>( a tiny hypervisor)和<code>SubKernel</code>(即microkernel)。</p>
+<p>首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。</p>
+<p>Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用<code>direct_server_call</code>，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。</p>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<p>在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。</p>
+<h3 id=something-else>something else<a hidden class=anchor aria-hidden=true href=#something-else>#</a></h3>
+<p><strong>RootKernel & 虚拟化开销</strong>，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。</p>
+<p><strong>illegal VMFUNC</strong>，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。</p>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<h2 id=xpc>XPC<a hidden class=anchor aria-hidden=true href=#xpc>#</a></h2>
+<p>但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。</p>
+<p>XPC从两个方面提高IPC性能，</p>
+<ul>
+<li>让IPC不经过kernel</li>
+<li>不复制传递消息</li>
+</ul>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<p>和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。</p>
+<p>XPC engine提供了两个硬件原语：<strong>User-level Cross Process Call</strong>，<strong>Lightweight Message Transfer</strong></p>
+<h3 id=cross-procss-call>Cross Procss Call<a hidden class=anchor aria-hidden=true href=#cross-procss-call>#</a></h3>
+<p><strong>x-entry</strong>, 和其他进程的procedure绑定。每个进程可以创建多个<code>x-entry</code>,所有的<code>x-entry</code>都存在<code>x-entry-table</code>（<code>x-entry-table-reg</code>指向的一个全局内存空间）中。通过<code>x-entry-table-size</code>控制<code>x-entry-table</code>的大小。<code>xcall-cap</code>(XPC call capability)记录每个entry的capability。</p>
+<p><strong>link stack & linkage record</strong>, <code>linkage record</code>用来维护调用时的信息，存在<code>link stack</code>中。<code>link stack</code>是存在<code>link-reg</code>指向的进程内存中。可以考虑使用非阻塞的方法优化压栈，减少延迟。</p>
+<p><strong>x-call</strong>, 用来调在用一个x-entry。XPC engine去检查caller的<code>xcall-cap</code>、加载<code>x-entry</code>并检查、在<code>link stack</code>中压入<code>linkage record</code>、加载新的页表指针。</p>
+<p><strong>x-reg</strong>, 从<code>link stack</code>中弹出一个record,返回之前的进程。CPU会首先检查<code>linkage record</code>中的有效位，然后恢复caller。</p>
+<p><strong>XPC Engine Cache</strong>, 可以用cache优化XPC engine取<code>x-entry</code>和capability。因为对单线程IPC具有高局部性、IPC是可预测的。</p>
+<h3 id=relay-segment>Relay Segment<a hidden class=anchor aria-hidden=true href=#relay-segment>#</a></h3>
+<p><strong>relay-seg</strong>, 有四个字段，虚地址基址、物理地址基址、长度、权限。地址翻译时，<code>seg-reg</code>的比页表有更高的优先级。</p>
+<p><strong>seg-mask</strong>, 虽然不能改变<code>seg-reg</code>的映射，但是可以通过<code>seg-mask</code>缩小relay-seg</p>
+<p><strong>seg-list-reg</strong>, 存放<code>seg-reg</code>的列表，存放在进程内存。一个进程可以创建多个<code>relay-seg</code>。可以通过<code>swapseg #reg</code>切换<code>seg-reg</code></p>
+<p>
+<img class=img-fluid src=#ZgotmplZ alt>
+</p>
+<p>每个时刻每个<code>relay-seg</code>只能有一个线程所有，同一个时刻只能有一个核对<code>relay-reg</code>进行操作，不然有会导致TOCTTOC攻击。</p>
+<p>在<code>x-ret</code>时，<code>seg-reg</code>需要和调用时一样，因为有可能恶意的程序会去修改<code>seg-reg</code>。</p>
+<p><strong>Reference</strong></p>
+<p>[1] Mi, Zeyu, et al. &ldquo;Skybridge: Fast and secure inter-process communication for microkernels.&rdquo; <em>Proceedings of the Fourteenth EuroSys Conference 2019</em>. 2019.</p>
+<p>[2] Du, Dong, et al. &ldquo;Xpc: Architectural support for secure and efficient cross process call.&rdquo; <em>Proceedings of the 46th International Symposium on Computer Architecture</em>. 2019.</p>
+<p>[3] <a href=https://royhunter.github.io/2014/06/18/KVM-EPT/>KVM硬件辅助虚拟化之 EPT(Extended Page Table)</a></p>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=/tags/ipc/>IPC</a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/active-learning-for-ml-enhanced-database-systems/>
+<span class=title>« Prev Page</span>
+<br>
+<span>Active Learning for ML Enhanced Database Systems</span>
+</a>
+<a class=next href=/posts/acm-icpc/codeforces-round-664/>
+<span class=title>Next Page »</span>
+<br>
+<span>Codeforces Round #664</span>
+</a>
+</nav>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2021 <a href>Jiali Wang</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

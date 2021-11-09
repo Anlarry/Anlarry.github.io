@@ -1,0 +1,164 @@
+baseURL: ""
+title: Hi-^_^
+paginate: 5
+theme: PaperMod
+
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+googleAnalytics: UA-123-45
+
+copyright: "Jiali Wang"
+
+minify:
+    disableXML: true
+    minifyOutput: true
+
+params:
+    env: production # to enable google analytics, opengraph, twitter-cards and schema.
+    title: Hi~, ^_^
+    description: "this is Jiali's Tech Blog"
+    keywords: [Blog, Portfolio, PaperMod]
+    # author: Me
+    # author: ["Me", "You"] # multiple authors
+    # images: ["<link or path of image for opengraph, twitter-cards>"]
+    DateFormat: "📝 January 2, 2006"
+    defaultTheme: auto # dark, light
+    disableThemeToggle: false
+    hasCJKLanguage: true  
+
+    ShowReadingTime: true
+    ShowShareButtons: false
+    ShowPostNavLinks: true
+    ShowBreadCrumbs: true
+    ShowCodeCopyButtons: true
+    disableSpecial1stPost: false
+    disableScrollToTop: false
+    comments: true
+    hidemeta: false
+    hideSummary: false
+    showtoc: true
+    tocopen: true
+
+    assets:
+        disableHLJS: false # to disable highlight.js
+        # disableFingerprinting: true
+        favicon: "./icon/ai512.png"
+        favicon16x16: "./icon/ai16.png"
+        favicon32x32: "./icon/ai32.png"
+        # apple_touch_icon: "<link / abs url>"
+        # safari_pinned_tab: "<link / abs url>"
+
+    label:
+        text: "Jiali's Blog"
+        icon: "/icon/ai512.png"
+        iconHeight: 35
+
+    #mainSections:
+        #- post
+
+    profileMode:
+        enabled: false # needs to be explicitly set
+        title: ExampleSite
+        subtitle: "This is subtitle"
+        imageUrl: "<img location>"
+        imageWidth: 120
+        imageHeight: 120
+        imageTitle: my image
+        buttons:
+            - name: Posts
+              url: posts
+            - name: Tags
+              url: tags
+
+    # home-info mode
+    homeInfoParams:
+        Title: "Hi there \U0001F44B"
+        Content: Welcome to my blog
+
+    socialIcons:
+        # - name: twitter
+        #  url: "https://twitter.com/Anlarry3"
+        #- name: stackoverflow
+        #  url: "https://stackoverflow.com"
+        - name: github
+          url: "https://github.com/Anlarry"
+        - name: rss
+          url: ""
+
+    analytics:
+        google:
+            SiteVerificationTag: "XYZabc"
+        bing:
+            SiteVerificationTag: "XYZabc"
+        yandex:
+            SiteVerificationTag: "XYZabc"
+
+    cover:
+        hidden: false # hide everywhere but not in structured data
+        hiddenInList: false # hide on list pages and home
+        hiddenInSingle: true # hide on single page
+
+    editPost:
+        URL: "https://github.com/<path_to_repo>/content"
+        Text: "Suggest Changes" # edit text
+        appendFilePath: true # to append file path to Edit link
+
+    # for search
+    # https://fusejs.io/api/options.html
+    fuseOpts:
+        isCaseSensitive: false
+        shouldSort: true
+        location: 0
+        distance: 1000
+        threshold: 0.4
+        minMatchCharLength: 0
+        keys: ["title", "permalink", "summary", "content"]
+        
+    
+        
+menu:
+    main:
+        - identifier: archives
+          name: Archives 📦
+          url: /archives/
+          weight: 10
+        - identifier: categories
+          name: Categories 📂
+          url: /categories/
+          weight: 20
+        - identifier: tags
+          name: Tags 🏷
+          url: /tags/
+          weight: 30
+        - identifier: links
+          name: Links 🔗
+          url: /links/
+          weight: 40
+        - identifier: search
+          name: Search 🔍
+          url: /search/
+          weight: 50
+        #- identifier: example
+        #  name: example.org
+        #  url: https://example.org
+        #  weight: 30
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON # is necessary
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+# pygmentsUseClasses: true
+markup:
+    goldmark:
+        renderer:
+            unsafe: true
+#     highlight:
+#         # anchorLineNos: true
+#         codeFences: true
+#         guessSyntax: true
+#         lineNos: true
+#         style: monokai

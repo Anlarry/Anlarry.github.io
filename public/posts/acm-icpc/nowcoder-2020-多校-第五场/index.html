@@ -1,0 +1,399 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>nowcoder 2020 多校 第五场 | Hi-^_^</title>
+<meta name=keywords content="搬家">
+<meta name=description content="nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670
+ B Graph  tire树，最小生成树
+ 题意：
+给一个带有边权的树，可以删除或添加边，但要保证：
+ 图联通 环上边权异或为0  Solution
+不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$, 将他们联通的代价是
+$$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
+可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\log n)$
+#include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>#include <memory.h>#include <cstdlib>#include <queue>#include <iomanip>#include <bitset>#include <unordered_map>#include <assert.h>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.">
+<meta name=author content>
+<link rel=canonical href=/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.5e2b4101351c21e906f398ae96901791830f58d430f96f2659dab7eaef7b3cb7.css integrity="sha256-XitBATUcIekG85iulpAXkYMPWNQw+W8mWdq36u97PLc=" rel="preload stylesheet" as=style>
+<link rel=preload href=/icon/ai512.png as=image>
+<script defer crossorigin=anonymous src=/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=icon/ai512.png>
+<link rel=icon type=image/png sizes=16x16 href=icon/ai16.png>
+<link rel=icon type=image/png sizes=32x32 href=icon/ai32.png>
+<link rel=apple-touch-icon href=apple-touch-icon.png>
+<link rel=mask-icon href=safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.88.1">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="nowcoder 2020 多校 第五场">
+<meta property="og:description" content="nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670
+ B Graph  tire树，最小生成树
+ 题意：
+给一个带有边权的树，可以删除或添加边，但要保证：
+ 图联通 环上边权异或为0  Solution
+不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$, 将他们联通的代价是
+$$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
+可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\log n)$
+#include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>#include <memory.h>#include <cstdlib>#include <queue>#include <iomanip>#include <bitset>#include <unordered_map>#include <assert.h>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-08-07T16:34:00+08:00">
+<meta property="article:modified_time" content="2020-08-07T16:34:00+08:00"><meta property="og:site_name" content="Hi~, ^_^">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="nowcoder 2020 多校 第五场">
+<meta name=twitter:description content="nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670
+ B Graph  tire树，最小生成树
+ 题意：
+给一个带有边权的树，可以删除或添加边，但要保证：
+ 图联通 环上边权异或为0  Solution
+不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$, 将他们联通的代价是
+$$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
+可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\log n)$
+#include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>#include <memory.h>#include <cstdlib>#include <queue>#include <iomanip>#include <bitset>#include <unordered_map>#include <assert.h>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"/posts/"},{"@type":"ListItem","position":3,"name":"nowcoder 2020 多校 第五场","item":"/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"nowcoder 2020 多校 第五场","name":"nowcoder 2020 多校 第五场","description":"nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670\n B Graph  tire树，最小生成树\n 题意：\n给一个带有边权的树，可以删除或添加边，但要保证：\n 图联通 环上边权异或为0  Solution\n不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$, 将他们联通的代价是\n$$ \\min\\limits_{u\\in S_1 v\\in S_2} {\\mathord{dis}(u,v)} $$\n可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\\log n)$\n#include \u0026lt;cstdio\u0026gt;#include \u0026lt;stack\u0026gt;#include \u0026lt;set\u0026gt;#include \u0026lt;cmath\u0026gt;#include \u0026lt;map\u0026gt;#include \u0026lt;time.h\u0026gt;#include \u0026lt;vector\u0026gt;#include \u0026lt;iostream\u0026gt;#include \u0026lt;string\u0026gt;#include \u0026lt;cstring\u0026gt;#include \u0026lt;algorithm\u0026gt;#include \u0026lt;memory.h\u0026gt;#include \u0026lt;cstdlib\u0026gt;#include \u0026lt;queue\u0026gt;#include \u0026lt;iomanip\u0026gt;#include \u0026lt;bitset\u0026gt;#include \u0026lt;unordered_map\u0026gt;#include \u0026lt;assert.h\u0026gt;#define P pair\u0026lt;int, int\u0026gt; #define LL long long #define LD long double #define PLL pair\u0026lt;LL, LL\u0026gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i \u0026lt; b; i++) #define PI acos(-1.","keywords":["搬家"],"articleBody":"nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670\n B Graph  tire树，最小生成树\n 题意：\n给一个带有边权的树，可以删除或添加边，但要保证：\n 图联通 环上边权异或为0  Solution\n不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$, 将他们联通的代价是\n$$ \\min\\limits_{u\\in S_1 v\\in S_2} {\\mathord{dis}(u,v)} $$\n可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\\log n)$\n#include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 1e3 + 50; #else const int MAX = 3e6 + 50; #endif const int mod = 10007; LL pow2[100]; vectorP G[MAX]; int dis[MAX]; struct Tire{ int nex[MAX][2]; int siz[MAX]; int tot ; LL ans; void init(){ ans = 0; siz[0] = 0; mset(nex[0], 0); tot = 1; } void add(int x, int d) { int rt = 0; for(int i = d; i = 0; i--){ int e = x \u0026 pow2[i] ? 1 : 0; if(!nex[rt][e]) { mset(nex[tot], 0); siz[tot] = 0; nex[rt][e] = tot ++; } rt = nex[rt][e]; siz[rt] ++; } } LL query(int val, int u, int d) { int rt = u; LL res = val; for(int i = d; i = 0; i--){ if(res \u0026 pow2[i]) { if(nex[rt][1]) { res ^= pow2[i]; rt = nex[rt][1]; } else rt = nex[rt][0]; } else { if(nex[rt][0]) { rt = nex[rt][0]; } else { res ^= pow2[i]; rt = nex[rt][1]; } } } return res; } LL merge(int l, int r, int val, int d, int row_d){ if(!nex[l][0] and !nex[l][1]) { return query(val, r, row_d); } LL res = inf; if(nex[l][0]) res = min(res, merge(nex[l][0], r, val, d-1, row_d)); if(nex[l][1]) res = min(res, merge(nex[l][1], r, val^pow2[d], d-1, row_d)); return res; } void dfs(int u, int val, int d) { if(nex[u][0]) dfs(nex[u][0], val, d-1); if(nex[u][1]) dfs(nex[u][1], val ^ pow2[d], d-1); if(!nex[u][0] or !nex[u][1]) return; int l = nex[u][0], r = nex[u][1]; if(siz[l]  siz[r]) swap(l, r); ans += 1LL * merge(l, r, 0, d-1, d-1) + pow2[d]; } }tire; void dfs(int u, int p, int d){ dis[u] = d; for(int i = 0; i  G[u].size(); i++){ int v = G[u][i].first; if(v == p) continue; dfs(v, u, d^G[u][i].second); } } int main(){ #ifdef DEBUG  freopen64(\"in\", \"r\", stdin); #endif  pow2[0] = 1; for(int i = 1; i  32; i++) pow2[i] = pow2[i-1]  1; int n; scanf(\"%d\", \u0026n); for(int i = 1; i  n; i++) { int u, v, c; scanf(\"%d%d%d\", \u0026u, \u0026v, \u0026c); u++, v++; G[u].emplace_back(v, c); G[v].emplace_back(u, c); } dfs(1, -1, 0); tire.init(); for(int i = 1; i  n; i++) tire.add(dis[i], 29); tire.dfs(0, 0, 29); printf(\"%lld\\n\", tire.ans); return 0; } D Drop Voicing  最长上升子序列\n 题意\n给一个序列$p_1\\dots p_n$，可以进行两种操作，进行连续的第一个操作耗费一个代价\n 把$p_{n-1}$放到最前面 $p_1$放到最后面  求把序列变成升序的最小代价\nSolution\n结合两种操作其实就是把一个元素$p_i$移到一个位置，需要一个代价。于是变成求LIS\nint n; int a[MAX]; int b[MAX]; int solve(){ mset(b, 0); int ans = 0; for(int i = 1; i  n; i++) { int idx = lower_bound(b, b+ans, a[i]) - b; b[idx] = a[i]; if(idx == ans) ans ++; } // cout  return ans; } int main(){ #ifdef DEBUG  freopen64(\"in\", \"r\", stdin); #else  ios::sync_with_stdio(0); cin.tie(0); #endif  cin  n; for(int i = 1; i  n; i++) cin  a[i]; int ans = 0; for(int i = 0; i  n; i++) { rotate(a+1, a+2, a+n+1); ans = max(ans, solve()); } cout  n - ans  \"\\n\"; return 0; } E Bogo Sort 题意\n给一个置换，求有多少种排列可以通过这个置换变成升序\nfrom math import gcd def lcm(a:int, b:int) -int: return a * b // gcd(a, b) n = int(input()) a = [0] + list(map(int, input().split())) vis = [False for i in range(len(a))] ans = 1 for i in range(1, n+1): x = a[i] if vis[x] : continue cur = 0 while not vis[x] : vis[x] = True cur += 1 x = a[x] ans = lcm(ans, cur) print(ans) ","wordCount":"664","inLanguage":"en","datePublished":"2020-08-07T16:34:00+08:00","dateModified":"2020-08-07T16:34:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"icon/ai512.png"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href accesskey=h title="Jiali's Blog (Alt + H)">
+<img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=/archives/ title="Archives 📦">
+<span>Archives 📦</span>
+</a>
+</li>
+<li>
+<a href=/categories/ title="Categories 📂">
+<span>Categories 📂</span>
+</a>
+</li>
+<li>
+<a href=/tags/ title="Tags 🏷">
+<span>Tags 🏷</span>
+</a>
+</li>
+<li>
+<a href=/links/ title="Links 🔗">
+<span>Links 🔗</span>
+</a>
+</li>
+<li>
+<a href=/search/ title="Search 🔍 (Alt + /)" accesskey=/>
+<span>Search 🔍</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href>Home</a>&nbsp;»&nbsp;<a href=/posts/>Posts</a></div>
+<h1 class=post-title>
+nowcoder 2020 多校 第五场
+</h1>
+<div class=post-meta>📝 August 7, 2020&nbsp;·&nbsp;⌛ 4 min&nbsp;|&nbsp;<a href=https://github.com/%3cpath_to_repo%3e/content/posts/ACM-ICPC/nowcoder%202020%20%e5%a4%9a%e6%a0%a1%20%e7%ac%ac%e4%ba%94%e5%9c%ba.md rel="noopener noreferrer" target=_blank>Suggest Changes</a>
+</div>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#nowcoder-2020-%e5%a4%9a%e6%a0%a1-%e7%ac%ac%e4%ba%94%e5%9c%ba aria-label="nowcoder 2020 多校 第五场">nowcoder 2020 多校 第五场</a><ul>
+<li>
+<a href=#b-graph aria-label="B Graph">B Graph</a></li>
+<li>
+<a href=#d-drop-voicing aria-label="D Drop Voicing">D Drop Voicing</a></li>
+<li>
+<a href=#e-bogo-sort aria-label="E Bogo Sort">E Bogo Sort</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=nowcoder-2020-多校-第五场>nowcoder 2020 多校 第五场<a hidden class=anchor aria-hidden=true href=#nowcoder-2020-多校-第五场>#</a></h1>
+<blockquote>
+<p><a href=https://ac.nowcoder.com/acm/contest/5670>https://ac.nowcoder.com/acm/contest/5670</a></p>
+</blockquote>
+<h2 id=b-graph>B Graph<a hidden class=anchor aria-hidden=true href=#b-graph>#</a></h2>
+<blockquote>
+<p>tire树，最小生成树</p>
+</blockquote>
+<p><strong>题意</strong>：</p>
+<p>给一个带有边权的树，可以删除或添加边，但要保证：</p>
+<ul>
+<li>图联通</li>
+<li>环上边权异或为0</li>
+</ul>
+<p><strong>Solution</strong></p>
+<p>不管怎么操作，两点路径上边权的异或值是固定的，于是问题就转化成一个最小生成树问题。每次选出不联通的点集$S_1$, $S_2$,
+将他们联通的代价是</p>
+<p>$$
+\min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)}
+$$</p>
+<p>可以通过tire树实现这个过程，就是tire树合并子节点，复杂度为$O(n\log n)$</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;memory.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;bitset&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;assert.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>3e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>10007</span>;
+
+LL pow2[<span style=color:#ae81ff>100</span>];
+vector<span style=color:#f92672>&lt;</span>P<span style=color:#f92672>&gt;</span> G[MAX];
+<span style=color:#66d9ef>int</span> dis[MAX];
+<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Tire</span>{
+    <span style=color:#66d9ef>int</span> nex[MAX][<span style=color:#ae81ff>2</span>];
+    <span style=color:#66d9ef>int</span> siz[MAX];
+    <span style=color:#66d9ef>int</span> tot ;
+    LL ans;
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>init</span>(){
+        ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+        siz[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+        mset(nex[<span style=color:#ae81ff>0</span>], <span style=color:#ae81ff>0</span>);
+        tot <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+    }
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span>(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> d) {
+        <span style=color:#66d9ef>int</span> rt <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> d; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+            <span style=color:#66d9ef>int</span> e <span style=color:#f92672>=</span> x <span style=color:#f92672>&amp;</span> pow2[i] <span style=color:#f92672>?</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span>;
+            <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>nex[rt][e]) {
+                mset(nex[tot], <span style=color:#ae81ff>0</span>);
+                siz[tot] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+                nex[rt][e] <span style=color:#f92672>=</span> tot <span style=color:#f92672>++</span>;
+            }
+            rt <span style=color:#f92672>=</span> nex[rt][e];
+            siz[rt] <span style=color:#f92672>++</span>;
+        }
+    }
+    LL <span style=color:#a6e22e>query</span>(<span style=color:#66d9ef>int</span> val, <span style=color:#66d9ef>int</span> u, <span style=color:#66d9ef>int</span> d) {
+        <span style=color:#66d9ef>int</span> rt <span style=color:#f92672>=</span> u;
+        LL res <span style=color:#f92672>=</span> val;
+        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> d; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+            <span style=color:#66d9ef>if</span>(res <span style=color:#f92672>&amp;</span> pow2[i]) {
+                <span style=color:#66d9ef>if</span>(nex[rt][<span style=color:#ae81ff>1</span>]) {
+                    res <span style=color:#f92672>^=</span> pow2[i];
+                    rt <span style=color:#f92672>=</span> nex[rt][<span style=color:#ae81ff>1</span>];
+                }
+                <span style=color:#66d9ef>else</span> rt <span style=color:#f92672>=</span> nex[rt][<span style=color:#ae81ff>0</span>];
+            }
+            <span style=color:#66d9ef>else</span> {
+                <span style=color:#66d9ef>if</span>(nex[rt][<span style=color:#ae81ff>0</span>]) {
+                    rt <span style=color:#f92672>=</span> nex[rt][<span style=color:#ae81ff>0</span>];
+                }
+                <span style=color:#66d9ef>else</span> {
+                    res <span style=color:#f92672>^=</span> pow2[i];
+                    rt <span style=color:#f92672>=</span> nex[rt][<span style=color:#ae81ff>1</span>];
+                }
+            }
+        }
+        <span style=color:#66d9ef>return</span> res;
+    }
+    LL <span style=color:#a6e22e>merge</span>(<span style=color:#66d9ef>int</span> l, <span style=color:#66d9ef>int</span> r, <span style=color:#66d9ef>int</span> val, <span style=color:#66d9ef>int</span> d, <span style=color:#66d9ef>int</span> row_d){
+        <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>nex[l][<span style=color:#ae81ff>0</span>] and <span style=color:#f92672>!</span>nex[l][<span style=color:#ae81ff>1</span>]) {
+            <span style=color:#66d9ef>return</span> query(val, r, row_d);
+        }
+        LL res <span style=color:#f92672>=</span> inf;
+        <span style=color:#66d9ef>if</span>(nex[l][<span style=color:#ae81ff>0</span>]) res <span style=color:#f92672>=</span> min(res, merge(nex[l][<span style=color:#ae81ff>0</span>], r, val, d<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, row_d));
+        <span style=color:#66d9ef>if</span>(nex[l][<span style=color:#ae81ff>1</span>]) res <span style=color:#f92672>=</span> min(res, merge(nex[l][<span style=color:#ae81ff>1</span>], r, val<span style=color:#f92672>^</span>pow2[d], d<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, row_d));
+        <span style=color:#66d9ef>return</span> res;
+    }
+    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(<span style=color:#66d9ef>int</span> u, <span style=color:#66d9ef>int</span> val, <span style=color:#66d9ef>int</span> d) {
+        <span style=color:#66d9ef>if</span>(nex[u][<span style=color:#ae81ff>0</span>]) dfs(nex[u][<span style=color:#ae81ff>0</span>], val, d<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+        <span style=color:#66d9ef>if</span>(nex[u][<span style=color:#ae81ff>1</span>]) dfs(nex[u][<span style=color:#ae81ff>1</span>], val <span style=color:#f92672>^</span> pow2[d], d<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+        <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>nex[u][<span style=color:#ae81ff>0</span>] or <span style=color:#f92672>!</span>nex[u][<span style=color:#ae81ff>1</span>]) 
+            <span style=color:#66d9ef>return</span>;
+        <span style=color:#66d9ef>int</span> l <span style=color:#f92672>=</span> nex[u][<span style=color:#ae81ff>0</span>], r <span style=color:#f92672>=</span> nex[u][<span style=color:#ae81ff>1</span>];
+        <span style=color:#66d9ef>if</span>(siz[l] <span style=color:#f92672>&gt;</span> siz[r]) swap(l, r);
+        ans <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> merge(l, r, <span style=color:#ae81ff>0</span>, d<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, d<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> pow2[d];
+
+    }
+}tire;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(<span style=color:#66d9ef>int</span> u, <span style=color:#66d9ef>int</span> p, <span style=color:#66d9ef>int</span> d){
+    dis[u] <span style=color:#f92672>=</span> d;
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> G[u].size(); i<span style=color:#f92672>++</span>){
+        <span style=color:#66d9ef>int</span> v <span style=color:#f92672>=</span> G[u][i].first;
+        <span style=color:#66d9ef>if</span>(v <span style=color:#f92672>==</span> p) <span style=color:#66d9ef>continue</span>;
+        dfs(v, u, d<span style=color:#f92672>^</span>G[u][i].second);
+    }
+}
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>    freopen64(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>    pow2[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>32</span>; i<span style=color:#f92672>++</span>) pow2[i] <span style=color:#f92672>=</span> pow2[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>&lt;&lt;</span> <span style=color:#ae81ff>1</span>;
+    <span style=color:#66d9ef>int</span> n;
+    scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>n);
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>) {
+        <span style=color:#66d9ef>int</span> u, v, c;
+        scanf(<span style=color:#e6db74>&#34;%d%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>u, <span style=color:#f92672>&amp;</span>v, <span style=color:#f92672>&amp;</span>c);
+        u<span style=color:#f92672>++</span>, v<span style=color:#f92672>++</span>;
+        G[u].emplace_back(v, c);
+        G[v].emplace_back(u, c);
+    }
+    dfs(<span style=color:#ae81ff>1</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>);
+    tire.init();
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) 
+        tire.add(dis[i], <span style=color:#ae81ff>29</span>);
+    tire.dfs(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>29</span>);  
+    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, tire.ans);
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=d-drop-voicing>D Drop Voicing<a hidden class=anchor aria-hidden=true href=#d-drop-voicing>#</a></h2>
+<blockquote>
+<p>最长上升子序列</p>
+</blockquote>
+<p><strong>题意</strong></p>
+<p>给一个序列$p_1\dots p_n$，可以进行两种操作，进行连续的第一个操作耗费一个代价</p>
+<ul>
+<li>把$p_{n-1}$放到最前面</li>
+<li>$p_1$放到最后面</li>
+</ul>
+<p>求把序列变成升序的最小代价</p>
+<p><strong>Solution</strong></p>
+<p>结合两种操作其实就是把一个元素$p_i$移到一个位置，需要一个代价。于是变成求LIS</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> n;
+<span style=color:#66d9ef>int</span> a[MAX];
+<span style=color:#66d9ef>int</span> b[MAX];
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>solve</span>(){
+    mset(b, <span style=color:#ae81ff>0</span>);
+    <span style=color:#66d9ef>int</span> ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+        <span style=color:#66d9ef>int</span> idx <span style=color:#f92672>=</span> lower_bound(b, b<span style=color:#f92672>+</span>ans, a[i]) <span style=color:#f92672>-</span> b;
+        b[idx] <span style=color:#f92672>=</span> a[i];
+        <span style=color:#66d9ef>if</span>(idx <span style=color:#f92672>==</span> ans) ans <span style=color:#f92672>++</span>;
+    }
+    <span style=color:#75715e>// cout &lt;&lt; n - ans &lt;&lt; &#34;\n&#34;;
+</span><span style=color:#75715e></span>    <span style=color:#66d9ef>return</span> ans;
+}
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>    freopen64(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+<span style=color:#75715e>#else 
+</span><span style=color:#75715e></span>    ios<span style=color:#f92672>::</span>sync_with_stdio(<span style=color:#ae81ff>0</span>);
+    cin.tie(<span style=color:#ae81ff>0</span>);
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>    cin <span style=color:#f92672>&gt;&gt;</span> n;
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) cin <span style=color:#f92672>&gt;&gt;</span> a[i];
+    <span style=color:#66d9ef>int</span> ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>) {
+        rotate(a<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, a<span style=color:#f92672>+</span><span style=color:#ae81ff>2</span>, a<span style=color:#f92672>+</span>n<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
+        ans <span style=color:#f92672>=</span> max(ans, solve());
+    }
+    cout <span style=color:#f92672>&lt;&lt;</span> n <span style=color:#f92672>-</span> ans <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=e-bogo-sort>E Bogo Sort<a hidden class=anchor aria-hidden=true href=#e-bogo-sort>#</a></h2>
+<p><strong>题意</strong></p>
+<p>给一个置换，求有多少种排列可以通过这个置换变成升序</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> math <span style=color:#f92672>import</span> gcd
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>lcm</span>(a:int, b:int) <span style=color:#f92672>-&gt;</span>int:
+    <span style=color:#66d9ef>return</span> a <span style=color:#f92672>*</span> b <span style=color:#f92672>//</span> gcd(a, b)
+
+n <span style=color:#f92672>=</span> int(input())
+a <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> list(map(int, input()<span style=color:#f92672>.</span>split()))
+vis <span style=color:#f92672>=</span> [<span style=color:#66d9ef>False</span> <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(len(a))]
+
+ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+<span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1</span>, n<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>):
+    x <span style=color:#f92672>=</span> a[i]
+    <span style=color:#66d9ef>if</span> vis[x] : <span style=color:#66d9ef>continue</span>
+    cur <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    <span style=color:#66d9ef>while</span> <span style=color:#f92672>not</span> vis[x] :
+        vis[x] <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+        cur <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+        x <span style=color:#f92672>=</span> a[x]
+    ans <span style=color:#f92672>=</span> lcm(ans, cur)
+print(ans)
+
+</code></pre></div>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/>
+<span class=title>« Prev Page</span>
+<br>
+<span>nowcoder 2020 多校 第三场</span>
+</a>
+<a class=next href=/posts/acm-icpc/poj-3376/>
+<span class=title>Next Page »</span>
+<br>
+<span>POJ 3376</span>
+</a>
+</nav>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>&copy; 2021 <a href>Jiali Wang</a></span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

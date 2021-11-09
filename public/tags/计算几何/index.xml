@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>计算几何 on Hi-^_^</title>
+    <link>/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</link>
+    <description>Recent content in 计算几何 on Hi-^_^</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Jiali Wang</copyright>
+    <lastBuildDate>Thu, 27 Aug 2020 00:01:00 +0800</lastBuildDate><atom:link href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gym 102460L Largest Quadrilateral </title>
+      <link>/posts/acm-icpc/gym-102460l-largest-quadrilateral/</link>
+      <pubDate>Thu, 27 Aug 2020 00:01:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/gym-102460l-largest-quadrilateral/</guid>
+      <description>Gym 102460L Largest Quadrilateral  Largest Quadrilateral
+ 题意 给$n$个点从中选出四个点，使得面积最大
+Solution  首先，肯定是求凸包，要求的点一定在凸包上。 不难联想到凸包对每个边求最大三角形面积的问题，也就是旋转卡壳。 可以将问题转化为，对凸包的每一个对角线$A_iA_j$，求最大面积的两个三角形，$\triangle{A_iA_jP}$, $\triangle{A_iA_jQ}$, 然后就可以枚举对角线，旋转卡壳算最大面积   细节
+ 输出的格式 凸包上应该留下共线的点   #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;//#include &amp;lt;memory.h&amp;gt; #include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;cassert&amp;gt;// #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>数论 on Hi-^_^</title>
+    <link>/tags/%E6%95%B0%E8%AE%BA/</link>
+    <description>Recent content in 数论 on Hi-^_^</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Jiali Wang</copyright>
+    <lastBuildDate>Sat, 25 Apr 2020 00:41:00 +0800</lastBuildDate><atom:link href="/tags/%E6%95%B0%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AtCoder-Sum of gcd of Tuples</title>
+      <link>/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
+      <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
+      
+      <guid>/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
+      <description>AtCoder-Sum of gcd of Tuples (Hard) 题意  https://atcoder.jp/contests/abc162/tasks/abc162_e
+ 求$\sum\gcd(a_1,a_2,\cdots,a_n)$,其中$a_i\in[1,K]$
+Solution 直接计算肯定是不好计算的，可以考虑按$gcd$的值进行分类，问题就转化为一个计数问题
+ $\displaystyle \gcd(a,b)=d\Rightarrow\gcd(\frac{a}{d},\frac{b}{d})=1$
+$\displaystyle {\gcd(a_1,\cdots, a_n)=d的数量}={\gcd(\frac{a_1}{d},\cdots,\frac{a_n}{d})=1的数量}$
+ 那么，
+$$ Ans=\sum_{d=1}^{K}dF(\lfloor\frac{K}{d}\rfloor, N) $$
+其中$F(K,N)$表示$\gcd(a_1,\cdots,a_N)=1$的个数，$a_i\in[1,K]$
+可以用容斥算出$\displaystyle F(K,N)=K^N-\sum_{i=1}^{K}F(\lfloor\frac{K}{i}\rfloor)$
+#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;// #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
+    </item>
+    
+  </channel>
+</rss>
