@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>STRING on Hi-^_^</title>
+    <link>Anlarry.github.io/tags/string/</link>
+    <description>Recent content in STRING on Hi-^_^</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Jiali Wang</copyright>
+    <lastBuildDate>Wed, 05 Aug 2020 10:08:00 +0800</lastBuildDate><atom:link href="Anlarry.github.io/tags/string/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>POJ 3376</title>
+      <link>Anlarry.github.io/posts/acm-icpc/poj-3376/</link>
+      <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
+      
+      <guid>Anlarry.github.io/posts/acm-icpc/poj-3376/</guid>
+      <description>POJ 3376  tire + manacher
+ 题意  http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
+ Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
+首先考虑什么情况下，两个串拼接会是一个回文串。
+case 1： s=reverse(t)
+$$ \begin{cases} s = a_0\dots a_{n-1} \ t = a_{n-1}\dots a_0 \end{cases} $$
+case 2
+$$ \begin{cases} \begin{matrix} &amp;amp;\mathrm{palindrome} \ s = a_0\dots a_i &amp;amp;\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \ \ t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \ \begin{matrix} \ \ \ \ \ \mathrm{palindrome} &amp;amp;\ t = \overbrace{a_0\dots a_{i-1}} &amp;amp;a_i\dots a_{n-1} \end{matrix} \end{cases} $$</description>
+    </item>
+    
+  </channel>
+</rss>

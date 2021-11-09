@@ -1,0 +1,743 @@
+<!doctype html><html lang=en dir=auto>
+<head><meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
+<meta name=robots content="index, follow">
+<title>Codeforces Round #664 | Hi-^_^</title>
+<meta name=keywords content="搬家">
+<meta name=description content="Codeforces Round #664  https://codeforces.com/contest/1395
+ A 题意
+给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串
+#include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>//#include <memory.h> #include <cstdlib>#include <queue>#include <iomanip>#include <cassert>#include <unordered_map>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout << #x << &#34; &#34; << x << &#34;\n&#34; using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG 	freopen(&#34;in&#34;, &#34;r&#34;, stdin); // freopen(&#34;out&#34;, &#34;w&#34;, stdout); #endif } int main() { file_read(); int T; LL a, b, c, d; scanf(&#34;%d&#34;, &T); while (T--) { cin >> a >> b >> c >> d; LL tot = a + b + c + d; if(tot & 1) { int odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 1) { puts(&#34;Yes&#34;); continue; } if(a > 0 and b > 0 and c > 0) { a--, b--, c--, d+=3; odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 1) { puts(&#34;Yes&#34;); continue; } } puts(&#34;No&#34;); continue; }	else { int odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 0 ) { puts(&#34;Yes&#34;); continue; } if(a > 0 and b > 0 and c > 0 and d > 0) { a--, b--, c--, d += 3; odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 0) { puts(&#34;Yes&#34;); continue; } }	puts(&#34;No&#34;); } } return 0; } B 题意">
+<meta name=author content>
+<link rel=canonical href=Anlarry.github.io/posts/acm-icpc/codeforces-round-664/>
+<meta name=google-site-verification content="XYZabc">
+<meta name=yandex-verification content="XYZabc">
+<meta name=msvalidate.01 content="XYZabc">
+<link crossorigin=anonymous href=/Anlarry.github.io/assets/css/stylesheet.min.5e2b4101351c21e906f398ae96901791830f58d430f96f2659dab7eaef7b3cb7.css integrity="sha256-XitBATUcIekG85iulpAXkYMPWNQw+W8mWdq36u97PLc=" rel="preload stylesheet" as=style>
+<link rel=preload href=/icon/ai512.png as=image>
+<script defer crossorigin=anonymous src=/Anlarry.github.io/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5+kdJvBz5iKbt6B5PJI=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=Anlarry.github.io/icon/ai512.png>
+<link rel=icon type=image/png sizes=16x16 href=Anlarry.github.io/icon/ai16.png>
+<link rel=icon type=image/png sizes=32x32 href=Anlarry.github.io/icon/ai32.png>
+<link rel=apple-touch-icon href=Anlarry.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=Anlarry.github.io/safari-pinned-tab.svg>
+<meta name=theme-color content="#2e2e33">
+<meta name=msapplication-TileColor content="#2e2e33">
+<meta name=generator content="Hugo 0.89.2">
+<noscript>
+<style>#theme-toggle,.top-link{display:none}</style>
+<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
+</noscript>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="Codeforces Round #664">
+<meta property="og:description" content="Codeforces Round #664  https://codeforces.com/contest/1395
+ A 题意
+给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串
+#include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>//#include <memory.h> #include <cstdlib>#include <queue>#include <iomanip>#include <cassert>#include <unordered_map>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout << #x << &#34; &#34; << x << &#34;\n&#34; using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG 	freopen(&#34;in&#34;, &#34;r&#34;, stdin); // freopen(&#34;out&#34;, &#34;w&#34;, stdout); #endif } int main() { file_read(); int T; LL a, b, c, d; scanf(&#34;%d&#34;, &T); while (T--) { cin >> a >> b >> c >> d; LL tot = a + b + c + d; if(tot & 1) { int odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 1) { puts(&#34;Yes&#34;); continue; } if(a > 0 and b > 0 and c > 0) { a--, b--, c--, d+=3; odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 1) { puts(&#34;Yes&#34;); continue; } } puts(&#34;No&#34;); continue; }	else { int odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 0 ) { puts(&#34;Yes&#34;); continue; } if(a > 0 and b > 0 and c > 0 and d > 0) { a--, b--, c--, d += 3; odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 0) { puts(&#34;Yes&#34;); continue; } }	puts(&#34;No&#34;); } } return 0; } B 题意">
+<meta property="og:type" content="article">
+<meta property="og:url" content="Anlarry.github.io/posts/acm-icpc/codeforces-round-664/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2020-09-01T19:40:00+00:00">
+<meta property="article:modified_time" content="2020-09-01T19:40:00+00:00"><meta property="og:site_name" content="Hi~, ^_^">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Codeforces Round #664">
+<meta name=twitter:description content="Codeforces Round #664  https://codeforces.com/contest/1395
+ A 题意
+给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串
+#include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>//#include <memory.h> #include <cstdlib>#include <queue>#include <iomanip>#include <cassert>#include <unordered_map>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout << #x << &#34; &#34; << x << &#34;\n&#34; using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG 	freopen(&#34;in&#34;, &#34;r&#34;, stdin); // freopen(&#34;out&#34;, &#34;w&#34;, stdout); #endif } int main() { file_read(); int T; LL a, b, c, d; scanf(&#34;%d&#34;, &T); while (T--) { cin >> a >> b >> c >> d; LL tot = a + b + c + d; if(tot & 1) { int odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 1) { puts(&#34;Yes&#34;); continue; } if(a > 0 and b > 0 and c > 0) { a--, b--, c--, d+=3; odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 1) { puts(&#34;Yes&#34;); continue; } } puts(&#34;No&#34;); continue; }	else { int odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 0 ) { puts(&#34;Yes&#34;); continue; } if(a > 0 and b > 0 and c > 0 and d > 0) { a--, b--, c--, d += 3; odd = (a & 1) + (b & 1) + (c & 1) + (d & 1); if(odd == 0) { puts(&#34;Yes&#34;); continue; } }	puts(&#34;No&#34;); } } return 0; } B 题意">
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"Anlarry.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Codeforces Round #664","item":"Anlarry.github.io/posts/acm-icpc/codeforces-round-664/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Codeforces Round #664","name":"Codeforces Round #664","description":"Codeforces Round #664  https://codeforces.com/contest/1395\n A 题意\n给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串\n#include \u0026lt;cstdio\u0026gt;#include \u0026lt;stack\u0026gt;#include \u0026lt;set\u0026gt;#include \u0026lt;cmath\u0026gt;#include \u0026lt;map\u0026gt;#include \u0026lt;time.h\u0026gt;#include \u0026lt;vector\u0026gt;#include \u0026lt;iostream\u0026gt;#include \u0026lt;string\u0026gt;#include \u0026lt;cstring\u0026gt;#include \u0026lt;algorithm\u0026gt;//#include \u0026lt;memory.h\u0026gt; #include \u0026lt;cstdlib\u0026gt;#include \u0026lt;queue\u0026gt;#include \u0026lt;iomanip\u0026gt;#include \u0026lt;cassert\u0026gt;#include \u0026lt;unordered_map\u0026gt;#define P pair\u0026lt;int, int\u0026gt; #define LL long long #define LD long double #define PLL pair\u0026lt;LL, LL\u0026gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i \u0026lt; b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout \u0026lt;\u0026lt; #x \u0026lt;\u0026lt; \u0026#34; \u0026#34; \u0026lt;\u0026lt; x \u0026lt;\u0026lt; \u0026#34;\\n\u0026#34; using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\u0026#34;in\u0026#34;, \u0026#34;r\u0026#34;, stdin); // freopen(\u0026#34;out\u0026#34;, \u0026#34;w\u0026#34;, stdout); #endif } int main() { file_read(); int T; LL a, b, c, d; scanf(\u0026#34;%d\u0026#34;, \u0026amp;T); while (T--) { cin \u0026gt;\u0026gt; a \u0026gt;\u0026gt; b \u0026gt;\u0026gt; c \u0026gt;\u0026gt; d; LL tot = a + b + c + d; if(tot \u0026amp; 1) { int odd = (a \u0026amp; 1) + (b \u0026amp; 1) + (c \u0026amp; 1) + (d \u0026amp; 1); if(odd == 1) { puts(\u0026#34;Yes\u0026#34;); continue; } if(a \u0026gt; 0 and b \u0026gt; 0 and c \u0026gt; 0) { a--, b--, c--, d+=3; odd = (a \u0026amp; 1) + (b \u0026amp; 1) + (c \u0026amp; 1) + (d \u0026amp; 1); if(odd == 1) { puts(\u0026#34;Yes\u0026#34;); continue; } } puts(\u0026#34;No\u0026#34;); continue; }\telse { int odd = (a \u0026amp; 1) + (b \u0026amp; 1) + (c \u0026amp; 1) + (d \u0026amp; 1); if(odd == 0 ) { puts(\u0026#34;Yes\u0026#34;); continue; } if(a \u0026gt; 0 and b \u0026gt; 0 and c \u0026gt; 0 and d \u0026gt; 0) { a--, b--, c--, d += 3; odd = (a \u0026amp; 1) + (b \u0026amp; 1) + (c \u0026amp; 1) + (d \u0026amp; 1); if(odd == 0) { puts(\u0026#34;Yes\u0026#34;); continue; } }\tputs(\u0026#34;No\u0026#34;); } } return 0; } B 题意","keywords":["搬家"],"articleBody":"Codeforces Round #664  https://codeforces.com/contest/1395\n A 题意\n给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串\n#include #include #include #include #include #include #include #include #include #include #include //#include  #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\"in\", \"r\", stdin); // freopen(\"out\", \"w\", stdout); #endif } int main() { file_read(); int T; LL a, b, c, d; scanf(\"%d\", \u0026T); while (T--) { cin  a  b  c  d; LL tot = a + b + c + d; if(tot \u0026 1) { int odd = (a \u0026 1) + (b \u0026 1) + (c \u0026 1) + (d \u0026 1); if(odd == 1) { puts(\"Yes\"); continue; } if(a  0 and b  0 and c  0) { a--, b--, c--, d+=3; odd = (a \u0026 1) + (b \u0026 1) + (c \u0026 1) + (d \u0026 1); if(odd == 1) { puts(\"Yes\"); continue; } } puts(\"No\"); continue; }\telse { int odd = (a \u0026 1) + (b \u0026 1) + (c \u0026 1) + (d \u0026 1); if(odd == 0 ) { puts(\"Yes\"); continue; } if(a  0 and b  0 and c  0 and d  0) { a--, b--, c--, d += 3; odd = (a \u0026 1) + (b \u0026 1) + (c \u0026 1) + (d \u0026 1); if(odd == 0) { puts(\"Yes\"); continue; } }\tputs(\"No\"); } } return 0; } B 题意\n在棋盘上走，类似于车，求遍历所有格子一次的方案\n#include #include #include #include #include #include #include #include #include #include #include //#include  #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\"in\", \"r\", stdin); // freopen(\"out\", \"w\", stdout); #endif } void print(int x, int y) { printf(\"%d %d\\n\", x, y); } bool vis[105][105]; int main() { file_read(); int n, m, x, y; int X, Y; cin  n  m  x  y; X = x, Y = y; print(x, y--); while(y = 1) { print(x, y--); } y = Y+1; while(y  m) { print(x, y++); } y = m; for(int i = x-1; i = 1; i--) { if(y == m){ for(; y = 1; y--) print(i, y); y = 1; } else if(y == 1) { for(; y  m; y++) print(i, y); y = m; } } for(int i = x+1; i  n; i++) { if(y == m){ for(; y = 1; y--) print(i, y); y = 1; } else if(y == 1) { for(; y  m; y++) print(i, y); y = m; } } return 0; } C 题意\n给两个序列$a$,$b$, 对每个$a_i$可以选择一个$b_j$,$c_i=a_i \u0026 b_j$,求最小的$c_1|c_2|\\dots|c_n$\nSolution\n从高位到低位，使得每一位尽可能为0，维护对于每个$a_i$,可以用的$b_j$\n#include #include #include #include #include #include #include #include #include #include #include //#include  #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\"in\", \"r\", stdin); // freopen(\"out\", \"w\", stdout); #endif } int n, m; LL a[MAX], b[MAX]; bool ok[205][205]; bool check(LL x) { bool res = true; for(int i = 1; i  n; i++) { bool cur = false; for(int j = 1; j  m; j++) { if(!ok[i][j]) continue; if((a[i] \u0026 b[j] \u0026 x) == 0) { cur = true; break; } } res \u0026= cur; } if(res) { for(int i = 1; i  n; i++) { for(int j = 1; j  m; j++) { if((a[i] \u0026 b[j] \u0026 x) != 0) { ok[i][j] = false; } } } } return res; } int main() { file_read(); scanf(\"%d%d\", \u0026n, \u0026m); for(int i = 1; i  n; i++) cin  a[i]; for(int i = 1; i  m; i++) cin  b[i]; LL ans = 0; mset(ok, 1); for(LL i = 32; i = 0; i--) { if(!check(1LLi)) { ans |= (1LLi); } } cout  ans  \"\\n\"; return 0; } D 题意\n给以序列$a$,可以选$n$次数字，如果数字大于$m$,那么后$d$次就不能选，求选出的数字的最大值\nSolution\n枚举选的数字小于等于$m$的个数，可以选择超过$m$的数字就是固定的，选择最大的\n#include #include #include #include #include #include #include #include #include #include #include //#include  #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\"in\", \"r\", stdin); // freopen(\"out\", \"w\", stdout); #endif } LL a[MAX]; LL A[MAX], B[MAX]; LL sa[MAX], sb[MAX]; int main() { file_read(); LL n, d, m; cin  n  d  m; for(int i = 1; i  n; i++) cin  a[i]; sort(a+1, a+1+n, [](LL x, LL y) { return x  y; }); int tot1 = 0, tot2 = 0; for(int i = 1; i  n; i++) { if(a[i]  m) A[++tot1] = a[i]; else B[++tot2] = a[i]; } if(tot1 == 0) { LL nn = (n+d) / (d + 1); LL ans = 0; for(int i = 1; i  nn; i++) { ans += B[i]; } cout  ans  \"\\n\"; return 0; } if(tot2 == 0) { LL ans = 0; for(int i = 1; i  n; i++) { ans += A[i]; } cout  ans  \"\\n\"; return 0; } for(int i = 1; i  tot1; i++) sa[i] = sa[i-1] + A[i]; for(int i = 1; i  tot2; i++) sb[i] = sb[i-1] + B[i]; LL ans = 0; for(int i = 0; i  tot1; i++) { LL cur = sa[i]; LL nn = (n-i+d) / (d+1); ans = max(cur+sb[nn], ans); } cout  ans  \"\\n\"; return 0; } E 题意\n给一个图$G=(V,E)$,选择一个tuple $(c_1,\\dots, c_k)$作为遍历图的规则，出度为$i$的点的下一个节点是第$c_i$小的边指向的点，问有多少种tuple可以把图遍历一遍\nSolution\n 不能发现其实最后的路径是一个环，可以对每个点的下一个节点所组成的集合是$V$，因此可以通判断过这是否成立来检查一个tuple 另外可以将点按出度分类，维护$S[i][j]$表示出度为$i$的点，选第$j$小的边所到达的点的集合 可以用hash判断集合是否相等，有可能会冲突  #include #include #include #include #include #include #include #include #include #include #include //#include  #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\"in\", \"r\", stdin); // freopen(\"out\", \"w\", stdout); #endif } #define ULL unsigned long long const int mod2 = 998244353; vectorP G[MAX]; ULL s[100][100]; LL g[100][100]; LL t[100][100]; bool vis[MAX]; ULL val[MAX]; ULL TARGET1 = 1; LL TARGET2 = 1; LL TARGET3 = 1; int n, m, k; int ans; void dfs(int u) { vis[u] = 1; for(int i = 0; i  G[u].size(); i++) { int v = G[u][i].first; s[G[u].size()][i+1] *= (ULL)val[v]; g[G[u].size()][i+1] = g[G[u].size()][i+1] * val[v] % mod; t[G[u].size()][i+1] = t[G[u].size()][i+1] * val[v] % mod2; if(vis[v]) continue; dfs(v); } } void dfs2(int x, ULL cur1, LL cur2, LL cur3) { if(x  k) { if(cur1 == TARGET1 and cur2 == TARGET2 and cur3 == TARGET3) ans ++; return ; } for(int i = 1; i  x; i++) { dfs2(x+1, cur1*s[x][i], cur2*g[x][i]%mod, cur3 * t[x][i] % mod2); } } int main() { srand((int)time(0)); file_read(); for(int i = 0; i  100; i++) for(int j = 0; j  100; j++) s[i][j] = g[i][j] = t[i][j] = 1; scanf(\"%d%d%d\", \u0026n, \u0026m, \u0026k); for(int i = 1; i  n; i++) val[i] = rand() % mod; for(ULL i = 1; i  n; i++) TARGET1 = TARGET1 * val[i], TARGET2 = TARGET2 * val[i] % mod, TARGET3 = TARGET3 * val[i] % mod2; for(int i = 1; i  m; i++) { int u, v, w; scanf(\"%d%d%d\", \u0026u, \u0026v, \u0026w); G[u].push_back({v, w}); } for(int i = 1; i  n; i++) { sort(G[i].begin(), G[i].end(), [](const P\u0026A, const P\u0026B){ return A.second  B.second; }); } dfs(1); dfs2(1, 1, 1, 1); printf(\"%d\\n\", ans); return 0; } F 题意\n定义串只有N和B，有四种操作，给$s_1, \\dots, s_n$，求一个串$t$使得和$s$的最大距离最小\nSolution\n 不难发现字符串对应一个坐标，对于一个$x,y$可以移动上下左右，或者右上，左下 对于一个点，在固定距离内可以访问的点是一个六边形 要找一个最小半径的六边形覆盖所有的点 因此二分半径，计算六边形中心的可行区域 最后在可行区域选一个作为$t$,不能是空串  #include #include #include #include #include #include #include #include #include #include #include //#include  #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __inf64 = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 500; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG \tfreopen(\"in\", \"r\", stdin); // freopen(\"out\", \"w\", stdout); #endif } vectorP pt; int xL, xR, yL, yR, zL, zR; bool check(int mid) { xL = -inf, xR = inf, yL = -inf, yR = inf, zL = -inf, zR = inf; for(auto p : pt) { xL = max(xL, p.first-mid); xR = min(xR, p.first+mid); yL = max(yL, p.second-mid); yR = min(yR, p.second+mid); zL = max(zL, p.first-p.second-mid); zR = min(zR, p.first-p.second+mid); } if(xL  xR || yL  yR || zL  zR) return false; yL = max(yL, xL-zR); yR = min(yR, xR-zL); if(yL  yR) return false; return true; } int main() { file_read(); int n; cin  n; for(int i = 1; i  n; i++) { string s; cin  s; int x = 0, y = 0; for(auto c : s) { if(c == 'B') x++; else y++; } pt.emplace_back(x, y); } int l = 0, r = inf; while(l  r) { int mid = (l + r)  1; if(check(mid)) r = mid; else l = mid + 1; } // cout \tcheck(l); int ansx, ansy; for(int x = max(0, xL); x  xR; x++) { int curyL = max(yR, x-zR); int curyR = min(yR, x-zL); if(curyL  curyR) continue; if(x  0 || curyR  0) { ansx = x; ansy = curyR; break; }\t} cout  l  \"\\n\"; while(ansx--) printf(\"B\"); while(ansy--) printf(\"N\"); return 0; } ","wordCount":"1965","inLanguage":"en","datePublished":"2020-09-01T19:40:00Z","dateModified":"2020-09-01T19:40:00Z","mainEntityOfPage":{"@type":"WebPage","@id":"Anlarry.github.io/posts/acm-icpc/codeforces-round-664/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"Anlarry.github.io/icon/ai512.png"}}}</script>
+</head>
+<body id=top>
+<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
+<header class=header>
+<nav class=nav>
+<div class=logo>
+<a href=Anlarry.github.io accesskey=h title="Jiali's Blog (Alt + H)">
+<img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
+<span class=logo-switches>
+<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
+</span>
+</div>
+<ul id=menu>
+<li>
+<a href=Anlarry.github.io/Anlarry.github.io/archives/ title="Archives 📦">
+<span>Archives 📦</span>
+</a>
+</li>
+<li>
+<a href=Anlarry.github.io/Anlarry.github.io/categories/ title="Categories 📂">
+<span>Categories 📂</span>
+</a>
+</li>
+<li>
+<a href=Anlarry.github.io/Anlarry.github.io/tags/ title="Tags 🏷">
+<span>Tags 🏷</span>
+</a>
+</li>
+<li>
+<a href=Anlarry.github.io/Anlarry.github.io/links/ title="Links 🔗">
+<span>Links 🔗</span>
+</a>
+</li>
+<li>
+<a href=Anlarry.github.io/Anlarry.github.io/search/ title="Search 🔍 (Alt + /)" accesskey=/>
+<span>Search 🔍</span>
+</a>
+</li>
+</ul>
+</nav>
+</header>
+<main class=main>
+<article class=post-single>
+<header class=post-header>
+<div class=breadcrumbs><a href=Anlarry.github.io>Home</a>&nbsp;»&nbsp;<a href=Anlarry.github.io/posts/>Posts</a></div>
+<h1 class=post-title>
+Codeforces Round #664
+</h1>
+<div class=post-meta>📝 September 1, 2020&nbsp;·&nbsp;10 min&nbsp;|&nbsp;<a href=https://github.com/%3cpath_to_repo%3e/content/posts/ACM-ICPC/Codeforces%20Round%20664.md rel="noopener noreferrer" target=_blank>Suggest Changes</a>
+</div>
+</header> <div class=toc>
+<details open>
+<summary accesskey=c title="(Alt + C)">
+<span class=details>Table of Contents</span>
+</summary>
+<div class=inner><ul>
+<li>
+<a href=#codeforces-round-664 aria-label="Codeforces Round #664">Codeforces Round #664</a><ul>
+<li>
+<a href=#a aria-label=A>A</a></li>
+<li>
+<a href=#b aria-label=B>B</a></li>
+<li>
+<a href=#c aria-label=C>C</a></li>
+<li>
+<a href=#d aria-label=D>D</a></li>
+<li>
+<a href=#e aria-label=E>E</a></li>
+<li>
+<a href=#f aria-label=F>F</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+</div>
+<div class=post-content><h1 id=codeforces-round-664>Codeforces Round #664<a hidden class=anchor aria-hidden=true href=#codeforces-round-664>#</a></h1>
+<blockquote>
+<p><a href=https://codeforces.com/contest/1395>https://codeforces.com/contest/1395</a></p>
+</blockquote>
+<h2 id=a>A<a hidden class=anchor aria-hidden=true href=#a>#</a></h2>
+<p><strong>题意</strong></p>
+<p>给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>500</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e9</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>file_read</span>() {
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>	freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+	<span style=color:#75715e>// freopen(&#34;out&#34;, &#34;w&#34;, stdout);
+</span><span style=color:#75715e></span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+	file_read();
+	<span style=color:#66d9ef>int</span> T;
+	LL a, b, c, d;
+	scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>T);
+	<span style=color:#66d9ef>while</span> (T<span style=color:#f92672>--</span>)
+	{
+		cin <span style=color:#f92672>&gt;&gt;</span> a <span style=color:#f92672>&gt;&gt;</span> b <span style=color:#f92672>&gt;&gt;</span> c <span style=color:#f92672>&gt;&gt;</span> d;
+		LL tot <span style=color:#f92672>=</span> a <span style=color:#f92672>+</span> b <span style=color:#f92672>+</span> c <span style=color:#f92672>+</span> d;
+		<span style=color:#66d9ef>if</span>(tot <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) {
+			<span style=color:#66d9ef>int</span> odd <span style=color:#f92672>=</span> (a <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (b <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (c <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (d <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>);
+			<span style=color:#66d9ef>if</span>(odd <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
+				puts(<span style=color:#e6db74>&#34;Yes&#34;</span>);
+				<span style=color:#66d9ef>continue</span>;
+			}
+			<span style=color:#66d9ef>if</span>(a <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> and b <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> and c <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>) {
+				a<span style=color:#f92672>--</span>, b<span style=color:#f92672>--</span>, c<span style=color:#f92672>--</span>, d<span style=color:#f92672>+=</span><span style=color:#ae81ff>3</span>;
+				odd <span style=color:#f92672>=</span> (a <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (b <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (c <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (d <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>);
+				<span style=color:#66d9ef>if</span>(odd <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
+					puts(<span style=color:#e6db74>&#34;Yes&#34;</span>);
+					<span style=color:#66d9ef>continue</span>;
+				}
+			}
+			puts(<span style=color:#e6db74>&#34;No&#34;</span>);
+			<span style=color:#66d9ef>continue</span>;
+		}	
+		<span style=color:#66d9ef>else</span> {
+			<span style=color:#66d9ef>int</span> odd <span style=color:#f92672>=</span> (a <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (b <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (c <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (d <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>);
+			<span style=color:#66d9ef>if</span>(odd <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span> ) {
+				puts(<span style=color:#e6db74>&#34;Yes&#34;</span>);
+				<span style=color:#66d9ef>continue</span>;
+			}
+			<span style=color:#66d9ef>if</span>(a <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> and b <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> and c <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> and d <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>) {
+				a<span style=color:#f92672>--</span>, b<span style=color:#f92672>--</span>, c<span style=color:#f92672>--</span>, d <span style=color:#f92672>+=</span> <span style=color:#ae81ff>3</span>;
+				odd <span style=color:#f92672>=</span> (a <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (b <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (c <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>) <span style=color:#f92672>+</span> (d <span style=color:#f92672>&amp;</span> <span style=color:#ae81ff>1</span>);
+				<span style=color:#66d9ef>if</span>(odd <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+					puts(<span style=color:#e6db74>&#34;Yes&#34;</span>);
+					<span style=color:#66d9ef>continue</span>;
+				}
+			}			
+			puts(<span style=color:#e6db74>&#34;No&#34;</span>);
+		}
+	}
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=b>B<a hidden class=anchor aria-hidden=true href=#b>#</a></h2>
+<p><strong>题意</strong></p>
+<p>在棋盘上走，类似于车，求遍历所有格子一次的方案</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>500</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e9</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>file_read</span>() {
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>	freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+	<span style=color:#75715e>// freopen(&#34;out&#34;, &#34;w&#34;, stdout);
+</span><span style=color:#75715e></span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>print</span>(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> y) {
+	printf(<span style=color:#e6db74>&#34;%d %d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, x, y);
+}
+
+<span style=color:#66d9ef>bool</span> vis[<span style=color:#ae81ff>105</span>][<span style=color:#ae81ff>105</span>];
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+	file_read();
+	<span style=color:#66d9ef>int</span> n, m, x, y;
+	<span style=color:#66d9ef>int</span> X, Y;
+	cin <span style=color:#f92672>&gt;&gt;</span> n <span style=color:#f92672>&gt;&gt;</span> m <span style=color:#f92672>&gt;&gt;</span> x <span style=color:#f92672>&gt;&gt;</span> y;
+	X <span style=color:#f92672>=</span> x, Y <span style=color:#f92672>=</span> y;
+	print(x, y<span style=color:#f92672>--</span>);
+	<span style=color:#66d9ef>while</span>(y <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>) {
+		print(x, y<span style=color:#f92672>--</span>);
+	}
+	y <span style=color:#f92672>=</span> Y<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>;
+	<span style=color:#66d9ef>while</span>(y <span style=color:#f92672>&lt;=</span> m) {
+		print(x, y<span style=color:#f92672>++</span>);
+	}
+	y <span style=color:#f92672>=</span> m;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> x<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>; i<span style=color:#f92672>--</span>) {
+		<span style=color:#66d9ef>if</span>(y <span style=color:#f92672>==</span> m){
+			<span style=color:#66d9ef>for</span>(; y <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>; y<span style=color:#f92672>--</span>)
+				print(i, y);
+			y <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+		}
+		<span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span>(y <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
+			<span style=color:#66d9ef>for</span>(; y <span style=color:#f92672>&lt;=</span> m; y<span style=color:#f92672>++</span>)
+				print(i, y);
+			y <span style=color:#f92672>=</span> m;
+		}
+	}
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+		<span style=color:#66d9ef>if</span>(y <span style=color:#f92672>==</span> m){
+			<span style=color:#66d9ef>for</span>(; y <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>; y<span style=color:#f92672>--</span>)
+				print(i, y);
+			y <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+		}
+		<span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span>(y <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>) {
+			<span style=color:#66d9ef>for</span>(; y <span style=color:#f92672>&lt;=</span> m; y<span style=color:#f92672>++</span>)
+				print(i, y);
+			y <span style=color:#f92672>=</span> m;
+		}
+	}
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=c>C<a hidden class=anchor aria-hidden=true href=#c>#</a></h2>
+<p><strong>题意</strong></p>
+<p>给两个序列$a$,$b$, 对每个$a_i$可以选择一个$b_j$,$c_i=a_i & b_j$,求最小的$c_1|c_2|\dots|c_n$</p>
+<p><strong>Solution</strong></p>
+<p>从高位到低位，使得每一位尽可能为0，维护对于每个$a_i$,可以用的$b_j$</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>500</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e9</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>file_read</span>() {
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>	freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+	<span style=color:#75715e>// freopen(&#34;out&#34;, &#34;w&#34;, stdout);
+</span><span style=color:#75715e></span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+
+<span style=color:#66d9ef>int</span> n, m;
+LL a[MAX], b[MAX];
+<span style=color:#66d9ef>bool</span> ok[<span style=color:#ae81ff>205</span>][<span style=color:#ae81ff>205</span>];
+<span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>check</span>(LL x) {
+	<span style=color:#66d9ef>bool</span> res <span style=color:#f92672>=</span> true;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+		<span style=color:#66d9ef>bool</span> cur <span style=color:#f92672>=</span> false;
+		<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;=</span> m; j<span style=color:#f92672>++</span>) {
+			<span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>ok[i][j]) <span style=color:#66d9ef>continue</span>;
+			<span style=color:#66d9ef>if</span>((a[i] <span style=color:#f92672>&amp;</span> b[j] <span style=color:#f92672>&amp;</span> x) <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+				cur <span style=color:#f92672>=</span> true;
+				<span style=color:#66d9ef>break</span>;
+			} 
+		}
+		res <span style=color:#f92672>&amp;=</span> cur;
+	}
+	<span style=color:#66d9ef>if</span>(res) {
+		<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+			<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;=</span> m; j<span style=color:#f92672>++</span>) {
+				<span style=color:#66d9ef>if</span>((a[i] <span style=color:#f92672>&amp;</span> b[j] <span style=color:#f92672>&amp;</span> x) <span style=color:#f92672>!=</span> <span style=color:#ae81ff>0</span>) {
+					ok[i][j] <span style=color:#f92672>=</span> false;
+				}
+			}
+		}
+	}
+	<span style=color:#66d9ef>return</span> res;
+}
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+	file_read();
+	scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>m);
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) cin <span style=color:#f92672>&gt;&gt;</span> a[i];
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> m; i<span style=color:#f92672>++</span>) cin <span style=color:#f92672>&gt;&gt;</span> b[i];
+	LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+	mset(ok, <span style=color:#ae81ff>1</span>);
+	<span style=color:#66d9ef>for</span>(LL i <span style=color:#f92672>=</span> <span style=color:#ae81ff>32</span>; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>) {
+		<span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>check(<span style=color:#ae81ff>1LL</span><span style=color:#f92672>&lt;&lt;</span>i)) {
+			ans <span style=color:#f92672>|=</span> (<span style=color:#ae81ff>1LL</span><span style=color:#f92672>&lt;&lt;</span>i);
+		}
+	}
+	cout <span style=color:#f92672>&lt;&lt;</span> ans <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=d>D<a hidden class=anchor aria-hidden=true href=#d>#</a></h2>
+<p><strong>题意</strong></p>
+<p>给以序列$a$,可以选$n$次数字，如果数字大于$m$,那么后$d$次就不能选，求选出的数字的最大值</p>
+<p><strong>Solution</strong></p>
+<p>枚举选的数字小于等于$m$的个数，可以选择超过$m$的数字就是固定的，选择最大的</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>500</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e9</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>file_read</span>() {
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>	freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+	<span style=color:#75715e>// freopen(&#34;out&#34;, &#34;w&#34;, stdout);
+</span><span style=color:#75715e></span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+
+LL a[MAX];
+LL A[MAX], B[MAX];
+LL sa[MAX], sb[MAX];
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+	file_read();
+	LL n, d, m;
+	cin <span style=color:#f92672>&gt;&gt;</span> n <span style=color:#f92672>&gt;&gt;</span> d <span style=color:#f92672>&gt;&gt;</span> m;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) cin <span style=color:#f92672>&gt;&gt;</span> a[i];
+	sort(a<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, a<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>+</span>n, [](LL x, LL y) {
+		<span style=color:#66d9ef>return</span> x <span style=color:#f92672>&gt;</span> y;
+	});
+	<span style=color:#66d9ef>int</span> tot1 <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, tot2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+		<span style=color:#66d9ef>if</span>(a[i] <span style=color:#f92672>&lt;=</span> m) A[<span style=color:#f92672>++</span>tot1] <span style=color:#f92672>=</span> a[i];
+		<span style=color:#66d9ef>else</span> B[<span style=color:#f92672>++</span>tot2] <span style=color:#f92672>=</span> a[i];
+	}
+	<span style=color:#66d9ef>if</span>(tot1 <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+		LL nn <span style=color:#f92672>=</span> (n<span style=color:#f92672>+</span>d) <span style=color:#f92672>/</span> (d <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>);
+		LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+		<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> nn; i<span style=color:#f92672>++</span>) {
+			ans <span style=color:#f92672>+=</span> B[i];
+		}
+		cout <span style=color:#f92672>&lt;&lt;</span> ans <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+		<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+	}
+	<span style=color:#66d9ef>if</span>(tot2 <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) {
+		LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+		<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+			ans <span style=color:#f92672>+=</span> A[i];
+		}
+		cout <span style=color:#f92672>&lt;&lt;</span> ans <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+		<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+	}
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> tot1; i<span style=color:#f92672>++</span>) sa[i] <span style=color:#f92672>=</span> sa[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> A[i];
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> tot2; i<span style=color:#f92672>++</span>) sb[i] <span style=color:#f92672>=</span> sb[i<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> B[i];
+	LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;=</span> tot1; i<span style=color:#f92672>++</span>) {
+		LL cur <span style=color:#f92672>=</span> sa[i];
+		LL nn <span style=color:#f92672>=</span> (n<span style=color:#f92672>-</span>i<span style=color:#f92672>+</span>d) <span style=color:#f92672>/</span> (d<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>);
+		ans <span style=color:#f92672>=</span> max(cur<span style=color:#f92672>+</span>sb[nn], ans);
+	}
+	cout <span style=color:#f92672>&lt;&lt;</span> ans <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=e>E<a hidden class=anchor aria-hidden=true href=#e>#</a></h2>
+<p><strong>题意</strong></p>
+<p>给一个图$G=(V,E)$,选择一个tuple $(c_1,\dots, c_k)$作为遍历图的规则，出度为$i$的点的下一个节点是第$c_i$小的边指向的点，问有多少种tuple可以把图遍历一遍</p>
+<p><strong>Solution</strong></p>
+<ul>
+<li>不能发现其实最后的路径是一个环，可以对每个点的下一个节点所组成的集合是$V$，因此可以通判断过这是否成立来检查一个tuple</li>
+<li>另外可以将点按出度分类，维护$S[i][j]$表示出度为$i$的点，选第$j$小的边所到达的点的集合</li>
+<li>可以用hash判断集合是否相等，有可能会冲突</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>500</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e9</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>file_read</span>() {
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>	freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+	<span style=color:#75715e>// freopen(&#34;out&#34;, &#34;w&#34;, stdout);
+</span><span style=color:#75715e></span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+
+<span style=color:#75715e>#define ULL unsigned long long
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>998244353</span>;
+vector<span style=color:#f92672>&lt;</span>P<span style=color:#f92672>&gt;</span> G[MAX];
+ULL s[<span style=color:#ae81ff>100</span>][<span style=color:#ae81ff>100</span>];
+LL g[<span style=color:#ae81ff>100</span>][<span style=color:#ae81ff>100</span>];
+LL t[<span style=color:#ae81ff>100</span>][<span style=color:#ae81ff>100</span>];
+<span style=color:#66d9ef>bool</span> vis[MAX];
+ULL val[MAX];
+ULL TARGET1 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+LL TARGET2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+LL TARGET3 <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+<span style=color:#66d9ef>int</span> n, m, k;
+<span style=color:#66d9ef>int</span> ans;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs</span>(<span style=color:#66d9ef>int</span> u) {
+	vis[u] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> G[u].size(); i<span style=color:#f92672>++</span>) {
+		<span style=color:#66d9ef>int</span> v <span style=color:#f92672>=</span> G[u][i].first;
+		s[G[u].size()][i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>*=</span> (ULL)val[v];
+		g[G[u].size()][i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> g[G[u].size()][i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> val[v] <span style=color:#f92672>%</span> mod;
+		t[G[u].size()][i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> t[G[u].size()][i<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> val[v] <span style=color:#f92672>%</span> mod2;
+		<span style=color:#66d9ef>if</span>(vis[v]) <span style=color:#66d9ef>continue</span>;
+		dfs(v);
+	}
+}
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>dfs2</span>(<span style=color:#66d9ef>int</span> x, ULL cur1, LL cur2, LL cur3) {
+	<span style=color:#66d9ef>if</span>(x <span style=color:#f92672>&gt;</span> k) {
+		<span style=color:#66d9ef>if</span>(cur1 <span style=color:#f92672>==</span> TARGET1 and cur2 <span style=color:#f92672>==</span> TARGET2 and cur3 <span style=color:#f92672>==</span> TARGET3) ans <span style=color:#f92672>++</span>;
+		<span style=color:#66d9ef>return</span> ;
+	}
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> x; i<span style=color:#f92672>++</span>) {
+		dfs2(x<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, cur1<span style=color:#f92672>*</span>s[x][i], cur2<span style=color:#f92672>*</span>g[x][i]<span style=color:#f92672>%</span>mod, cur3 <span style=color:#f92672>*</span> t[x][i] <span style=color:#f92672>%</span> mod2);
+	}
+}
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+	srand((<span style=color:#66d9ef>int</span>)time(<span style=color:#ae81ff>0</span>));
+	file_read();
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>100</span>; i<span style=color:#f92672>++</span>) <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>100</span>; j<span style=color:#f92672>++</span>) s[i][j] <span style=color:#f92672>=</span> g[i][j] <span style=color:#f92672>=</span> t[i][j] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+	scanf(<span style=color:#e6db74>&#34;%d%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>m, <span style=color:#f92672>&amp;</span>k);
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) val[i] <span style=color:#f92672>=</span> rand() <span style=color:#f92672>%</span> mod;
+	<span style=color:#66d9ef>for</span>(ULL i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) TARGET1 <span style=color:#f92672>=</span> TARGET1 <span style=color:#f92672>*</span> val[i], TARGET2 <span style=color:#f92672>=</span> TARGET2 <span style=color:#f92672>*</span> val[i] <span style=color:#f92672>%</span> mod, TARGET3 <span style=color:#f92672>=</span> TARGET3 <span style=color:#f92672>*</span> val[i] <span style=color:#f92672>%</span> mod2;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> m; i<span style=color:#f92672>++</span>) {
+		<span style=color:#66d9ef>int</span> u, v, w;
+		scanf(<span style=color:#e6db74>&#34;%d%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>u, <span style=color:#f92672>&amp;</span>v, <span style=color:#f92672>&amp;</span>w);
+		G[u].push_back({v, w});
+	}
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+		sort(G[i].begin(), G[i].end(), [](<span style=color:#66d9ef>const</span> P<span style=color:#f92672>&amp;</span>A, <span style=color:#66d9ef>const</span> P<span style=color:#f92672>&amp;</span>B){
+			<span style=color:#66d9ef>return</span> A.second <span style=color:#f92672>&lt;</span> B.second;
+		});
+	}
+	dfs(<span style=color:#ae81ff>1</span>);
+	dfs2(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>1</span>);
+	printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><h2 id=f>F<a hidden class=anchor aria-hidden=true href=#f>#</a></h2>
+<p><strong>题意</strong></p>
+<p>定义串只有<code>N</code>和<code>B</code>，有四种操作，给$s_1, \dots, s_n$，求一个串$t$使得和$s$的最大距离最小</p>
+<p><strong>Solution</strong></p>
+<ul>
+<li>不难发现字符串对应一个坐标，对于一个$x,y$可以移动上下左右，或者右上，左下</li>
+<li>对于一个点，在固定距离内可以访问的点是一个六边形</li>
+<li>要找一个最小半径的六边形覆盖所有的点</li>
+<li>因此二分半径，计算六边形中心的可行区域</li>
+<li>最后在可行区域选一个作为$t$,不能是空串</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;time.h&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;vector&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iostream&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;unordered_map&gt;</span><span style=color:#75715e>
+</span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span><span style=color:#75715e>#define LL long long
+</span><span style=color:#75715e>#define LD long double
+</span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
+</span><span style=color:#75715e>#define mset(a, b) memset(a, b, sizeof(a))
+</span><span style=color:#75715e>#define rep(i, a, b) for (int i = a; i &lt; b; i++)
+</span><span style=color:#75715e>#define PI acos(-1.0)
+</span><span style=color:#75715e>#define random(x) rand() % x
+</span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
+</span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
+<span style=color:#66d9ef>const</span> LL __inf64 <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e3</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+<span style=color:#75715e>#else
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>500</span>;
+<span style=color:#75715e>#endif
+</span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>1e9</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>7</span>;
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>file_read</span>() {
+<span style=color:#75715e>#ifdef DEBUG
+</span><span style=color:#75715e></span>	freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+	<span style=color:#75715e>// freopen(&#34;out&#34;, &#34;w&#34;, stdout);
+</span><span style=color:#75715e></span><span style=color:#75715e>#endif
+</span><span style=color:#75715e></span>}
+
+vector<span style=color:#f92672>&lt;</span>P<span style=color:#f92672>&gt;</span> pt;
+<span style=color:#66d9ef>int</span> xL, xR, yL, yR, zL, zR;
+<span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>check</span>(<span style=color:#66d9ef>int</span> mid) {
+	xL <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>inf, xR <span style=color:#f92672>=</span> inf, yL <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>inf, yR <span style=color:#f92672>=</span> inf, zL <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>inf, zR <span style=color:#f92672>=</span> inf;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> p : pt) {
+		xL <span style=color:#f92672>=</span> max(xL, p.first<span style=color:#f92672>-</span>mid);
+		xR <span style=color:#f92672>=</span> min(xR, p.first<span style=color:#f92672>+</span>mid);
+		yL <span style=color:#f92672>=</span> max(yL, p.second<span style=color:#f92672>-</span>mid);
+		yR <span style=color:#f92672>=</span> min(yR, p.second<span style=color:#f92672>+</span>mid);
+		zL <span style=color:#f92672>=</span> max(zL, p.first<span style=color:#f92672>-</span>p.second<span style=color:#f92672>-</span>mid);
+		zR <span style=color:#f92672>=</span> min(zR, p.first<span style=color:#f92672>-</span>p.second<span style=color:#f92672>+</span>mid);
+	}
+	<span style=color:#66d9ef>if</span>(xL <span style=color:#f92672>&gt;</span> xR <span style=color:#f92672>||</span> yL <span style=color:#f92672>&gt;</span> yR <span style=color:#f92672>||</span> zL <span style=color:#f92672>&gt;</span> zR) <span style=color:#66d9ef>return</span> false;
+	yL <span style=color:#f92672>=</span> max(yL, xL<span style=color:#f92672>-</span>zR);
+	yR <span style=color:#f92672>=</span> min(yR, xR<span style=color:#f92672>-</span>zL);
+	<span style=color:#66d9ef>if</span>(yL <span style=color:#f92672>&gt;</span> yR) <span style=color:#66d9ef>return</span> false;
+	<span style=color:#66d9ef>return</span> true;
+}
+<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>() {
+	file_read();
+	<span style=color:#66d9ef>int</span> n;
+	cin <span style=color:#f92672>&gt;&gt;</span> n;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+		string s;
+		cin <span style=color:#f92672>&gt;&gt;</span> s;
+		<span style=color:#66d9ef>int</span> x <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+		<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>auto</span> c : s) {
+			<span style=color:#66d9ef>if</span>(c <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;B&#39;</span>) x<span style=color:#f92672>++</span>;
+			<span style=color:#66d9ef>else</span> y<span style=color:#f92672>++</span>;
+		}
+		pt.emplace_back(x, y);
+	}
+	<span style=color:#66d9ef>int</span> l <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, r <span style=color:#f92672>=</span> inf;
+	<span style=color:#66d9ef>while</span>(l <span style=color:#f92672>&lt;</span> r) {
+		<span style=color:#66d9ef>int</span> mid <span style=color:#f92672>=</span> (l <span style=color:#f92672>+</span> r) <span style=color:#f92672>&gt;&gt;</span> <span style=color:#ae81ff>1</span>;
+		<span style=color:#66d9ef>if</span>(check(mid)) r <span style=color:#f92672>=</span> mid;
+		<span style=color:#66d9ef>else</span> l <span style=color:#f92672>=</span> mid <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>;
+	}
+	<span style=color:#75715e>// cout &lt;&lt; check(l) &lt;&lt; &#34;\n&#34;;
+</span><span style=color:#75715e></span>	check(l);
+	<span style=color:#66d9ef>int</span> ansx, ansy;
+	<span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> x <span style=color:#f92672>=</span> max(<span style=color:#ae81ff>0</span>, xL); x <span style=color:#f92672>&lt;=</span> xR; x<span style=color:#f92672>++</span>) {
+		<span style=color:#66d9ef>int</span> curyL <span style=color:#f92672>=</span> max(yR, x<span style=color:#f92672>-</span>zR);
+		<span style=color:#66d9ef>int</span> curyR <span style=color:#f92672>=</span> min(yR, x<span style=color:#f92672>-</span>zL);
+		<span style=color:#66d9ef>if</span>(curyL <span style=color:#f92672>&gt;</span> curyR) <span style=color:#66d9ef>continue</span>;
+		<span style=color:#66d9ef>if</span>(x <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> curyR <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>) {
+			ansx <span style=color:#f92672>=</span> x;
+			ansy <span style=color:#f92672>=</span> curyR;
+			<span style=color:#66d9ef>break</span>;
+		}		
+	}
+	cout <span style=color:#f92672>&lt;&lt;</span> l <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+	<span style=color:#66d9ef>while</span>(ansx<span style=color:#f92672>--</span>) printf(<span style=color:#e6db74>&#34;B&#34;</span>);
+	<span style=color:#66d9ef>while</span>(ansy<span style=color:#f92672>--</span>) printf(<span style=color:#e6db74>&#34;N&#34;</span>);
+	<span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div>
+</div>
+<footer class=post-footer>
+<ul class=post-tags>
+<li><a href=Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
+</ul>
+<nav class=paginav>
+<a class=prev href=Anlarry.github.io/posts/paper-reading/skybridge-xpc/>
+<span class=title>« Prev Page</span>
+<br>
+<span>SkyBridge & XPC</span>
+</a>
+<a class=next href=Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/>
+<span class=title>Next Page »</span>
+<br>
+<span>Gym 102501部分题解</span>
+</a>
+</nav>
+</footer>
+</article>
+</main>
+<footer class=footer>
+<span>Jiali Wang</span>
+<span>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
+</span>
+</footer>
+<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a>
+<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
+<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
+<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
+<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='copy';function d(){a.innerText='copied!',setTimeout(()=>{a.innerText='copy'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
+</body>
+</html>

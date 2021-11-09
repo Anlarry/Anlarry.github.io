@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PAPER-READING on Hi-^_^</title>
+    <link>Anlarry.github.io/categories/paper-reading/</link>
+    <description>Recent content in PAPER-READING on Hi-^_^</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Jiali Wang</copyright>
+    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="Anlarry.github.io/categories/paper-reading/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Active Learning for ML Enhanced Database Systems</title>
+      <link>Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</link>
+      <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
+      
+      <guid>Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</guid>
+      <description>figcaption { text-align: center; }  Intro &amp;amp; Background ML模型会因为训练和测试时的数据分布不同，导致很多预测错误。将ML模型优化database也面对这个问题。
+Active learning  Active leraning  主动学习采用的方法是，可以在unlabled的数据中再选出一些数据，从orcale得到数据的lable，从新的知识中学习。
+ An illustrative example of pool-based active learning  Execution cost prediction &amp;amp; Plan regression prediction  ECP是一个回归任务，需要预测执行plan需要的时间。在优化查询中，可以用ECP来寻找最优的plan PRP是一个分类任务，给出两个plan，需要找到哪个plan代价更高  Architecture 在这里oracle可以用database的副本执行plan，获取plan的执行时间。因此不同的plan就有不同的cost。
+ 开始，用户指定budget，之后ADCP获取lable数据时会消耗budget。ADCP获取target data，选出unlabeled data给交给副本执行。获得新知识后retrain ML模型，再对target data数据进行预测，这时错误就会降低。
+但是新的环境就有新的问题。active learning需要选出要标注的数据，noise会带来一些问题。因此需要综合考虑cost、robust、以及active learning最不确定的unlabel数据。 $$ w_x=\frac{u(x)}{c(x)} $$ $c(x)$表示cost，$u(x)$表示uncertainty，因此x的权重可以理解成“uncertainty per cost”。
+同时为了解决noise，转化为概率并加入Gumbel噪音
+$$ p(x)=\frac{w_x}{\sum_{x&#39;}w_{x&#39;}} \newline {\rm arg}\ \max\limits_{x} \log p(x)+G_x $$
+另外，还需要减少sample时的冗余。
+  Algo &amp; Example  -- Comparison &amp;amp; Why it works  HAL相比于其他AL策略利用了各种不同的特点。感觉这是为什么HAL可以work的一个原因。在实验中，OPT(A crude baseline)直接用cost估计(for PRP)，Huber回归(for ECP)得到label不用retrain也不需要额外的label，比其它AL错误要高出很多。</description>
+    </item>
+    
+    <item>
+      <title>SkyBridge &amp; XPC</title>
+      <link>Anlarry.github.io/posts/paper-reading/skybridge-xpc/</link>
+      <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
+      
+      <guid>Anlarry.github.io/posts/paper-reading/skybridge-xpc/</guid>
+      <description>Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
+另外在宏内核中也会经常使用IPC，如Android Binder。
+Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
+ seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
+ 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
+在seL4上测试负载，IPC占用的时间是很多的。
+SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
+但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
+ 在虚拟机中运行的进程，如果要访问内存会经过
+GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
+这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
+ 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
+从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
+Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
+在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+something else RootKernel &amp;amp; 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
+illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
+XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+XPC从两个方面提高IPC性能，
+ 让IPC不经过kernel 不复制传递消息  和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。
+XPC engine提供了两个硬件原语：User-level Cross Process Call，Lightweight Message Transfer</description>
+    </item>
+    
+  </channel>
+</rss>
