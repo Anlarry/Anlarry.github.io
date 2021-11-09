@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>数论 on Hi-^_^</title>
-    <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%95%B0%E8%AE%BA/</link>
+    <link>https://Anlarry.github.io/tags/%E6%95%B0%E8%AE%BA/</link>
     <description>Recent content in 数论 on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Sat, 25 Apr 2020 00:41:00 +0800</lastBuildDate><atom:link href="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%95%B0%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Apr 2020 00:41:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/%E6%95%B0%E8%AE%BA/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AtCoder-Sum of gcd of Tuples</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
       <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
       <description>AtCoder-Sum of gcd of Tuples (Hard) 题意  https://atcoder.jp/contests/abc162/tasks/abc162_e
  求$\sum\gcd(a_1,a_2,\cdots,a_n)$,其中$a_i\in[1,K]$
 Solution 直接计算肯定是不好计算的，可以考虑按$gcd$的值进行分类，问题就转化为一个计数问题

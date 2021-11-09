@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>FFT on Hi-^_^</title>
-    <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/fft/</link>
+    <link>https://Anlarry.github.io/tags/fft/</link>
     <description>Recent content in FFT on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Sun, 01 Mar 2020 12:09:00 +0800</lastBuildDate><atom:link href="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/fft/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2020 12:09:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/fft/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CodeChef - PRIMEDST</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codechef-primedst/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codechef-primedst/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</guid>
       <description>Prime Distance On Tree 题意  Prime Distance On Tree
  给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
 Solution 可以从生成函数的角度考虑
@@ -25,10 +25,10 @@ $$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简�
     
     <item>
       <title>Rock Paper Scissors Lizard Spock</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</link>
       <pubDate>Tue, 11 Feb 2020 15:40:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
       <description>Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock
  有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
@@ -39,10 +39,10 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
     
     <item>
       <title>URAL - 1996</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/ural-1996/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</link>
       <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/ural-1996/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</guid>
       <description>URAL - 1996 题意：  URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
  Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
 记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&#39;$, 在此处的的代价为 $$ \sum_{i+j=pos+m-1} [a_i \ne b&#39;j ] $$ 而 $$ \sum{i+j=posm-1} a_j * b&#39;_j $$ 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$

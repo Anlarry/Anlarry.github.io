@@ -12,21 +12,21 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>#include <memory.h>#include <cstdlib>#include <queue>#include <iomanip>#include <unordered_map>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.">
 <meta name=author content>
-<link rel=canonical href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/>
+<link rel=canonical href=https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/Anlarry/Anlarry.github.io/blob/gh-pages/assets/css/stylesheet.min.385897152d1020541031b34f0bce4211dae827514dbddb6e6707a26925762302.css integrity="sha256-OFiXFS0QIFQQMbNPC85CEdroJ1FNvdtuZweiaSV2IwI=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.385897152d1020541031b34f0bce4211dae827514dbddb6e6707a26925762302.css integrity="sha256-OFiXFS0QIFQQMbNPC85CEdroJ1FNvdtuZweiaSV2IwI=" rel="preload stylesheet" as=style>
 <link rel=preload href=/icon/ai512.png as=image>
 <link ref=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css>
 <script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js></script>
 <script>hljs.highlightAll()</script>
 <link href="https://fonts.googleapis.com/css?family=Source Code Pro" rel=stylesheet>
-<link rel=icon href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai512.png>
-<link rel=icon type=image/png sizes=16x16 href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai16.png>
-<link rel=icon type=image/png sizes=32x32 href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai32.png>
-<link rel=apple-touch-icon href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/apple-touch-icon.png>
-<link rel=mask-icon href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/safari-pinned-tab.svg>
+<link rel=icon href=https://Anlarry.github.io/icon/ai512.png>
+<link rel=icon type=image/png sizes=16x16 href=https://Anlarry.github.io/icon/ai16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://Anlarry.github.io/icon/ai32.png>
+<link rel=apple-touch-icon href=https://Anlarry.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.89.2">
@@ -42,7 +42,7 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>#include <memory.h>#include <cstdlib>#include <queue>#include <iomanip>#include <unordered_map>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/"><meta property="article:section" content="posts">
+<meta property="og:url" content="https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-02-11T15:40:00+08:00">
 <meta property="article:modified_time" content="2020-02-11T15:40:00+08:00"><meta property="og:site_name" content="Hi~, ^_^">
 <meta name=twitter:card content="summary">
@@ -53,8 +53,8 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 枚举可以得分的手势,假设当前手势为$op$, $$ \begin{aligned} t'i &=(reverse_t{i} == op ? 1 : 0) \ s'_i &= G[op][s_i] \end{aligned} $$
 将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include <cstdio>#include <stack>#include <set>#include <cmath>#include <map>#include <time.h>#include <vector>#include <iostream>#include <string>#include <cstring>#include <algorithm>#include <memory.h>#include <cstdlib>#include <queue>#include <iomanip>#include <unordered_map>#define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/"},{"@type":"ListItem","position":3,"name":"Rock Paper Scissors Lizard Spock","item":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Rock Paper Scissors Lizard Spock","name":"Rock Paper Scissors Lizard Spock","description":"Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock\n 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\\le pos \\le len(s)-len(t))$，使得得分最多\nSolution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,\n枚举可以得分的手势,假设当前手势为$op$, $$ \\begin{aligned} t'i \u0026amp;=(reverse_t{i} == op ? 1 : 0) \\ s'_i \u0026amp;= G[op][s_i] \\end{aligned} $$\n将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值\n#include \u0026lt;cstdio\u0026gt;#include \u0026lt;stack\u0026gt;#include \u0026lt;set\u0026gt;#include \u0026lt;cmath\u0026gt;#include \u0026lt;map\u0026gt;#include \u0026lt;time.h\u0026gt;#include \u0026lt;vector\u0026gt;#include \u0026lt;iostream\u0026gt;#include \u0026lt;string\u0026gt;#include \u0026lt;cstring\u0026gt;#include \u0026lt;algorithm\u0026gt;#include \u0026lt;memory.h\u0026gt;#include \u0026lt;cstdlib\u0026gt;#include \u0026lt;queue\u0026gt;#include \u0026lt;iomanip\u0026gt;#include \u0026lt;unordered_map\u0026gt;#define P pair\u0026lt;int, int\u0026gt; #define LL long long #define LD long double #define PLL pair\u0026lt;LL, LL\u0026gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i \u0026lt; b; i++) #define PI acos(-1.","keywords":["FFT","搬家"],"articleBody":"Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock\n 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\\le pos \\le len(s)-len(t))$，使得得分最多\nSolution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,\n枚举可以得分的手势,假设当前手势为$op$, $$ \\begin{aligned} t'i \u0026=(reverse_t{i} == op ? 1 : 0) \\ s'_i \u0026= G[op][s_i] \\end{aligned} $$\n将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值\n#include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 1e6 + 50; #endif const int mod = 1e9 + 7; #include namespace FFT { int rev[MAX * 4]; int cnt[MAX * 4]; void fft(complexdouble *a, int n, int inv){ int bit = 0; while((1bit)  n) bit++; for(int i = 0; i  n; i++){ rev[i] = (rev[i1]1) | ((i \u0026 1)  (bit-1)); if(i  rev[i]) swap(a[i], a[rev[i]]); } for(int mid = 1; mid  n; mid  1){ complexdouble wn(cos(PI/mid), inv*sin(PI/mid)); for(int i = 0; i  n; i += (mid1)){ complexdouble w(1, 0); for(int j = 0; j  mid; j++, w*=wn){ complexdouble u = a[i+j], t = w * a[i+j+mid]; a[i+j] = u + t, a[i+j+mid] = u-t; } } } } }; int N; char s[MAX], t[MAX], rev_t[MAX]; complexdouble a[MAX*4], b[MAX*4]; int mark[100][100]; void init(){ mark['S']['P'] = 1; mark['P']['R'] = 1; mark['R']['L'] = 1; mark['L']['K'] = 1; mark['K']['S'] = 1; mark['S']['L'] = 1; mark['L']['P'] = 1; mark['P']['K'] = 1; mark['K']['R'] = 1; mark['R']['S'] = 1; } void solve(char op, int n, int m){ for(int i = 0; i  n; i++) a[i] = complexdouble(mark[op][s[i]], 0); for(int i = n; i  N; i++) a[i] = complexdouble(0, 0); for(int i = 0; i  m; i++) b[i] = complexdouble(rev_t[i]==op?1:0, 0); for(int i = m; i  N; i++) b[i] = complexdouble(0, 0); ; FFT::fft(a, N, 1); FFT::fft(b, N, 1); for(int i = 0; i  N;i++) a[i] *= b[i]; FFT::fft(a, N, -1); for(int i = m-1; i  n-1; i++) FFT::cnt[i] += (int)(a[i].real() / N + 0.5); return; } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\", stdin); #endif  init(); scanf(\"%s%s\", s, t); int n = strlen(s), m = strlen(t); N = 1; while(N  n+m) N  1; for(int i = 0; i  m; i++) rev_t[i] = t[m-i-1]; vectorchar ops({'R','P', 'S', 'K', 'L'}); for(auto op : ops){ solve(op, n, m); } int ans = 0; for(int i = m-1; i  n-1; i++){ ans = max(ans, FFT::cnt[i]); // printf(\"%d \", FFT::cnt[i]);  } // puts(\"\");  printf(\"%d\\n\", ans); return 0; } ","wordCount":"469","inLanguage":"en","datePublished":"2020-02-11T15:40:00+08:00","dateModified":"2020-02-11T15:40:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai512.png"}}}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://Anlarry.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Rock Paper Scissors Lizard Spock","item":"https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Rock Paper Scissors Lizard Spock","name":"Rock Paper Scissors Lizard Spock","description":"Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock\n 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\\le pos \\le len(s)-len(t))$，使得得分最多\nSolution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,\n枚举可以得分的手势,假设当前手势为$op$, $$ \\begin{aligned} t'i \u0026amp;=(reverse_t{i} == op ? 1 : 0) \\ s'_i \u0026amp;= G[op][s_i] \\end{aligned} $$\n将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值\n#include \u0026lt;cstdio\u0026gt;#include \u0026lt;stack\u0026gt;#include \u0026lt;set\u0026gt;#include \u0026lt;cmath\u0026gt;#include \u0026lt;map\u0026gt;#include \u0026lt;time.h\u0026gt;#include \u0026lt;vector\u0026gt;#include \u0026lt;iostream\u0026gt;#include \u0026lt;string\u0026gt;#include \u0026lt;cstring\u0026gt;#include \u0026lt;algorithm\u0026gt;#include \u0026lt;memory.h\u0026gt;#include \u0026lt;cstdlib\u0026gt;#include \u0026lt;queue\u0026gt;#include \u0026lt;iomanip\u0026gt;#include \u0026lt;unordered_map\u0026gt;#define P pair\u0026lt;int, int\u0026gt; #define LL long long #define LD long double #define PLL pair\u0026lt;LL, LL\u0026gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i \u0026lt; b; i++) #define PI acos(-1.","keywords":["FFT","搬家"],"articleBody":"Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock\n 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\\le pos \\le len(s)-len(t))$，使得得分最多\nSolution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,\n枚举可以得分的手势,假设当前手势为$op$, $$ \\begin{aligned} t'i \u0026=(reverse_t{i} == op ? 1 : 0) \\ s'_i \u0026= G[op][s_i] \\end{aligned} $$\n将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值\n#include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #include #define P pair#define LL long long #define LD long double #define PLL pair#define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 1e6 + 50; #endif const int mod = 1e9 + 7; #include namespace FFT { int rev[MAX * 4]; int cnt[MAX * 4]; void fft(complexdouble *a, int n, int inv){ int bit = 0; while((1bit)  n) bit++; for(int i = 0; i  n; i++){ rev[i] = (rev[i1]1) | ((i \u0026 1)  (bit-1)); if(i  rev[i]) swap(a[i], a[rev[i]]); } for(int mid = 1; mid  n; mid  1){ complexdouble wn(cos(PI/mid), inv*sin(PI/mid)); for(int i = 0; i  n; i += (mid1)){ complexdouble w(1, 0); for(int j = 0; j  mid; j++, w*=wn){ complexdouble u = a[i+j], t = w * a[i+j+mid]; a[i+j] = u + t, a[i+j+mid] = u-t; } } } } }; int N; char s[MAX], t[MAX], rev_t[MAX]; complexdouble a[MAX*4], b[MAX*4]; int mark[100][100]; void init(){ mark['S']['P'] = 1; mark['P']['R'] = 1; mark['R']['L'] = 1; mark['L']['K'] = 1; mark['K']['S'] = 1; mark['S']['L'] = 1; mark['L']['P'] = 1; mark['P']['K'] = 1; mark['K']['R'] = 1; mark['R']['S'] = 1; } void solve(char op, int n, int m){ for(int i = 0; i  n; i++) a[i] = complexdouble(mark[op][s[i]], 0); for(int i = n; i  N; i++) a[i] = complexdouble(0, 0); for(int i = 0; i  m; i++) b[i] = complexdouble(rev_t[i]==op?1:0, 0); for(int i = m; i  N; i++) b[i] = complexdouble(0, 0); ; FFT::fft(a, N, 1); FFT::fft(b, N, 1); for(int i = 0; i  N;i++) a[i] *= b[i]; FFT::fft(a, N, -1); for(int i = m-1; i  n-1; i++) FFT::cnt[i] += (int)(a[i].real() / N + 0.5); return; } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\", stdin); #endif  init(); scanf(\"%s%s\", s, t); int n = strlen(s), m = strlen(t); N = 1; while(N  n+m) N  1; for(int i = 0; i  m; i++) rev_t[i] = t[m-i-1]; vectorchar ops({'R','P', 'S', 'K', 'L'}); for(auto op : ops){ solve(op, n, m); } int ans = 0; for(int i = m-1; i  n-1; i++){ ans = max(ans, FFT::cnt[i]); // printf(\"%d \", FFT::cnt[i]);  } // puts(\"\");  printf(\"%d\\n\", ans); return 0; } ","wordCount":"469","inLanguage":"en","datePublished":"2020-02-11T15:40:00+08:00","dateModified":"2020-02-11T15:40:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"https://Anlarry.github.io/icon/ai512.png"}}}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
 <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
@@ -64,7 +64,7 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages accesskey=h title="Jiali's Blog (Alt + H)">
+<a href=https://Anlarry.github.io/ accesskey=h title="Jiali's Blog (Alt + H)">
 <img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -73,27 +73,27 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 </div>
 <ul id=menu>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/archives/ title="Archives 📦">
+<a href=https://Anlarry.github.io/archives/ title="Archives 📦">
 <span>Archives 📦</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/categories/ title="Categories 📂">
+<a href=https://Anlarry.github.io/categories/ title="Categories 📂">
 <span>Categories 📂</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/ title="Tags 🏷">
+<a href=https://Anlarry.github.io/tags/ title="Tags 🏷">
 <span>Tags 🏷</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/links/ title="Links 🔗">
+<a href=https://Anlarry.github.io/links/ title="Links 🔗">
 <span>Links 🔗</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/search/ title="Search 🔍 (Alt + /)" accesskey=/>
+<a href=https://Anlarry.github.io/search/ title="Search 🔍 (Alt + /)" accesskey=/>
 <span>Search 🔍</span>
 </a>
 </li>
@@ -101,10 +101,10 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 </nav>
 </header>
 <main class=main>
-<link rel=stylesheet href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/sass/single-main.css>
+<link rel=stylesheet href=https://Anlarry.github.io/sass/single-main.css>
 <article class=post-single>
 <header class=post-header>
-<div class=breadcrumbs><a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages>Home</a>&nbsp;»&nbsp;<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/>Posts</a></div>
+<div class=breadcrumbs><a href=https://Anlarry.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://Anlarry.github.io/posts/>Posts</a></div>
 <h1 class=post-title>
 Rock Paper Scissors Lizard Spock
 </h1>
@@ -269,16 +269,16 @@ complex<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</sp
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
-<li><a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/fft/>FFT</a></li>
-<li><a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
+<li><a href=https://Anlarry.github.io/tags/fft/>FFT</a></li>
+<li><a href=https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
 </ul>
 <nav class=paginav>
-<a class=prev href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/>
+<a class=prev href=https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/>
 <span class=title>« Prev Page</span>
 <br>
 <span>波里亚计数</span>
 </a>
-<a class=next href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/ural-1996/>
+<a class=next href=https://Anlarry.github.io/posts/acm-icpc/ural-1996/>
 <span class=title>Next Page »</span>
 <br>
 <span>URAL - 1996</span>
@@ -288,7 +288,7 @@ complex<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</sp
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2021 <a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages>Jiali Wang</a></span>
+<span>&copy; 2021 <a href=https://Anlarry.github.io/>Jiali Wang</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

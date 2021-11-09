@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>ACM/ICPC on Hi-^_^</title>
-    <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/categories/acm/icpc/</link>
+    <link>https://Anlarry.github.io/categories/acm/icpc/</link>
     <description>Recent content in ACM/ICPC on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>Jiali Wang</copyright><atom:link href="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/categories/acm/icpc/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Jiali Wang</copyright><atom:link href="https://Anlarry.github.io/categories/acm/icpc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Codeforces Round #664</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codeforces-round-664/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/</link>
       <pubDate>Tue, 01 Sep 2020 19:40:00 +0000</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codeforces-round-664/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/</guid>
       <description>Codeforces Round #664  https://codeforces.com/contest/1395
  A 题意
 给四种颜色的球，可以把一个红色一个蓝色一个绿色染成白色，问能不能变成回文串
@@ -20,10 +20,10 @@
     
     <item>
       <title>Gym 102501部分题解</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</link>
       <pubDate>Mon, 31 Aug 2020 21:18:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</guid>
       <description>Gym - 102501D Gnalcats  https://codeforces.com/gym/102501/problem/D
  题意 给两种栈操作判断是否相等,如果两个操作都fail，也认为相等
 Solution 模拟，每个氨基酸一个hash值。通过判断最后栈元素是否对应hash相等，判断操作是否相等
@@ -32,10 +32,10 @@ Solution 模拟，每个氨基酸一个hash值。通过判断最后栈元素是�
     
     <item>
       <title>Gym 102460L Largest Quadrilateral </title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/gym-102460l-largest-quadrilateral/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/gym-102460l-largest-quadrilateral/</link>
       <pubDate>Thu, 27 Aug 2020 00:01:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/gym-102460l-largest-quadrilateral/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/gym-102460l-largest-quadrilateral/</guid>
       <description>Gym 102460L Largest Quadrilateral  Largest Quadrilateral
  题意 给$n$个点从中选出四个点，使得面积最大
 Solution  首先，肯定是求凸包，要求的点一定在凸包上。 不难联想到凸包对每个边求最大三角形面积的问题，也就是旋转卡壳。 可以将问题转化为，对凸包的每一个对角线$A_iA_j$，求最大面积的两个三角形，$\triangle{A_iA_jP}$, $\triangle{A_iA_jQ}$, 然后就可以枚举对角线，旋转卡壳算最大面积   细节
@@ -44,10 +44,10 @@ Solution  首先，肯定是求凸包，要求的点一定在凸包上。 不难
     
     <item>
       <title>Codeforces Round #663</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codeforces-round-663/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-663/</link>
       <pubDate>Mon, 17 Aug 2020 22:42:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codeforces-round-663/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-663/</guid>
       <description>Codeforces Round #663  http://codeforces.com/contest/1391
  C 题意
 对于一个排列${p_1, p_2, \dots, p_n}$，对于每个数字$p_i$，向前找第一个大于$p_i$的$p_j$，$i$和$j$连一条边，向后同理。求多少种排列生成的图是有环的
@@ -57,10 +57,10 @@ Solution
     
     <item>
       <title>Codeforces Round #660</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codeforces-round-660/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-660/</link>
       <pubDate>Wed, 12 Aug 2020 01:01:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codeforces-round-660/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-660/</guid>
       <description>Codeforces Round #660  https://codeforces.com/contest/1388
  E 题意
 平面上有一些线段，将他们投影到$x$轴上，使得彼此不想交(但是可以挨着)，设最左边的点和最右边的点的横坐标分别是$x_l, x_r$， 求$min{x_r-x_l}$
@@ -75,10 +75,10 @@ $$ max{x_j+y_jKi}-min{x_j+y_jk_i} $$
     
     <item>
       <title>nowcoder 2020 多校 第三场</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</link>
       <pubDate>Tue, 11 Aug 2020 16:08:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</guid>
       <description>nowcoder 2020 多校 第三场 E Two Matchings 题意
 可以简化题意为，每个点有个权重$w$，两个点$i,j$相连的代价$abs(w_i-w_j)$,找两个没有重叠的匹配使得代价最小
 Solution
@@ -88,10 +88,10 @@ LL n; LL a[MAX]; LL dp[MAX][2]; LL four(const vector&amp;lt;LL&amp;gt; &amp;amp;
     
     <item>
       <title>nowcoder 2020 多校 第五场</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</link>
       <pubDate>Fri, 07 Aug 2020 16:34:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</guid>
       <description>nowcoder 2020 多校 第五场  https://ac.nowcoder.com/acm/contest/5670
  B Graph  tire树，最小生成树
  题意：
@@ -105,10 +105,10 @@ $$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
     
     <item>
       <title>POJ 3376</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/poj-3376/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</link>
       <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/poj-3376/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</guid>
       <description>POJ 3376  tire + manacher
  题意  http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
  Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
@@ -121,10 +121,10 @@ $$ \begin{cases} \begin{matrix} &amp;amp;\mathrm{palindrome} \ s = a_0\dots a_i 
     
     <item>
       <title>nowcoder 2020 多校 第二场</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</link>
       <pubDate>Tue, 14 Jul 2020 23:18:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</guid>
       <description>nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
  A All with Pairs 题意
 给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$
@@ -135,10 +135,10 @@ const unsigned long long base = 131; // vector&amp;lt;string&amp;gt; str; string
     
     <item>
       <title>AtCoder-Sum of gcd of Tuples</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
       <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
       <description>AtCoder-Sum of gcd of Tuples (Hard) 题意  https://atcoder.jp/contests/abc162/tasks/abc162_e
  求$\sum\gcd(a_1,a_2,\cdots,a_n)$,其中$a_i\in[1,K]$
 Solution 直接计算肯定是不好计算的，可以考虑按$gcd$的值进行分类，问题就转化为一个计数问题
@@ -153,10 +153,10 @@ $$ Ans=\sum_{d=1}^{K}dF(\lfloor\frac{K}{d}\rfloor, N) $$
     
     <item>
       <title>CodeChef - PRIMEDST</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codechef-primedst/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codechef-primedst/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</guid>
       <description>Prime Distance On Tree 题意  Prime Distance On Tree
  给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
 Solution 可以从生成函数的角度考虑
@@ -169,10 +169,10 @@ $$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简�
     
     <item>
       <title>波里亚计数</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</link>
       <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</guid>
       <description>Polya计数  将波利亚计数定理整理在这里，作为一个总结和介绍，也方便以后复习
  为什么学习Polya计数定理
 通过Polya计数定理，我们可以计算等价类的数量，比如下面这个问题：
@@ -192,10 +192,10 @@ $$ \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; \dotsc &amp;amp; n \ a_1 &amp;
     
     <item>
       <title>Rock Paper Scissors Lizard Spock</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</link>
       <pubDate>Tue, 11 Feb 2020 15:40:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
       <description>Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock
  有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
@@ -206,10 +206,10 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
     
     <item>
       <title>URAL - 1996</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/ural-1996/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</link>
       <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/ural-1996/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</guid>
       <description>URAL - 1996 题意：  URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
  Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
 记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&#39;$, 在此处的的代价为 $$ \sum_{i+j=pos+m-1} [a_i \ne b&#39;j ] $$ 而 $$ \sum{i+j=posm-1} a_j * b&#39;_j $$ 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$

@@ -12,21 +12,21 @@
 sum.ys： 遍历链表求和
 # begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .">
 <meta name=author content>
-<link rel=canonical href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/csapp/csapp-arch-lab/>
+<link rel=canonical href=https://Anlarry.github.io/posts/csapp/csapp-arch-lab/>
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/Anlarry/Anlarry.github.io/blob/gh-pages/assets/css/stylesheet.min.385897152d1020541031b34f0bce4211dae827514dbddb6e6707a26925762302.css integrity="sha256-OFiXFS0QIFQQMbNPC85CEdroJ1FNvdtuZweiaSV2IwI=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.385897152d1020541031b34f0bce4211dae827514dbddb6e6707a26925762302.css integrity="sha256-OFiXFS0QIFQQMbNPC85CEdroJ1FNvdtuZweiaSV2IwI=" rel="preload stylesheet" as=style>
 <link rel=preload href=/icon/ai512.png as=image>
 <link ref=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css>
 <script src=http://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js></script>
 <script>hljs.highlightAll()</script>
 <link href="https://fonts.googleapis.com/css?family=Source Code Pro" rel=stylesheet>
-<link rel=icon href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai512.png>
-<link rel=icon type=image/png sizes=16x16 href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai16.png>
-<link rel=icon type=image/png sizes=32x32 href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai32.png>
-<link rel=apple-touch-icon href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/apple-touch-icon.png>
-<link rel=mask-icon href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/safari-pinned-tab.svg>
+<link rel=icon href=https://Anlarry.github.io/icon/ai512.png>
+<link rel=icon type=image/png sizes=16x16 href=https://Anlarry.github.io/icon/ai16.png>
+<link rel=icon type=image/png sizes=32x32 href=https://Anlarry.github.io/icon/ai32.png>
+<link rel=apple-touch-icon href=https://Anlarry.github.io/apple-touch-icon.png>
+<link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
 <meta name=generator content="Hugo 0.89.2">
@@ -42,7 +42,7 @@ sum.ys： 遍历链表求和
 sum.ys： 遍历链表求和
 # begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/csapp/csapp-arch-lab/"><meta property="article:section" content="posts">
+<meta property="og:url" content="https://Anlarry.github.io/posts/csapp/csapp-arch-lab/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2020-03-16T21:24:00+08:00">
 <meta property="article:modified_time" content="2020-03-16T21:24:00+08:00"><meta property="og:site_name" content="Hi~, ^_^">
 <meta name=twitter:card content="summary">
@@ -53,8 +53,8 @@ sum.ys： 遍历链表求和
  Part A 在这部分要在sim/misc中完成，我们要编写和模拟三个Y86-64程序
 sum.ys： 遍历链表求和
 # begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/"},{"@type":"ListItem","position":3,"name":"CSAPP arch lab","item":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/csapp/csapp-arch-lab/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSAPP arch lab","name":"CSAPP arch lab","description":"arch lab Download archlab-handout\n 安装模拟器 解决undefined reference to ’matherr‘\n参考 Y86-64模拟器的安装与出现对\u0026rsquo;matherr\u0026rsquo;未定义引用问题的解决\n Part A 在这部分要在sim/misc中完成，我们要编写和模拟三个Y86-64程序\nsum.ys： 遍历链表求和\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .","keywords":["搬家"],"articleBody":"arch lab Download archlab-handout\n 安装模拟器 解决undefined reference to ’matherr‘\n参考 Y86-64模拟器的安装与出现对’matherr’未定义引用问题的解决\n Part A 在这部分要在sim/misc中完成，我们要编写和模拟三个Y86-64程序\nsum.ys： 遍历链表求和\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .pos 0x200 stack: 用YAS编译后，再用YIS运行\nlinux make *.yo inux ../misc/yis *.yo  rsum.ys: 用递归的方式求和\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .pos 0x200 stack: copy.ys: 将src复制到dst\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 src: .quad 0x00a .quad 0x0b0 .quad 0xc00 # Destination block dest: .quad 0x111 .quad 0x222 .quad 0x333 main: irmovq src,%rdi irmovq dest,%rsi irmovq $3,%rdx call copy_block ret copy_block: xorq %rax, %rax irmovq $1,%r14 irmovq $8,%r13 pushq %rbx andq %rdx,%rdx jmp test loop: mrmovq (%rdi),%rbx addq %r13,%rdi rmmovq %rbx,(%rsi) addq %r13,%rsi xorq %rbx,%rax subq %r14,%rdx test: jne loop popq %rbx ret .pos 0x200 stack: Part B 这部分在sim/seq完成，我们需要修改seq-full.hcl， 给SEQ添加iaddq指令\nseq-full.hcl\n然后根据文档测试\n./ssim -t ../y86-code/asumi.yo (cd ../y86-code; make testssim) (cd ../ptest; make SIM=../seq/ssim) (cd ../ptest; make SIM=../seq/ssim TFLAGS=-i) 测试均成功\nPart C 这部分要在sim/pipe中完成\n我们的目的是优化ncopy，然他更快完成，会根据CPE给出一个分数\nStep1\n添加iaddq（类似于PartB），然后测试\nunix make psim VERSION=full unix ./psim -t sdriver.yo unix ./psim -t ldriver.yo unix ./correctness.pl unix ./benchmark.pl 然而竟然还是0.0/60.0，此时CPE大概可以达到11左右，可是从10.5才开始记分\nStep2\n考虑循环展开，将循环展开8次，分数大概可以提高到40多\n 循环展开后，就可以改变指令执行的顺序，避免数据冒险\nmrmovq (%rdi),%r8 rmmovq %r8,(%rsi) 这样会有一个气泡，如果先把8个数据都放到寄存器，在放到目标地址就可以消除气泡，降低执行的周期数\n Step3\n然而还有剩下的余数没有处理，可以考虑将剩下的余数再循环展开一次，此时已经有50多分了\nStep4\n将循环展开的次数提高到10次，那么性能会提高一点，但不是很明显\n优化余数的处理方法，最终可以将分数提高到56.1,平均CPE=7.69, ncopy length= 847 bytes\n 应该还可以优化pipe-full.hcl，ncopy.ys因该也还有提高的空间，以后在补上。。。\n ncopy.ys\nncopy: xorq %rax,%rax\t# count = 0 iaddq $-10,%rdx # jl L2\t# if so, goto Done: ## if so, goto Loop Loop:\tmrmovq (%rdi), %r8 mrmovq 0x8(%rdi), %r9 mrmovq 0x10(%rdi), %r10 mrmovq 0x18(%rdi), %r11 mrmovq 0x20(%rdi), %r12 mrmovq 0x28(%rdi), %r13 mrmovq 0x30(%rdi), %r14 mrmovq 0x38(%rdi), %rcx mrmovq 0x40(%rdi), %rbx mrmovq 0x48(%rdi), %rbp andq %r8,%r8 rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) rmmovq %rbx, 0x40(%rsi) rmmovq %rbp, 0x48(%rsi) jle L1_2 iaddq $1, %rax L1_2: andq %r9,%r9 jle L1_3 iaddq $1, %rax L1_3: andq %r10,%r10 rmmovq %r10, 0x10(%rsi) rmmovq %r11, 0x18(%rsi) jle L1_4 iaddq $1, %rax L1_4: andq %r11,%r11 jle L1_5 iaddq $1, %rax L1_5: andq %r12,%r12 rmmovq %r12, 0x20(%rsi) rmmovq %r13, 0x28(%rsi) jle L1_6 iaddq $1, %rax L1_6: andq %r13,%r13 jle L1_7 iaddq $1, %rax L1_7: andq %r14,%r14 rmmovq %r14, 0x30(%rsi) rmmovq %rcx, 0x38(%rsi) jle L1_8 iaddq $1, %rax L1_8: andq %rcx,%rcx jle L1_9 iaddq $1, %rax L1_9: andq %rbx, %rbx jle L1_10 iaddq $1, %rax L1_10: andq %rbp, %rbp jle L1_11 iaddq $1, %rax L1_11: iaddq $0x50, %rdi iaddq $0x50, %rsi iaddq $-10, %rdx jge Loop L2: iaddq $9, %rdx jg Loop2 jl L2_Done mrmovq (%rdi),%r8 rmmovq %r8, (%rsi) andq %r8, %r8 jle Done iaddq $1, %rax L2_Done: ret Loop2: mrmovq (%rdi), %r8 mrmovq 8(%rdi), %r9 iaddq $-2, %rdx jg L2_0 je D3 # last 3 rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) andq %r8,%r8 jle D2_1 iaddq $1, %rax D2_1: andq %r9, %r9 jle Done iaddq $1, %rax ret D3: mrmovq 0x10(%rdi), %r10 rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) rmmovq %r10, 0x10(%rsi) andq %r8, %r8 jle D3_1 iaddq $1, %rax D3_1: andq %r9, %r9 jle D3_2 iaddq $1, %rax D3_2: andq %r10, %r10 jle Done iaddq $1, %rax ret L2_0: rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) andq %r8,%r8 jle L2_1 iaddq $1, %rax L2_1: andq %r9, %r9 jle L2_2 iaddq $1, %rax L2_2: iaddq $0x10, %rdi iaddq $0x10, %rsi jmp Loop2 Done: ret End: Step5 待更\n。。。\n","wordCount":"601","inLanguage":"en","datePublished":"2020-03-16T21:24:00+08:00","dateModified":"2020-03-16T21:24:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/csapp/csapp-arch-lab/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/icon/ai512.png"}}}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://Anlarry.github.io/posts/"},{"@type":"ListItem","position":2,"name":"CSAPP arch lab","item":"https://Anlarry.github.io/posts/csapp/csapp-arch-lab/"}]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"CSAPP arch lab","name":"CSAPP arch lab","description":"arch lab Download archlab-handout\n 安装模拟器 解决undefined reference to ’matherr‘\n参考 Y86-64模拟器的安装与出现对\u0026rsquo;matherr\u0026rsquo;未定义引用问题的解决\n Part A 在这部分要在sim/misc中完成，我们要编写和模拟三个Y86-64程序\nsum.ys： 遍历链表求和\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .","keywords":["搬家"],"articleBody":"arch lab Download archlab-handout\n 安装模拟器 解决undefined reference to ’matherr‘\n参考 Y86-64模拟器的安装与出现对’matherr’未定义引用问题的解决\n Part A 在这部分要在sim/misc中完成，我们要编写和模拟三个Y86-64程序\nsum.ys： 遍历链表求和\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .pos 0x200 stack: 用YAS编译后，再用YIS运行\nlinux make *.yo inux ../misc/yis *.yo  rsum.ys: 用递归的方式求和\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 ele1: .quad 0x00a .quad ele2 ele2: .quad 0x0b0 .quad ele3 ele3: .quad 0xc00 .quad 0 main: irmovq ele1,%rdi call rsum ret rsum: xorq %rax,%rax andq %rdi,%rdi je L1 pushq %rbx mrmovq (%rdi),%rbx mrmovq 8(%rdi),%rdi call rsum addq %rbx,%rax popq %rbx L1: ret .pos 0x200 stack: copy.ys: 将src复制到dst\n# begin at 0 .pos 0 irmovq stack,%rsp call main halt .align 8 src: .quad 0x00a .quad 0x0b0 .quad 0xc00 # Destination block dest: .quad 0x111 .quad 0x222 .quad 0x333 main: irmovq src,%rdi irmovq dest,%rsi irmovq $3,%rdx call copy_block ret copy_block: xorq %rax, %rax irmovq $1,%r14 irmovq $8,%r13 pushq %rbx andq %rdx,%rdx jmp test loop: mrmovq (%rdi),%rbx addq %r13,%rdi rmmovq %rbx,(%rsi) addq %r13,%rsi xorq %rbx,%rax subq %r14,%rdx test: jne loop popq %rbx ret .pos 0x200 stack: Part B 这部分在sim/seq完成，我们需要修改seq-full.hcl， 给SEQ添加iaddq指令\nseq-full.hcl\n然后根据文档测试\n./ssim -t ../y86-code/asumi.yo (cd ../y86-code; make testssim) (cd ../ptest; make SIM=../seq/ssim) (cd ../ptest; make SIM=../seq/ssim TFLAGS=-i) 测试均成功\nPart C 这部分要在sim/pipe中完成\n我们的目的是优化ncopy，然他更快完成，会根据CPE给出一个分数\nStep1\n添加iaddq（类似于PartB），然后测试\nunix make psim VERSION=full unix ./psim -t sdriver.yo unix ./psim -t ldriver.yo unix ./correctness.pl unix ./benchmark.pl 然而竟然还是0.0/60.0，此时CPE大概可以达到11左右，可是从10.5才开始记分\nStep2\n考虑循环展开，将循环展开8次，分数大概可以提高到40多\n 循环展开后，就可以改变指令执行的顺序，避免数据冒险\nmrmovq (%rdi),%r8 rmmovq %r8,(%rsi) 这样会有一个气泡，如果先把8个数据都放到寄存器，在放到目标地址就可以消除气泡，降低执行的周期数\n Step3\n然而还有剩下的余数没有处理，可以考虑将剩下的余数再循环展开一次，此时已经有50多分了\nStep4\n将循环展开的次数提高到10次，那么性能会提高一点，但不是很明显\n优化余数的处理方法，最终可以将分数提高到56.1,平均CPE=7.69, ncopy length= 847 bytes\n 应该还可以优化pipe-full.hcl，ncopy.ys因该也还有提高的空间，以后在补上。。。\n ncopy.ys\nncopy: xorq %rax,%rax\t# count = 0 iaddq $-10,%rdx # jl L2\t# if so, goto Done: ## if so, goto Loop Loop:\tmrmovq (%rdi), %r8 mrmovq 0x8(%rdi), %r9 mrmovq 0x10(%rdi), %r10 mrmovq 0x18(%rdi), %r11 mrmovq 0x20(%rdi), %r12 mrmovq 0x28(%rdi), %r13 mrmovq 0x30(%rdi), %r14 mrmovq 0x38(%rdi), %rcx mrmovq 0x40(%rdi), %rbx mrmovq 0x48(%rdi), %rbp andq %r8,%r8 rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) rmmovq %rbx, 0x40(%rsi) rmmovq %rbp, 0x48(%rsi) jle L1_2 iaddq $1, %rax L1_2: andq %r9,%r9 jle L1_3 iaddq $1, %rax L1_3: andq %r10,%r10 rmmovq %r10, 0x10(%rsi) rmmovq %r11, 0x18(%rsi) jle L1_4 iaddq $1, %rax L1_4: andq %r11,%r11 jle L1_5 iaddq $1, %rax L1_5: andq %r12,%r12 rmmovq %r12, 0x20(%rsi) rmmovq %r13, 0x28(%rsi) jle L1_6 iaddq $1, %rax L1_6: andq %r13,%r13 jle L1_7 iaddq $1, %rax L1_7: andq %r14,%r14 rmmovq %r14, 0x30(%rsi) rmmovq %rcx, 0x38(%rsi) jle L1_8 iaddq $1, %rax L1_8: andq %rcx,%rcx jle L1_9 iaddq $1, %rax L1_9: andq %rbx, %rbx jle L1_10 iaddq $1, %rax L1_10: andq %rbp, %rbp jle L1_11 iaddq $1, %rax L1_11: iaddq $0x50, %rdi iaddq $0x50, %rsi iaddq $-10, %rdx jge Loop L2: iaddq $9, %rdx jg Loop2 jl L2_Done mrmovq (%rdi),%r8 rmmovq %r8, (%rsi) andq %r8, %r8 jle Done iaddq $1, %rax L2_Done: ret Loop2: mrmovq (%rdi), %r8 mrmovq 8(%rdi), %r9 iaddq $-2, %rdx jg L2_0 je D3 # last 3 rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) andq %r8,%r8 jle D2_1 iaddq $1, %rax D2_1: andq %r9, %r9 jle Done iaddq $1, %rax ret D3: mrmovq 0x10(%rdi), %r10 rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) rmmovq %r10, 0x10(%rsi) andq %r8, %r8 jle D3_1 iaddq $1, %rax D3_1: andq %r9, %r9 jle D3_2 iaddq $1, %rax D3_2: andq %r10, %r10 jle Done iaddq $1, %rax ret L2_0: rmmovq %r8, (%rsi) rmmovq %r9, 8(%rsi) andq %r8,%r8 jle L2_1 iaddq $1, %rax L2_1: andq %r9, %r9 jle L2_2 iaddq $1, %rax L2_2: iaddq $0x10, %rdi iaddq $0x10, %rsi jmp Loop2 Done: ret End: Step5 待更\n。。。\n","wordCount":"601","inLanguage":"en","datePublished":"2020-03-16T21:24:00+08:00","dateModified":"2020-03-16T21:24:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://Anlarry.github.io/posts/csapp/csapp-arch-lab/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"https://Anlarry.github.io/icon/ai512.png"}}}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
 <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
@@ -64,7 +64,7 @@ sum.ys： 遍历链表求和
 <header class=header>
 <nav class=nav>
 <div class=logo>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages accesskey=h title="Jiali's Blog (Alt + H)">
+<a href=https://Anlarry.github.io/ accesskey=h title="Jiali's Blog (Alt + H)">
 <img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
 <span class=logo-switches>
 <button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -73,27 +73,27 @@ sum.ys： 遍历链表求和
 </div>
 <ul id=menu>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/archives/ title="Archives 📦">
+<a href=https://Anlarry.github.io/archives/ title="Archives 📦">
 <span>Archives 📦</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/categories/ title="Categories 📂">
+<a href=https://Anlarry.github.io/categories/ title="Categories 📂">
 <span>Categories 📂</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/ title="Tags 🏷">
+<a href=https://Anlarry.github.io/tags/ title="Tags 🏷">
 <span>Tags 🏷</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/links/ title="Links 🔗">
+<a href=https://Anlarry.github.io/links/ title="Links 🔗">
 <span>Links 🔗</span>
 </a>
 </li>
 <li>
-<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/search/ title="Search 🔍 (Alt + /)" accesskey=/>
+<a href=https://Anlarry.github.io/search/ title="Search 🔍 (Alt + /)" accesskey=/>
 <span>Search 🔍</span>
 </a>
 </li>
@@ -101,10 +101,10 @@ sum.ys： 遍历链表求和
 </nav>
 </header>
 <main class=main>
-<link rel=stylesheet href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/sass/single-main.css>
+<link rel=stylesheet href=https://Anlarry.github.io/sass/single-main.css>
 <article class=post-single>
 <header class=post-header>
-<div class=breadcrumbs><a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages>Home</a>&nbsp;»&nbsp;<a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/>Posts</a></div>
+<div class=breadcrumbs><a href=https://Anlarry.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://Anlarry.github.io/posts/>Posts</a></div>
 <h1 class=post-title>
 CSAPP arch lab
 </h1>
@@ -449,15 +449,15 @@ End:
 </div>
 <footer class=post-footer>
 <ul class=post-tags>
-<li><a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
+<li><a href=https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
 </ul>
 <nav class=paginav>
-<a class=prev href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/>
+<a class=prev href=https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/>
 <span class=title>« Prev Page</span>
 <br>
 <span>AtCoder-Sum of gcd of Tuples</span>
 </a>
-<a class=next href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/acm-icpc/codechef-primedst/>
+<a class=next href=https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/>
 <span class=title>Next Page »</span>
 <br>
 <span>CodeChef - PRIMEDST</span>
@@ -467,7 +467,7 @@ End:
 </article>
 </main>
 <footer class=footer>
-<span>&copy; 2021 <a href=https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages>Jiali Wang</a></span>
+<span>&copy; 2021 <a href=https://Anlarry.github.io/>Jiali Wang</a></span>
 <span>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &

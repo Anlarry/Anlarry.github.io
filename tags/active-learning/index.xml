@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Active Learning on Hi-^_^</title>
-    <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/active-learning/</link>
+    <link>https://Anlarry.github.io/tags/active-learning/</link>
     <description>Recent content in Active Learning on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/tags/active-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/active-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Active Learning for ML Enhanced Database Systems</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</link>
+      <link>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</guid>
+      <guid>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</guid>
       <description>figcaption { text-align: center; }  Intro &amp;amp; Background ML模型会因为训练和测试时的数据分布不同，导致很多预测错误。将ML模型优化database也面对这个问题。
 Active learning  Active leraning  主动学习采用的方法是，可以在unlabled的数据中再选出一些数据，从orcale得到数据的lable，从新的知识中学习。
  An illustrative example of pool-based active learning  Execution cost prediction &amp;amp; Plan regression prediction  ECP是一个回归任务，需要预测执行plan需要的时间。在优化查询中，可以用ECP来寻找最优的plan PRP是一个分类任务，给出两个plan，需要找到哪个plan代价更高  Architecture 在这里oracle可以用database的副本执行plan，获取plan的执行时间。因此不同的plan就有不同的cost。

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>CSAPP on Hi-^_^</title>
-    <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/categories/csapp/</link>
+    <link>https://Anlarry.github.io/categories/csapp/</link>
     <description>Recent content in CSAPP on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Mon, 16 Mar 2020 21:24:00 +0800</lastBuildDate><atom:link href="https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/categories/csapp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Mar 2020 21:24:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/categories/csapp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CSAPP arch lab</title>
-      <link>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/csapp/csapp-arch-lab/</link>
+      <link>https://Anlarry.github.io/posts/csapp/csapp-arch-lab/</link>
       <pubDate>Mon, 16 Mar 2020 21:24:00 +0800</pubDate>
       
-      <guid>https://github.com/Anlarry/Anlarry.github.io/blob/gh-pages/posts/csapp/csapp-arch-lab/</guid>
+      <guid>https://Anlarry.github.io/posts/csapp/csapp-arch-lab/</guid>
       <description>arch lab Download archlab-handout
  安装模拟器 解决undefined reference to ’matherr‘
 参考 Y86-64模拟器的安装与出现对&amp;rsquo;matherr&amp;rsquo;未定义引用问题的解决
