@@ -79,10 +79,6 @@ params:
         Content: Welcome to my blog
 
     socialIcons:
-        # - name: twitter
-        #  url: "https://twitter.com/Anlarry3"
-        #- name: stackoverflow
-        #  url: "https://stackoverflow.com"
         - name: github
           url: "https://github.com/Anlarry"
         - name: rss
