@@ -87,6 +87,24 @@
 <main class=main>
 <article class=post-entry>
 <header class=entry-header>
+<h2>POJ 3376
+</h2>
+</header>
+<section class=entry-content>
+<p>POJ 3376 tire + manacher
+题意 http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
+Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
+首先考虑什么情况下，两个串拼接会是一个回文串。
+case 1： s=reverse(t)
+$$ \begin{cases} s = a_0\dots a_{n-1} \ t = a_{n-1}\dots a_0 \end{cases} $$
+case 2
+$$ \begin{cases} \begin{matrix} &\mathrm{palindrome} \ s = a_0\dots a_i &\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \ \ t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \ \begin{matrix} \ \ \ \ \ \mathrm{palindrome} &\ t = \overbrace{a_0\dots a_{i-1}} &a_i\dots a_{n-1} \end{matrix} \end{cases} $$...</p>
+</section>
+<footer class=entry-footer>📝 August 5, 2020&nbsp;·&nbsp;⌛ 4 min</footer>
+<a class=entry-link aria-label="post link to POJ 3376" href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/></a>
+</article>
+<article class=post-entry>
+<header class=entry-header>
 <h2>nowcoder 2020 多校 第二场
 </h2>
 </header>
@@ -154,33 +172,6 @@ $$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简�
 </section>
 <footer class=entry-footer>📝 March 1, 2020&nbsp;·&nbsp;⌛ 4 min</footer>
 <a class=entry-link aria-label="post link to CodeChef - PRIMEDST" href=https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/></a>
-</article>
-<article class=post-entry>
-<figure class=entry-cover><img loading=lazy src=https://Anlarry.github.io/cover.png alt>
-</figure>
-<header class=entry-header>
-<h2>波里亚计数
-</h2>
-</header>
-<section class=entry-content>
-<p>Polya计数 将波利亚计数定理整理在这里，作为一个总结和介绍，也方便以后复习
-为什么学习Polya计数定理
-通过Polya计数定理，我们可以计算等价类的数量，比如下面这个问题：
-用$m$种颜色给一个正方形染色，如果正方形可以自由转动，求染色方案数
-让我们从一些概念开始
-1 等价关系 1.1 等价关系的定义 假设$V$是一个集合，$S$是定义在$V$上的一个关系，若$S$有如下性质：
-自反性 传递性 对称性 那么， $S$就是一个等价关系
-$a$和$b$有关系$S$,可以记为$aSb$
-假设定义关系$S$，图形$a$可以旋转得到$b$ $\Leftrightarrow$ $aSb$
-例如图中的$方块_1$和$方块_2$具有关系$S$，即他们可以通过旋转得到彼此，而$方块_1$和$方块_2$则没有关系$S$
-1.2 等价类 通过上图，可以看出来：$方块_1$和$方块_2$是同一类的，而$方块_1$和$方块_2$则是另外两类，于是可以想到集合$V$上的等价关系$S$将集合的元素划分到不同的类中，我们把它称为等价类
-而包含元素$a$的等价类则是由满足$aSb$的所有元素$b$组成的(当然也包含元素$a$),即$C(a)={b\in V | \ aSb}$
-仔细想一想，不难发现两个不同等价类是不相交的
-2 置换群 2.1 置换群的定义 假设$A={1,2,\dotsc, n}$，通过置换，将$A$中的元素重新排列，得到另一个排列$a_1, a_2, \dotsc, a_n$，可以把这个过程写成
-$$ \left ( \begin{matrix} 1 & 2 & \dotsc & n \ a_1 & a_2 & \dotsc & a_n \end{matrix} \right ) $$...</p>
-</section>
-<footer class=entry-footer>📝 February 14, 2020&nbsp;·&nbsp;⌛ 5 min</footer>
-<a class=entry-link aria-label="post link to 波里亚计数" href=https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

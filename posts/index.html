@@ -89,6 +89,38 @@
 </header>
 <article class=post-entry>
 <figure class=entry-cover>
+<img loading=lazy srcset="https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605_huec861d61564418316951c1398ea6e408_203378_360x0_resize_box_3.png 360w ,https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605_huec861d61564418316951c1398ea6e408_203378_480x0_resize_box_3.png 480w ,https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605_huec861d61564418316951c1398ea6e408_203378_720x0_resize_box_3.png 720w ,https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605.png 880w" sizes="(min-width: 768px) 720px, 100vw" src=https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605.png alt width=880 height=831>
+</figure>
+<header class=entry-header>
+<h2>NextDoor
+</h2>
+</header>
+<section class=entry-content>
+<p>Background 基本各种东西都可以用图来表示，也就促成了GNN的快速发展。然而很多图都有这样的特点，一些节点的度数很高然而大多数节点的度数很低。
+训练时要用邻居更新当前节点，不能将整个图全部拿来训练，因此一般采用graph sampling+mini batch，比如，给$n$个节点，每个节点对邻居采样后在进行训练。
+然而产生了新的问题，采样在整个训练过程中占了很多时间。
+因此，大家也会去想用GPU加速采样，但是naive的方法并不能很好的利用GPU。
+“Transit-Parallelism” 作者首先对采样进行了抽象，采样从一节点开始，扩展出新的节点加入sample，再从新的节点扩展$\cdots$，每次遍历邻居扩展新节点的节点，作者把它叫做"transit vertices"
+将采样分成两类：
+Individual Transit Sampling，这个是按节点来的，每个transit节点从邻居中采样一定数量的节点 Collective Transit Sampling，这个是按层来，每一层从所有transit节点的邻居中采样一定数量的节点 CUDA & GPU
+一个CUDA程序被划分给很多blocks of threads完成并行，而GPU又由很多StreamingMultiprocessors (SMs)构成，每个block被放到SM上执行
+一个block的线程数是有限的，但是相同的大小block可以被组织成grid，于是kernel(a c++ function)就可以用grid里面所有的线程。 $$ thread \xrightarrow[]{array} block \xrightarrow[]{array} grid $$ 众所周知，内存层次结构，GPU当然也有：
+前面已经提到了block会在SM上执行，在物理实现时会用到SIMT(Single-Instruction, Multiple-Thread)。multiprocessor用warp(a group of 32 threads)来管理线程。
+warp中的线程都从相同的起点开始，但是每个线程都有自己的pc，寄存器状态也可能不一样。而且一个warp的thread执行的指令还是相同的。
+如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。
+Sample-Parallelism，对于Individual Transit Sampling可以将每一对sample和transit分配$m_i$个线程，每个sample放到一个block里。对于Collective Transit Sampling，需要先把所有的邻居存到global memory里，再采样。
+在采样时，邻居多的节点计算的时间就会更久。如果同一个warp里面的两个thread被分给两个邻居数量不同的transit，就会有divergence。而且，图得存在gobal memory，shared memory利用不充分。
+但是如果是按transit划分，局部性就会更好，按照工作量需求分配线程数量。是不是有点像倒排索引 :-)
+线程组中的线程，他们做的事情更相似，而且工作量也差不多。他们访问的邻居也是同一个transit的，能更好利用share memory。
+Sampling Large Graphs NextDoor还可以去对超出GPU memory的图采样。方法有点像mini batch，把图分成不相交的子图，每次对一个子图和和其transit节点采样。
+Reference
+[1] Jangda A, Polisetty S, Guha A, et al....</p>
+</section>
+<footer class=entry-footer>📝 November 14, 2021&nbsp;·&nbsp;⌛ 1 min</footer>
+<a class=entry-link aria-label="post link to NextDoor" href=https://Anlarry.github.io/posts/paper-reading/nextdoor/></a>
+</article>
+<article class=post-entry>
+<figure class=entry-cover>
 <img loading=lazy srcset="https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/image-20211021151111682_hu965e4dd26653855c84e89b78c2a94e12_139327_360x0_resize_box_3.png 360w ,https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/image-20211021151111682_hu965e4dd26653855c84e89b78c2a94e12_139327_480x0_resize_box_3.png 480w ,https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/image-20211021151111682_hu965e4dd26653855c84e89b78c2a94e12_139327_720x0_resize_box_3.png 720w ,https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/image-20211021151111682.png 721w" sizes="(min-width: 768px) 720px, 100vw" src=https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/image-20211021151111682.png alt width=721 height=697>
 </figure>
 <header class=entry-header>
@@ -171,20 +203,6 @@ Solution 模拟，每个氨基酸一个hash值。通过判断最后栈元素是�
 </section>
 <footer class=entry-footer>📝 August 31, 2020&nbsp;·&nbsp;⌛ 5 min</footer>
 <a class=entry-link aria-label="post link to Gym 102501部分题解" href=https://Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Gym 102460L Largest Quadrilateral
-</h2>
-</header>
-<section class=entry-content>
-<p>Gym 102460L Largest Quadrilateral Largest Quadrilateral
-题意 给$n$个点从中选出四个点，使得面积最大
-Solution 首先，肯定是求凸包，要求的点一定在凸包上。 不难联想到凸包对每个边求最大三角形面积的问题，也就是旋转卡壳。 可以将问题转化为，对凸包的每一个对角线$A_iA_j$，求最大面积的两个三角形，$\triangle{A_iA_jP}$, $\triangle{A_iA_jQ}$, 然后就可以枚举对角线，旋转卡壳算最大面积 细节
-输出的格式 凸包上应该留下共线的点 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>//#include &lt;memory.h> #include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>#include &lt;cassert>// #include &lt;unordered_map> #define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
-</section>
-<footer class=entry-footer>📝 August 27, 2020&nbsp;·&nbsp;⌛ 4 min</footer>
-<a class=entry-link aria-label="post link to Gym 102460L Largest Quadrilateral " href=https://Anlarry.github.io/posts/acm-icpc/gym-102460l-largest-quadrilateral/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>

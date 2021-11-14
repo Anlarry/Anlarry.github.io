@@ -2,28 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://Anlarry.github.io/categories/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/gnn/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/gpu/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/graph-sampling/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/posts/paper-reading/nextdoor/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/categories/paper-reading/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/posts/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/</loc>
+    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://Anlarry.github.io/tags/active-learning/</loc>
     <lastmod>2021-10-22T16:35:00+08:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</loc>
     <lastmod>2021-10-22T16:35:00+08:00</lastmod>
   </url><url>
-    <loc>https://Anlarry.github.io/categories/</loc>
-    <lastmod>2021-10-22T16:35:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/</loc>
-    <lastmod>2021-10-22T16:35:00+08:00</lastmod>
-  </url><url>
     <loc>https://Anlarry.github.io/tags/ml-for-sys/</loc>
-    <lastmod>2021-10-22T16:35:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/categories/paper-reading/</loc>
-    <lastmod>2021-10-22T16:35:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/posts/</loc>
-    <lastmod>2021-10-22T16:35:00+08:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/tags/</loc>
     <lastmod>2021-10-22T16:35:00+08:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/tags/ipc/</loc>
