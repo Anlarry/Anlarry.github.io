@@ -30,7 +30,7 @@ $$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简�
       
       <guid>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
       <description>Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock
- 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
+  有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
 枚举可以得分的手势,假设当前手势为$op$, $$ \begin{aligned} t&#39;i &amp;amp;=(reverse_t{i} == op ? 1 : 0) \ s&#39;_i &amp;amp;= G[op][s_i] \end{aligned} $$
 将$t&#39;,s&#39;$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值

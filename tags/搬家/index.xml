@@ -18,23 +18,22 @@
 Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
  seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
  另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
-在seL4上测试负载，IPC占用的时间是很多的。
+ 在seL4上测试负载，IPC占用的时间是很多的。
 SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
 但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
  在虚拟机中运行的进程，如果要访问内存会经过
 GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
 这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
  同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
-从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+  从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
 首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
 Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
-在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+ 在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
 something else RootKernel &amp;amp; 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
 illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
-XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+ XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
 XPC从两个方面提高IPC性能，
- 让IPC不经过kernel 不复制传递消息  和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。
-XPC engine提供了两个硬件原语：User-level Cross Process Call，Lightweight Message Transfer</description>
+ 让IPC不经过kernel 不复制传递消息   和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。</description>
     </item>
     
     <item>
@@ -242,7 +241,7 @@ $$ \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; \dotsc &amp;amp; n \ a_1 &amp;
       
       <guid>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
       <description>Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock
- 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
+  有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
 枚举可以得分的手势,假设当前手势为$op$, $$ \begin{aligned} t&#39;i &amp;amp;=(reverse_t{i} == op ? 1 : 0) \ s&#39;_i &amp;amp;= G[op][s_i] \end{aligned} $$
 将$t&#39;,s&#39;$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
