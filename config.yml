@@ -130,7 +130,7 @@ menu:
           url: /tags/
           weight: 30
         - identifier: book_reading
-          name: BOOK-READING 📚
+          name: Book-Reading 📚
           url: /book_reading/
           weight: 40
         - identifier: links
