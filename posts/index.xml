@@ -186,9 +186,9 @@ $$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
  Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。
 case 1： s=reverse(t)
-$$ \begin{cases} s = a_0\dots a_{n-1} \ t = a_{n-1}\dots a_0 \end{cases} $$
+$$ \begin{cases} s = a_0\dots a_{n-1} \newline t = a_{n-1}\dots a_0 \end{cases} $$
 case 2
-$$ \begin{cases} \begin{matrix} &amp;amp;\mathrm{palindrome} \ s = a_0\dots a_i &amp;amp;\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \ \ t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \ \begin{matrix} \ \ \ \ \ \mathrm{palindrome} &amp;amp;\ t = \overbrace{a_0\dots a_{i-1}} &amp;amp;a_i\dots a_{n-1} \end{matrix} \end{cases} $$</description>
+$$ \begin{cases} \begin{matrix} &amp;amp;\mathrm{palindrome} \newline s = a_0\dots a_i &amp;amp;\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \newline \newline t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \newline \begin{matrix} \ \ \ \ \ \mathrm{palindrome} &amp;amp;\newline t = \overbrace{a_0\dots a_{i-1}} &amp;amp;a_i\dots a_{n-1} \end{matrix} \end{cases} $$</description>
     </item>
     
     <item>
@@ -247,8 +247,9 @@ sum.ys： 遍历链表求和
  给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
 Solution 可以从生成函数的角度考虑
 假设rt是一个树的树根，而且rt的深度是d，将树中节点的深度统计出来，记为$f_{rt，d}$，如果$u,v&amp;hellip;$是rt的子节点，那么rt对答案的贡献就是生成函数中素数项的系数，那么问题就是怎么计算生成函数了
-$$ \sum_{u,v \in son(rt)} f_{u,1} * f_{v, 1}
-$$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简单的 $$ \Big(f_{rt,0}^2 - \sum_{u \in son(rt) }f_{u,1}^2\Big) / 2 $$
+$$ \sum_{u,v \in son(rt)} f_{u,1} * f_{v, 1} $$
+这个式子中的素数项系数和与下式是相等的,计算$f$是很简单的
+$$ \Big(f_{rt,0}^2 - \sum_{u \in son(rt) }f_{u,1}^2\Big) / 2 $$
 为了确保复杂度不会太高，需要用点分治
 #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;// #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
     </item>
@@ -298,7 +299,11 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
       <guid>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</guid>
       <description>URAL - 1996 题意：  URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
  Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
-记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&#39;$, 在此处的的代价为 $$ \sum_{i+j=pos+m-1} [a_i \ne b&#39;j ] $$ 而 $$ \sum{i+j=posm-1} a_j * b&#39;_j $$ 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
+记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&#39;$, 在此处的的代价为
+$$ \sum_{i+j=pos+m-1} [a_i \ne b&#39;_j ] $$
+而
+$$ \sum_{i+j=posm-1} a_j * b&#39;_j $$
+可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
 #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
     </item>
     

@@ -71,8 +71,8 @@
 </a>
 </li>
 <li>
-<a href=https://Anlarry.github.io/book_reading/ title="BOOK-READING 📚">
-<span>BOOK-READING 📚</span>
+<a href=https://Anlarry.github.io/book_reading/ title="Book-Reading 📚">
+<span>Book-Reading 📚</span>
 </a>
 </li>
 <li>
@@ -143,7 +143,11 @@ Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)
 <section class=entry-content>
 <p>URAL - 1996 题意： URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
 Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
-记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b'$, 在此处的的代价为 $$ \sum_{i+j=pos+m-1} [a_i \ne b'j ] $$ 而 $$ \sum{i+j=posm-1} a_j * b'_j $$ 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
+记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b'$, 在此处的的代价为
+$$ \sum_{i+j=pos+m-1} [a_i \ne b'_j ] $$
+而
+$$ \sum_{i+j=posm-1} a_j * b'_j $$
+可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>#include &lt;memory.h>#include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>#include &lt;unordered_map>#define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
 </section>
 <footer class=entry-footer>📝 February 11, 2020&nbsp;·&nbsp;⌛ 3 min</footer>

@@ -71,8 +71,8 @@
 </a>
 </li>
 <li>
-<a href=https://Anlarry.github.io/book_reading/ title="BOOK-READING 📚">
-<span>BOOK-READING 📚</span>
+<a href=https://Anlarry.github.io/book_reading/ title="Book-Reading 📚">
+<span>Book-Reading 📚</span>
 </a>
 </li>
 <li>
@@ -138,8 +138,9 @@ sum.ys： 遍历链表求和
 给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
 Solution 可以从生成函数的角度考虑
 假设rt是一个树的树根，而且rt的深度是d，将树中节点的深度统计出来，记为$f_{rt，d}$，如果$u,v…$是rt的子节点，那么rt对答案的贡献就是生成函数中素数项的系数，那么问题就是怎么计算生成函数了
-$$ \sum_{u,v \in son(rt)} f_{u,1} * f_{v, 1}
-$$ 这个式子中的素数项系数和与下式是相等的,计算$f$是很简单的 $$ \Big(f_{rt,0}^2 - \sum_{u \in son(rt) }f_{u,1}^2\Big) / 2 $$
+$$ \sum_{u,v \in son(rt)} f_{u,1} * f_{v, 1} $$
+这个式子中的素数项系数和与下式是相等的,计算$f$是很简单的
+$$ \Big(f_{rt,0}^2 - \sum_{u \in son(rt) }f_{u,1}^2\Big) / 2 $$
 为了确保复杂度不会太高，需要用点分治
 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>#include &lt;memory.h>#include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>// #include &lt;unordered_map> #define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
 </section>
