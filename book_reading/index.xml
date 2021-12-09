@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Book-Reading on Hi-^_^</title>
+    <link>https://Anlarry.github.io/book_reading/</link>
+    <description>Recent content in Book-Reading on Hi-^_^</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Jiali Wang</copyright><atom:link href="https://Anlarry.github.io/book_reading/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021-PrimusLiber</title>
+      <link>https://Anlarry.github.io/book-reading/2021-primusliber/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://Anlarry.github.io/book-reading/2021-primusliber/</guid>
+      <description>Primus liber means the first book in latin, and means first commit here in some way.
+ 2021 Project Hail Mary
+ 讲述Grace和外星人Rocky一起“用魔法对抗魔法”（Astrophag和Taumoeba）的星际旅行故事，Save Earth &amp;amp; Save Erid。
+Rich Dad, Poor Dad
+ 从一个与众不同的思路，讲述理财的重要性，从不同的角度再思考这个问题。</description>
+    </item>
+    
+  </channel>
+</rss>
