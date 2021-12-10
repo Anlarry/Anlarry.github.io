@@ -11,7 +11,7 @@
 <meta name=google-site-verification content="XYZabc">
 <meta name=yandex-verification content="XYZabc">
 <meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/assets/css/stylesheet.min.b886e7a276371df860a94b50455814993fdf87cf36366827ac85854326387c68.css integrity="sha256-uIbnonY3HfhgqUtQRVgUmT/fh882NmgnrIWFQyY4fGg=" rel="preload stylesheet" as=style>
+<link crossorigin=anonymous href=/assets/css/stylesheet.min.adc94f6a0b1f14123eb9f0e26177c35ba3040fa9e921e93741358a9d6c6a42e6.css integrity="sha256-rclPagsfFBI+ufDiYXfDW6MED6npIek3QTWKnWxqQuY=" rel="preload stylesheet" as=style>
 <link rel=preload href=/icon/ai512.png as=image>
 <link ref=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css>
 <script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js></script>
@@ -92,6 +92,29 @@
 <header class=page-header><div class=breadcrumbs><a href=https://Anlarry.github.io/>Home</a></div>
 <h1>Posts</h1>
 </header>
+<article class=post-entry>
+<figure class=entry-cover>
+<img loading=lazy srcset="https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50_hu823b2c964dfaa02eefee39bbd60cea9d_168203_360x0_resize_box_3.png 360w ,https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50_hu823b2c964dfaa02eefee39bbd60cea9d_168203_480x0_resize_box_3.png 480w ,https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50_hu823b2c964dfaa02eefee39bbd60cea9d_168203_720x0_resize_box_3.png 720w ,https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50_hu823b2c964dfaa02eefee39bbd60cea9d_168203_1080x0_resize_box_3.png 1080w ,https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50.png 1494w" sizes="(min-width: 768px) 720px, 100vw" src=https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50.png alt width=1494 height=560>
+</figure>
+<header class=entry-header>
+<h2>FlexSC
+</h2>
+</header>
+<section class=entry-content>
+<p>System Call Cost 应用程序通过System Call向kernel请求服务。一般应用程序发起系统调用后，从用户态进入内核态，最后从异常退出，返回用户态。
+但是这种同步的系统调用机制可能对应用的性能带来限制：
+Direct Cost: 在系统调用后，CPU会清空流水线。 Indirect Cost: 程序的局部性以及cache可以提升性能。但是在系统调用后，要在kernel空间执行代码，这就会影响cache性能。而且在kernel处理结束返回用户后，相比与原来的cache，cache受到了污染，带来间接性能损失。 可以看到在系统调用后，IPC(Instructions Per Cycle)降低。
+Exception-Less System Call exception-less系统调用，让系统调用异步完成。在user和kernel共享一些syscall pages，用这些syscall page记录当前请求的系统调用。用户发起系统调用后，在syscall pages中添加新的entry后就可以返回。同时，有一些特殊的kernel thread，syscall thread，在syscall pages中找到请求的系统调用，把返回值写在相应的条目。最后用户就通过可以检查syscall pages，拿到返回值。
+那这种将invoke和execute接偶的设计怎么做有什么好处呢？
+可以推迟执行，把syscall按batchi执行，降低mode之间转化的代价，improve temporal locality。 对于多核系统，可以把syscall放在另一个核上执行，这样就可以降低间接代价，improved spatial locality。 Implementation 在实现时，作者添加两个新的系统调用，都采用同步的系统调用机制。
+flexsc_register，做一些syscall page的映射，并创建syscall thread，数量等于page中entry的数量。 flexsc_wait，因为这种异步机制，会出现用户需要停下来等待系统调用的完成。 syscall thread的调度，会影响exception-less syscall的性能。对于单核，调用flexsc_wait后，调度syscall thread处理page中每个entry，如果出现阻塞，就用新的syscall thread接着处理一下个entry。多核时，one syscall thread per application and core，这样就带来了并行处理的可能。
+FlexSC Threads 但是这样异步方式，可能会让使用变得复杂，而且随着多核的发展，作者就实现了FlexSC-Threads。利用dynamic loading，系统调用时，调用一个wrapper，这样就可以让应用得到free lunch。
+维护$M$个user-mod thread，对一个process，每个核上只有一个可以被kernel看见。发起系统调用的线程，在写好entry后，就会被切换执行一下thread。用完ready的user-mode thread，就看看syscall page上有没有完成的。如果还没有ready的，就需要调用下flexsc_wait。
+对于这种设计，需要提高并发，来提升性能。highly threaded workloads是FlexSC-Threads的理想环境。...</p>
+</section>
+<footer class=entry-footer>📝 December 10, 2021&nbsp;·&nbsp;⌛ 1 min</footer>
+<a class=entry-link aria-label="post link to FlexSC" href=https://Anlarry.github.io/posts/paper-reading/flexsc/></a>
+</article>
 <article class=post-entry>
 <figure class=entry-cover>
 <img loading=lazy srcset="https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605_huec861d61564418316951c1398ea6e408_203378_360x0_resize_box_3.png 360w ,https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605_huec861d61564418316951c1398ea6e408_203378_480x0_resize_box_3.png 480w ,https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605_huec861d61564418316951c1398ea6e408_203378_720x0_resize_box_3.png 720w ,https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605.png 880w" sizes="(min-width: 768px) 720px, 100vw" src=https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605.png alt width=880 height=831>
@@ -191,20 +214,6 @@ A 题意
 </section>
 <footer class=entry-footer>📝 September 1, 2020&nbsp;·&nbsp;⌛ 10 min</footer>
 <a class=entry-link aria-label="post link to Codeforces Round #664" href=https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/></a>
-</article>
-<article class=post-entry>
-<header class=entry-header>
-<h2>Gym 102501部分题解
-</h2>
-</header>
-<section class=entry-content>
-<p>Gym - 102501D Gnalcats https://codeforces.com/gym/102501/problem/D
-题意 给两种栈操作判断是否相等,如果两个操作都fail，也认为相等
-Solution 模拟，每个氨基酸一个hash值。通过判断最后栈元素是否对应hash相等，判断操作是否相等
-#include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>//#include &lt;memory.h> #include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>#include &lt;cassert>#include &lt;unordered_map>#define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout &lt;&lt; #x &lt;&lt; " " &lt;&lt; x &lt;&lt; "\n" using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 1e6 + 50; #endif const int mod = 1e9 + 7; void file_read() { #ifdef DEBUG freopen("in", "r", stdin); // freopen("out", "w", stdout); #endif } #define ULL unsigned long long struct DNA { struct Node { int l, r; unsigned LL val; Node(){} Node(int l, int r, unsigned LL val) : l(l), r(r), val(val) {} bool complex() const { return l and r; } }tr[MAX]; stack&lt;int> stk; int tot; int num; DNA() : tot(1), num(1) { for(int i = 1; i &lt;= (int)1e5; i++) { tr[tot] = Node(0, 0, num++); stk....</p>
-</section>
-<footer class=entry-footer>📝 August 31, 2020&nbsp;·&nbsp;⌛ 5 min</footer>
-<a class=entry-link aria-label="post link to Gym 102501部分题解" href=https://Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/></a>
 </article>
 <footer class=page-footer>
 <nav class=pagination>
