@@ -22,9 +22,10 @@ categories: ACM/ICPC
 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
 
 枚举可以得分的手势,假设当前手势为$op$, 
+
 $$
 \begin{aligned}
-    t'_i &=(reverse\_t_{i} == op ? 1 : 0)  \\
+    t'_i &=(reverse\ t_i == op ? 1 : 0)  \newline
     s'_i &= G[op][s_i]
 \end{aligned}
 $$
