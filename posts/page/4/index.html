@@ -24,7 +24,7 @@
 <link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg>
 <meta name=theme-color content="#2e2e33">
 <meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.90.0">
+<meta name=generator content="Hugo 0.90.1">
 <link rel=alternate type=application/rss+xml href=https://Anlarry.github.io/posts/index.xml>
 <noscript>
 <style>#theme-toggle,.top-link{display:none}</style>
@@ -147,7 +147,8 @@ $$ \left ( \begin{matrix} 1 & 2 & \dotsc & n \ a_1 & a_2 & \dotsc & a_n \end{mat
 <p>Rock Paper Scissors Lizard Spock 题意： Rock Paper Scissors Lizard Spock
 有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
-枚举可以得分的手势,假设当前手势为$op$, $$ \begin{aligned} t'i &=(reverse_t{i} == op ? 1 : 0) \ s'_i &= G[op][s_i] \end{aligned} $$
+枚举可以得分的手势,假设当前手势为$op$,
+$$ \begin{aligned} t'_i &=(reverse\ t_i == op ? 1 : 0) \newline s'_i &= G[op][s_i] \end{aligned} $$
 将$t',s'$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include &lt;cstdio>#include &lt;stack>#include &lt;set>#include &lt;cmath>#include &lt;map>#include &lt;time.h>#include &lt;vector>#include &lt;iostream>#include &lt;string>#include &lt;cstring>#include &lt;algorithm>#include &lt;memory.h>#include &lt;cstdlib>#include &lt;queue>#include &lt;iomanip>#include &lt;unordered_map>#define P pair&lt;int, int> #define LL long long #define LD long double #define PLL pair&lt;LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &lt; b; i++) #define PI acos(-1....</p>
 </section>

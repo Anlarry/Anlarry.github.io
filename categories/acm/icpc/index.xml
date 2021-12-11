@@ -200,7 +200,8 @@ $$ \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; \dotsc &amp;amp; n \ a_1 &amp;
       <description>Rock Paper Scissors Lizard Spock 题意：  Rock Paper Scissors Lizard Spock
   有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
-枚举可以得分的手势,假设当前手势为$op$, $$ \begin{aligned} t&#39;i &amp;amp;=(reverse_t{i} == op ? 1 : 0) \ s&#39;_i &amp;amp;= G[op][s_i] \end{aligned} $$
+枚举可以得分的手势,假设当前手势为$op$,
+$$ \begin{aligned} t&#39;_i &amp;amp;=(reverse\ t_i == op ? 1 : 0) \newline s&#39;_i &amp;amp;= G[op][s_i] \end{aligned} $$
 将$t&#39;,s&#39;$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
     </item>
