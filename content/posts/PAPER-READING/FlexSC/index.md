@@ -29,7 +29,7 @@ exception-less系统调用，让系统调用异步完成。在user和kernel共�
 
 那这种将invoke和execute解耦的设计怎么做有什么好处呢？
 
-- 可以推迟执行，把syscall按batchi执行，降低mode之间转化的代价，*improve temporal locality*。
+- 可以推迟执行，把syscall按batch执行，降低mode之间转化的代价，*improve temporal locality*。
 - 对于多核系统，可以把syscall放在另一个核上执行，这样就可以降低间接代价，*improved spatial locality*。
 
 ### Implementation
