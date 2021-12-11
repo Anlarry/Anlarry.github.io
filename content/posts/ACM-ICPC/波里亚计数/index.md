@@ -57,7 +57,7 @@ $a$和$b$有关系$S$,可以记为$aSb$
 $$
 \left (
     \begin{matrix}
-       1 & 2 & \dotsc & n \\
+       1 & 2 & \dotsc & n \newline
        a_1 & a_2 & \dotsc & a_n
     \end{matrix}
 \right )
@@ -69,13 +69,13 @@ $$
 >$$ 
 \pi_1 = \left ( 
     \begin{matrix}
-        1 & 2 & 3 & 4 \\
+        1 & 2 & 3 & 4 \newline
         4 & 2 & 1 & 3
     \end{matrix}
     \right ) \ \ 
 \pi_2 = \left ( 
     \begin{matrix}
-        1 & 2 & 3 & 4 \\
+        1 & 2 & 3 & 4 \newline
         2 & 1 & 4 & 3
     \end{matrix}
     \right ) 
@@ -83,7 +83,7 @@ $$
 >$$
  \pi_1 \circ \pi_2 =\left ( 
     \begin{matrix}
-        1 & 2 & 3 & 4 \\
+        1 & 2 & 3 & 4 \newline
         2 & 4 & 3 & 1
     \end{matrix}
     \right ) 
@@ -103,7 +103,7 @@ $$
 
 >![](2.1-1.png)  
 $\pi_1=\left(\begin{matrix}
-    1 & 2 & 3 & 4 \\
+    1 & 2 & 3 & 4 \newline
     1 & 2 & 3 & 4
 \end{matrix}\right)$
 
@@ -111,7 +111,7 @@ $\pi_1=\left(\begin{matrix}
 
 >![](2.1-2.png)
 $\pi_2=\left(\begin{matrix}
-    1 & 2 & 3 & 4 \\
+    1 & 2 & 3 & 4 \newline
     4 & 1 & 2 & 3
 \end{matrix}\right)$
 
@@ -131,11 +131,11 @@ $$
 
 >如果$A=\{1,2,3\}$  
 $\pi_1=\left(\begin{matrix}
-    1  & 2 & 3  \\
+    1  & 2 & 3  \newline
     1 & 2 & 3 
 \end{matrix}\right)$  
 $\pi_2=\left(\begin{matrix}
-    1 & 2 & 3 \\
+    1 & 2 & 3 \newline
     3 & 2 & 1 
 \end{matrix}\right)$  
 $X=\{\pi_1, \pi_2\}$,可以验证$G=\{X,\circ\}$是一个置换群，$\{1,3\}$是一个等价类，$\{2\}$是一个等价类
@@ -161,22 +161,22 @@ $|G|$是置换群中置换的数量，让我们来用一下这个定理，假设
 
 $$
    \pi_1=\left(\begin{matrix}
-    1  & 2 & 3  & 4\\
+    1  & 2 & 3  & 4\newline
     1 & 2 & 3 & 4
     \end{matrix}\right) ,
     \pi_2=\left(\begin{matrix}
-    1  & 2 & 3 & 4 \\
+    1  & 2 & 3 & 4 \newline
     2 & 1 & 3 & 4
 \end{matrix}\right) ,
 $$
 
 $$
 \pi_3=\left(\begin{matrix}
-    1  & 2 & 3  & 4\\
+    1  & 2 & 3  & 4\newline
     1 & 2 & 4 & 3
     \end{matrix}\right) ,
     \pi_4=\left(\begin{matrix}
-    1  & 2 & 3 & 4 \\
+    1  & 2 & 3 & 4 \newline
     2 & 1 & 4 & 3
 \end{matrix}\right) ,
 $$
@@ -199,15 +199,15 @@ $$
 
 >$$
    \pi_1=\left(\begin{matrix}
-    1  & 2 & 3 \\
+    1  & 2 & 3 \newline
     1 & 2 & 3
     \end{matrix}\right) ,
     \pi_2=\left(\begin{matrix}
-    1  & 2 & 3 \\
+    1  & 2 & 3 \newline
     2 & 3 & 1 
 \end{matrix}\right) , 
 \pi_3=\left(\begin{matrix}
-    1  & 2 & 3  \\
+    1  & 2 & 3  \newline
     3 & 1 & 2
     \end{matrix}\right) ,
 >$$
@@ -286,22 +286,25 @@ $$
 
 $$
 \pi_1^*=\left(\begin{matrix}
-    C_1 & C_2 & C_3 & C_4 &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} \\ 
+    C_1 & C_2 & C_3 & C_4 &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} \newline
    C_1 & C_2 & C_3 & C_4 &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} 
 \end{matrix}\right)
 $$
+
 $$
 \pi_2^*=\left(\begin{matrix}
-    C_1 & C_2 & C_3 & C_4  &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} \\ 
+    C_1 & C_2 & C_3 & C_4  &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} \newline
    C_1 & C_3 & C_4 & C_2  &C_5 & C_8 &C_6 & C_7 &C_{10} & C_{11} & C_{9} & C_{13} & C_{14} & C_{12} & C_{15} & C_{16} 
 \end{matrix}\right)
 $$
+
 $$
 \pi_3^*=\left(\begin{matrix}
-    C_1 & C_2 & C_3 & C_4 &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} \\ 
+    C_1 & C_2 & C_3 & C_4 &C_5 & C_6 &C_7 & C_8 &C_9 & C_{10} & C_{11} & C_{12} & C_{13} & C_{14} & C_{15} & C_{16} \newline
    C_1 & C_4 & C_2 & C_3 &C_5 & C_7 &C_8 & C_6 &C_{11} & C_{9} & C_{10} & C_{14} & C_{12} & C_{13} & C_{15} & C_{16} 
 \end{matrix}\right)
 $$
+
 $Inv(\pi_1^*)=16,Inv(\pi_2^*)=4,Inv(\pi_2^*)=4$
 
 根据伯恩赛德引理，
@@ -318,13 +321,13 @@ $$
 ### 5.1 循环分解
 
 让我们再回到置换，设置换$\pi_1=\left(\begin{matrix}
-    1 & 2 & 3 & 4 & 5\\
+    1 & 2 & 3 & 4 & 5\newline
     2 & 3 & 4 & 5 & 1 
 \end{matrix}\right)$
 让我们不断地重复这个置换，那么可以找到循环节$1\rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 1$，那我们就把$\pi$简写$(12345)$
 
 再比如$\pi_2=\left(\begin{matrix}
-    1 & 2 & 3 & 4 & 5 & 6 \\
+    1 & 2 & 3 & 4 & 5 & 6 \newline
     5 & 1 & 6 & 3 & 2 & 4
 \end{matrix}\right)$
 可以简写成$(152)(364)$，这一过程被称为循环分解
