@@ -327,9 +327,19 @@ $$ \sum_{i+j=posm-1} a_j * b&#39;_j $$
     </item>
     
     <item>
+      <title>2022-Fabula</title>
+      <link>https://Anlarry.github.io/book-reading/2022-fabula/</link>
+      <pubDate>Thu, 01 Jan 1970 00:33:42 +0000</pubDate>
+      
+      <guid>https://Anlarry.github.io/book-reading/2022-fabula/</guid>
+      <description>Fabula means story, which is a topic in A brief history of humankind
+ 简史三部曲  A brief history of humankind Homo Deus：A Brief History of Tomorrow 21 Lessons for the 21st Century   .column { float: left; width: 33.33%; padding: 5px; } .row::after { content: &#34;&#34;; clear: both; display: table; }      从史前到未来，再回到21世纪的旅行，有各种各样的意义之网。</description>
+    </item>
+    
+    <item>
       <title>2021-PrimusLiber</title>
       <link>https://Anlarry.github.io/book-reading/2021-primusliber/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:33:41 +0000</pubDate>
       
       <guid>https://Anlarry.github.io/book-reading/2021-primusliber/</guid>
       <description>Primus liber means the first book in latin, and means first commit here in some way.
