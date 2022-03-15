@@ -34,8 +34,8 @@ $$ \Big(f_{rt,0}^2 - \sum_{u \in son(rt) }f_{u,1}^2\Big) / 2 $$
   有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多
 Solution： 将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,
 枚举可以得分的手势,假设当前手势为$op$,
-$$ \begin{aligned} t&#39;_i &amp;amp;=(reverse\ t_i == op ? 1 : 0) \newline s&#39;_i &amp;amp;= G[op][s_i] \end{aligned} $$
-将$t&#39;,s&#39;$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
+$$ \begin{aligned} t&amp;rsquo;_i &amp;amp;=(reverse\ t_i == op ? 1 : 0) \newline s&amp;rsquo;_i &amp;amp;= G[op][s_i] \end{aligned} $$
+将$t&amp;rsquo;,s&amp;rsquo;$做卷积，累加每次的结果，再遍历一遍匹配的起始位置，取最大值
 #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
     </item>
     
@@ -47,10 +47,10 @@ $$ \begin{aligned} t&#39;_i &amp;amp;=(reverse\ t_i == op ? 1 : 0) \newline s&#3
       <guid>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</guid>
       <description>URAL - 1996 题意：  URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
  Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
-记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&#39;$, 在此处的的代价为
-$$ \sum_{i+j=pos+m-1} [a_i \ne b&#39;_j ] $$
+记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&amp;rsquo;$, 在此处的的代价为
+$$ \sum_{i+j=pos+m-1} [a_i \ne b&amp;rsquo;_j ] $$
 而
-$$ \sum_{i+j=posm-1} a_j * b&#39;_j $$
+$$ \sum_{i+j=posm-1} a_j * b&amp;rsquo;_j $$
 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
 #include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;cmath&amp;gt;#include &amp;lt;map&amp;gt;#include &amp;lt;time.h&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;memory.h&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;iomanip&amp;gt;#include &amp;lt;unordered_map&amp;gt;#define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
     </item>

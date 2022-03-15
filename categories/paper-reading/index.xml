@@ -62,7 +62,7 @@ Active learning  Active leraning  主动学习采用的方法是，可以在unla
  开始，用户指定budget，之后ADCP获取lable数据时会消耗budget。ADCP获取target data，选出unlabeled data给交给副本执行。获得新知识后retrain ML模型，再对target data数据进行预测，这时错误就会降低。
 但是新的环境就有新的问题。active learning需要选出要标注的数据，noise会带来一些问题。因此需要综合考虑cost、robust、以及active learning最不确定的unlabel数据。 $$ w_x=\frac{u(x)}{c(x)} $$ $c(x)$表示cost，$u(x)$表示uncertainty，因此x的权重可以理解成“uncertainty per cost”。
 同时为了解决noise，转化为概率并加入Gumbel噪音
-$$ p(x)=\frac{w_x}{\sum_{x&#39;}w_{x&#39;}} \newline {\rm arg}\ \max\limits_{x} \log p(x)+G_x $$
+$$ p(x)=\frac{w_x}{\sum_{x&amp;rsquo;}w_{x&amp;rsquo;}} \newline {\rm arg}\ \max\limits_{x} \log p(x)+G_x $$
 另外，还需要减少sample时的冗余。
   Algo &amp; Example  -- Comparison &amp;amp; Why it works  HAL相比于其他AL策略利用了各种不同的特点。感觉这是为什么HAL可以work的一个原因。在实验中，OPT(A crude baseline)直接用cost估计(for PRP)，Huber回归(for ECP)得到label不用retrain也不需要额外的label，比其它AL错误要高出很多。</description>
     </item>

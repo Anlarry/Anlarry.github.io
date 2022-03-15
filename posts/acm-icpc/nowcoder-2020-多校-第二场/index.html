@@ -1,510 +1,321 @@
-<!doctype html><html lang=en dir=auto>
-<head><meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge">
-<meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name=robots content="index, follow">
-<title>nowcoder 2020 多校 第二场 | Hi-^_^</title>
-<meta name=keywords content="搬家">
-<meta name=description content="nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>nowcoder 2020 多校 第二场 | Hi-^_^</title><meta name=keywords content="搬家"><meta name=description content="nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
  A All with Pairs 题意
 给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$
 Solution
 先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重
-const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i >= 0; i--){ // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p; p *= base; mp[res]++; } } void get_next(const string &t){ nex[0] = -1; int k = -1; for(int i = 1; i < t.">
-<meta name=author content>
-<link rel=canonical href=https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/>
-<meta name=google-site-verification content="XYZabc">
-<meta name=yandex-verification content="XYZabc">
-<meta name=msvalidate.01 content="XYZabc">
-<link crossorigin=anonymous href=/assets/css/stylesheet.min.adc94f6a0b1f14123eb9f0e26177c35ba3040fa9e921e93741358a9d6c6a42e6.css integrity="sha256-rclPagsfFBI+ufDiYXfDW6MED6npIek3QTWKnWxqQuY=" rel="preload stylesheet" as=style>
-<link rel=preload href=/icon/ai512.png as=image>
-<link ref=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css>
-<script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js></script>
-<script>hljs.highlightAll()</script>
-<link href="https://fonts.googleapis.com/css?family=Source Code Pro" rel=stylesheet>
-<link rel=icon href=https://Anlarry.github.io/icon/ai512.png>
-<link rel=icon type=image/png sizes=16x16 href=https://Anlarry.github.io/icon/ai16.png>
-<link rel=icon type=image/png sizes=32x32 href=https://Anlarry.github.io/icon/ai32.png>
-<link rel=apple-touch-icon href=https://Anlarry.github.io/apple-touch-icon.png>
-<link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg>
-<meta name=theme-color content="#2e2e33">
-<meta name=msapplication-TileColor content="#2e2e33">
-<meta name=generator content="Hugo 0.92.0">
-<noscript>
-<style>#theme-toggle,.top-link{display:none}</style>
-<style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style>
-</noscript>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)}(window,document,'script','https://www.google-analytics.com/analytics.js','ga'),ga('create','UA-123-45','auto'),ga('send','pageview'))</script><meta property="og:title" content="nowcoder 2020 多校 第二场">
-<meta property="og:description" content="nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
+const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &s){  unsigned long long res = 0;  unsigned long long p = 1;  for(int i = s.size()-1; i >= 0; i--){  // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p;  p *= base;  mp[res]++;  } } void get_next(const string &t){  nex[0] = -1;  int k = -1;  for(int i = 1; i < t."><meta name=author content><link rel=canonical href=https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/><meta name=google-site-verification content="XYZabc"><meta name=yandex-verification content="XYZabc"><meta name=msvalidate.01 content="XYZabc"><link crossorigin=anonymous href=/assets/css/stylesheet.min.adc94f6a0b1f14123eb9f0e26177c35ba3040fa9e921e93741358a9d6c6a42e6.css integrity="sha256-rclPagsfFBI+ufDiYXfDW6MED6npIek3QTWKnWxqQuY=" rel="preload stylesheet" as=style><link rel=preload href=/icon/ai512.png as=image><link ref=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/atom-one-dark.min.css><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js></script>
+<script>hljs.highlightAll()</script><link href="https://fonts.googleapis.com/css?family=Source Code Pro" rel=stylesheet><link rel=icon href=https://Anlarry.github.io/icon/ai512.png><link rel=icon type=image/png sizes=16x16 href=https://Anlarry.github.io/icon/ai16.png><link rel=icon type=image/png sizes=32x32 href=https://Anlarry.github.io/icon/ai32.png><link rel=apple-touch-icon href=https://Anlarry.github.io/apple-touch-icon.png><link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><meta name=generator content="Hugo 0.94.2"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,o,i,a,t,n,s){e.GoogleAnalyticsObject=t,e[t]=e[t]||function(){(e[t].q=e[t].q||[]).push(arguments)},e[t].l=1*new Date,n=o.createElement(i),s=o.getElementsByTagName(i)[0],n.async=1,n.src=a,s.parentNode.insertBefore(n,s)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-123-45","auto"),ga("send","pageview"))</script><meta property="og:title" content="nowcoder 2020 多校 第二场"><meta property="og:description" content="nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
  A All with Pairs 题意
 给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$
 Solution
 先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重
-const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i >= 0; i--){ // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p; p *= base; mp[res]++; } } void get_next(const string &t){ nex[0] = -1; int k = -1; for(int i = 1; i < t.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/"><meta property="article:section" content="posts">
-<meta property="article:published_time" content="2020-07-14T23:18:00+08:00">
-<meta property="article:modified_time" content="2020-07-14T23:18:00+08:00"><meta property="og:site_name" content="Hi~, ^_^">
-<meta name=twitter:card content="summary">
-<meta name=twitter:title content="nowcoder 2020 多校 第二场">
-<meta name=twitter:description content="nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
+const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &s){  unsigned long long res = 0;  unsigned long long p = 1;  for(int i = s.size()-1; i >= 0; i--){  // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p;  p *= base;  mp[res]++;  } } void get_next(const string &t){  nex[0] = -1;  int k = -1;  for(int i = 1; i < t."><meta property="og:type" content="article"><meta property="og:url" content="https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-07-14T23:18:00+08:00"><meta property="article:modified_time" content="2020-07-14T23:18:00+08:00"><meta property="og:site_name" content="Hi~, ^_^"><meta name=twitter:card content="summary"><meta name=twitter:title content="nowcoder 2020 多校 第二场"><meta name=twitter:description content="nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667
  A All with Pairs 题意
 给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$
 Solution
 先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重
-const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i >= 0; i--){ // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p; p *= base; mp[res]++; } } void get_next(const string &t){ nex[0] = -1; int k = -1; for(int i = 1; i < t.">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://Anlarry.github.io/posts/"},{"@type":"ListItem","position":2,"name":"nowcoder 2020 多校 第二场","item":"https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/"}]}</script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"nowcoder 2020 多校 第二场","name":"nowcoder 2020 多校 第二场","description":"nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667\n A All with Pairs 题意\n给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\\sum_i\\sum_j f(s_i, s_j)^2$\nSolution\n先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重\nconst unsigned long long base = 131; // vector\u0026lt;string\u0026gt; str; string str[MAX]; unordered_map\u0026lt;unsigned long long, int\u0026gt; mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string \u0026amp;s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i \u0026gt;= 0; i--){ // unsigned long long x = s[i] - \u0026#39;a\u0026#39;+1;  res += (s[i]-\u0026#39;a\u0026#39;+1) * p; p *= base; mp[res]++; } } void get_next(const string \u0026amp;t){ nex[0] = -1; int k = -1; for(int i = 1; i \u0026lt; t.","keywords":["搬家"],"articleBody":"nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667\n A All with Pairs 题意\n给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\\sum_i\\sum_j f(s_i, s_j)^2$\nSolution\n先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重\nconst unsigned long long base = 131; // vector str; string str[MAX]; unordered_mapunsigned long long, int mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string \u0026s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i = 0; i--){ // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p; p *= base; mp[res]++; } } void get_next(const string \u0026t){ nex[0] = -1; int k = -1; for(int i = 1; i  t.size(); i++){ while(k  -1 and t[k+1] != t[i]) k = nex[k]; if(t[k+1] == t[i]) k++; nex[i] = k; } } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\", stdin); #endif  int n; scanf(\"%d\", \u0026n); // cin  n;  for(int i = 0; i  n; i++){ // string s;  cin  str[i]; // str.push_back(s);  get_hash(str[i]); } LL ans = 0; for(int i = 0; i  n; i++){ unsigned long long cur_has = 0 ; for(int j = 0; j  str[i].size(); j++){ cur_has = cur_has * base + (str[i][j] - 'a' + 1); // cnt[j] = mp[cur_has];  auto it = mp.find(cur_has); if(it != mp.end()) cnt[j] = it-second; else cnt[j] = 0; } get_next(str[i]); for(int j = 1; j  str[i].size(); j++){ if(nex[j] = 0) cnt[nex[j]] -= cnt[j]; } for(LL j = 0; j  str[i].size(); j++){ ans = (ans + 1LL * cnt[j] * (j+1LL) % mod * (j+1LL) % mod) % mod; } } printf(\"%lld\\n\", ans); // cout } B Boundary 题意\n圆是过原点的，选一个能经过最多点的圆\nP pts[5000]; // map, int cnt; vectorpairdouble, double p; void update(LL x1, LL y1, LL x2, LL y2){ LL cir_x1 = (x1*x1 + y1*y1) * y2 - (x2*x2 + y2*y2) * y1; LL cir_x2 = 2 * (x1 * y2 - x2 * y1); LL cir_y1 = (x2*x2 + y2*y2) * x1 - (x1*x1 + y1*y1) * x2; LL cir_y2 = 2 * (x1 * y2 - x2 * y1); if(cir_x2 == 0) return ; p.push_back(make_pair(1.0 * cir_x1 / cir_x2, 1.0 * cir_y1 / cir_y2)); } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\", stdin); #endif  int n; scanf(\"%d\", \u0026n); for(int i = 1; i  n; i++){ scanf(\"%d%d\", \u0026pts[i].first, \u0026pts[i].second); } if(n  2) { printf(\"%d\\n\", n); return 0; } for(int i = 1; i  n; i++){ for(int j = 1; j  i; j++){ update(pts[i].first, pts[i].second, pts[j].first, pts[j].second); } } sort(p.begin(), p.end()); if(p.size() == 0){ printf(\"%d\\n\", 1); return 0; } pairdouble, double cur = p[0]; int ans = 0, tmp = 0; for(int i = 0; i  p.size(); i++){ if(p[i] == cur) {tmp++; ans = max(ans, tmp);} else { cur = p[i]; tmp = 1; ans = max(ans, tmp); } } ans *= 2; int res ; for(int i = 1; i  n; i++){ int cur = i; if(cur * (cur-1) == ans) { res = cur; break; } } printf(\"%d\\n\", res); } F Fake Maxpooling 题意\n给一个矩阵，$A_{i,j}=lcm(i,j)$，在每个$k\\times k$子矩阵中选出最大的元素求和\nSolution\n维护横竖的单调队列，或者暴力\nint k; struct stk { P stack[5050]; int lenth; int start_idx; int front; stk() : lenth(0), start_idx(0), front(0) {} void push(int x, int idx){ while(!empty() and top()  x) { pop(); } stack[lenth++] = {x, idx}; start_idx = idx; } int max(){ while(!empty() and stack[front].second  start_idx - k + 1) front ++; return stack[front].first; } int top(){ return stack[lenth-1].first; } void pop(){ lenth--; } bool empty(){ return lenth == front; } void clear(){ lenth = 0; front = 0; start_idx = 0; } }; inline int A(int x, int y){ return x * y / __gcd(x, y); } stk col_stk[5050]; stk row_stk; int main(){ #ifdef DEBUG  freopen64(\"in\", \"r\", stdin); #endif  int n, m; scanf(\"%d%d%d\", \u0026n, \u0026m, \u0026k); for(int i = 1; i  m; i++){ for(int j = 1; j  k; j++){ col_stk[i].push(A(i, j), j); } } LL ans = 0; for(int i = 1; i  n-k+1; i++){ for(int j = 1; j  m; j++){ col_stk[j].push(A(i+k-1,j), i+k-1); } for(int j = 1; j  k; j++){ row_stk.push(col_stk[j].max(), j); } for(int j = k; j  m; j++){ row_stk.push(col_stk[j].max(), j); ans += (LL) row_stk.max(); } row_stk.clear(); } printf(\"%lld\\n\", ans); return 0; } G Greater and Greater 题意\n给一个长度为$n$的序列A, 和一个长度位$m$的序列B，求A有多少位置对应元素都大于B\nSolution\n考虑bitset，$f(i, j)$表示序列A位置$i$,序列B位置$j$，后面的元素A对应大于B，要求的就是$\\sum f(i, 1)$\n A : 1 4 2 8 5 7 B : 2 3 3 比如$f(3, 1)$可以通过$f(4, 2)$转移过来，$f(3, 2)$可以用$f(4, 3)$转移过来，$f(3, 3)$直接比较A[3],B[3]，可以发现这些转移都要比较A[3],B[i]\n所以对每个A[i]求一个新的bitset\\ S，A[i]大于B[j]第$j$位就为1\n转移就是 $f_i=(f_{i+1}»1 | I_m) \u0026 S_i$\nint a[MAX], b[MAX]; P A[MAX], B[MAX]; vectorbitsetN bits; int idx[MAX]; int main(){ #ifdef DEBUG  freopen64(\"in\", \"r\", stdin); #endif  int n, m; scanf(\"%d%d\", \u0026n, \u0026m); for(int i = 1; i  n; i++) { scanf(\"%d\", \u0026a[i]); A[i] = make_pair(a[i], i); } for(int i = 1; i  m; i++){ scanf(\"%d\", \u0026b[i]); B[i] = make_pair(b[i], i); } sort(A+1, A+1+n); sort(B+1, B+1+m); int i = 1, j = 0; bitsetN cur; bits.push_back(cur); while(i  n){ bool new_bit = 0; while(j  m \u0026\u0026 A[i].first = B[j+1].first){ new_bit = 1; cur[B[j+1].second] = 1; j++; } if(new_bit) { bits.push_back(cur); } idx[A[i].second] = bits.size()-1; i++; } bitsetN f; int ans = 0; for(int i = n; i = 1; i--){ f = 1; f[m] = 1; f \u0026= bits[idx[i]]; ans += f[1]; } printf(\"%d\\n\", ans); } J Just Shuffle 题意\n要求一个置换$P$，使得${1,2,\\dots,n}$在$P$置换$k$次后成为排列$A$\n k是素数\n Solution\n就是说$A=P^k$,已知$A,k$，求$P$。把$A$分解成$(cir_1)(cir_2)\\dots$，对每个循环$cir$,我们知道$P^k(cir_i)=cir_{i+1}$。\n我们想让$cir_i$置换$sk$次，让$sk\\ mod\\ len(cir)=1$，就可以求出$P(cir_i)$\nint a[MAX]; int ans[MAX]; bool vis[MAX]; void extend_Euclid(int a, int b, int \u0026x, int \u0026y) { if(b == 0){ x = 1; y = 0; return; } extend_Euclid(b, a % b, x, y); int tmp = x; x = y; y = tmp - (a / b) * y; } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\",stdin); #endif  int n, k; scanf(\"%d%d\", \u0026n, \u0026k); for(int i = 1; i  n; i++){ scanf(\"%d\", \u0026a[i]); } for(int i = 1; i  n; i++){ if(vis[i]) continue; vectorint cir; int x = i; while(!vis[x]) { cir.push_back(x); vis[x] = 1; x = a[x]; } int s = k % cir.size(); int y = 1; int w, m; extend_Euclid(s, cir.size(), w, m); if(w  0) { int ww = -w; int tmp = (ww + cir.size() -1) / cir.size(); w += tmp * cir.size(); } y = w; // while(s * y % cir.size() != 1){  // y ++;  // // printf(\"%d\", s * y % cir.size());  // }  for(int j = 0; j  cir.size(); j++){ ans[cir[j]] = cir[(j+y)%cir.size()]; } } for(int i = 1; i  n; i++) printf(\"%d \", ans[i]); puts(\"\"); return 0; } ","wordCount":"1073","inLanguage":"en","datePublished":"2020-07-14T23:18:00+08:00","dateModified":"2020-07-14T23:18:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"https://Anlarry.github.io/icon/ai512.png"}}}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous>
-<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &s){  unsigned long long res = 0;  unsigned long long p = 1;  for(int i = s.size()-1; i >= 0; i--){  // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p;  p *= base;  mp[res]++;  } } void get_next(const string &t){  nex[0] = -1;  int k = -1;  for(int i = 1; i < t."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://Anlarry.github.io/posts/"},{"@type":"ListItem","position":2,"name":"nowcoder 2020 多校 第二场","item":"https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"nowcoder 2020 多校 第二场","name":"nowcoder 2020 多校 第二场","description":"nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667\n A All with Pairs 题意\n给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\\sum_i\\sum_j f(s_i, s_j)^2$\nSolution\n先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重\nconst unsigned long long base = 131; // vector\u0026lt;string\u0026gt; str; string str[MAX]; unordered_map\u0026lt;unsigned long long, int\u0026gt; mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string \u0026amp;s){  unsigned long long res = 0;  unsigned long long p = 1;  for(int i = s.size()-1; i \u0026gt;= 0; i--){  // unsigned long long x = s[i] - \u0026#39;a\u0026#39;+1;  res += (s[i]-\u0026#39;a\u0026#39;+1) * p;  p *= base;  mp[res]++;  } } void get_next(const string \u0026amp;t){  nex[0] = -1;  int k = -1;  for(int i = 1; i \u0026lt; t.","keywords":["搬家"],"articleBody":"nowcoder 2020 多校 第二场  https://ac.nowcoder.com/acm/contest/5667\n A All with Pairs 题意\n给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\\sum_i\\sum_j f(s_i, s_j)^2$\nSolution\n先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出 对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重\nconst unsigned long long base = 131; // vector str; string str[MAX]; unordered_mapunsigned long long, int mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string \u0026s){  unsigned long long res = 0;  unsigned long long p = 1;  for(int i = s.size()-1; i = 0; i--){  // unsigned long long x = s[i] - 'a'+1;  res += (s[i]-'a'+1) * p;  p *= base;  mp[res]++;  } } void get_next(const string \u0026t){  nex[0] = -1;  int k = -1;  for(int i = 1; i  t.size(); i++){  while(k  -1 and t[k+1] != t[i])  k = nex[k];  if(t[k+1] == t[i]) k++;  nex[i] = k;  } } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\", stdin); #endif  int n;  scanf(\"%d\", \u0026n);  // cin  n;  for(int i = 0; i  n; i++){  // string s;  cin  str[i];  // str.push_back(s);  get_hash(str[i]);  }  LL ans = 0;  for(int i = 0; i  n; i++){  unsigned long long cur_has = 0 ;  for(int j = 0; j  str[i].size(); j++){  cur_has = cur_has * base + (str[i][j] - 'a' + 1);  // cnt[j] = mp[cur_has];  auto it = mp.find(cur_has);  if(it != mp.end()) cnt[j] = it-second;  else cnt[j] = 0;  }  get_next(str[i]);  for(int j = 1; j  str[i].size(); j++){  if(nex[j] = 0)  cnt[nex[j]] -= cnt[j];  }  for(LL j = 0; j  str[i].size(); j++){  ans = (ans + 1LL * cnt[j] * (j+1LL) % mod * (j+1LL) % mod) % mod;  }  }  printf(\"%lld\\n\", ans);  // cout } B Boundary 题意\n圆是过原点的，选一个能经过最多点的圆\nP pts[5000]; // map, int cnt; vectorpairdouble, double p; void update(LL x1, LL y1, LL x2, LL y2){  LL cir_x1 = (x1*x1 + y1*y1) * y2 - (x2*x2 + y2*y2) * y1;  LL cir_x2 = 2 * (x1 * y2 - x2 * y1);  LL cir_y1 = (x2*x2 + y2*y2) * x1 - (x1*x1 + y1*y1) * x2;  LL cir_y2 = 2 * (x1 * y2 - x2 * y1);   if(cir_x2 == 0) return ;   p.push_back(make_pair(1.0 * cir_x1 / cir_x2, 1.0 * cir_y1 / cir_y2));  } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\", stdin); #endif  int n;  scanf(\"%d\", \u0026n);  for(int i = 1; i  n; i++){  scanf(\"%d%d\", \u0026pts[i].first, \u0026pts[i].second);  }  if(n  2) {  printf(\"%d\\n\", n);  return 0;  }  for(int i = 1; i  n; i++){  for(int j = 1; j  i; j++){  update(pts[i].first, pts[i].second, pts[j].first, pts[j].second);  }  }  sort(p.begin(), p.end());  if(p.size() == 0){  printf(\"%d\\n\", 1);  return 0;  }  pairdouble, double cur = p[0];  int ans = 0, tmp = 0;  for(int i = 0; i  p.size(); i++){  if(p[i] == cur) {tmp++; ans = max(ans, tmp);}  else {  cur = p[i];  tmp = 1;  ans = max(ans, tmp);  }  }  ans *= 2;  int res ;  for(int i = 1; i  n; i++){  int cur = i;  if(cur * (cur-1) == ans) {  res = cur;  break;  }  }  printf(\"%d\\n\", res); } F Fake Maxpooling 题意\n给一个矩阵，$A_{i,j}=lcm(i,j)$，在每个$k\\times k$子矩阵中选出最大的元素求和\nSolution\n维护横竖的单调队列，或者暴力\nint k; struct stk {  P stack[5050];  int lenth;  int start_idx;  int front;  stk() : lenth(0), start_idx(0), front(0) {}  void push(int x, int idx){  while(!empty() and top()  x) {  pop();  }  stack[lenth++] = {x, idx};  start_idx = idx;  }  int max(){  while(!empty() and stack[front].second  start_idx - k + 1)  front ++;  return stack[front].first;  }  int top(){  return stack[lenth-1].first;  }  void pop(){  lenth--;  }  bool empty(){  return lenth == front;  }  void clear(){  lenth = 0;  front = 0;  start_idx = 0;  } };   inline int A(int x, int y){  return x * y / __gcd(x, y); }  stk col_stk[5050]; stk row_stk; int main(){ #ifdef DEBUG  freopen64(\"in\", \"r\", stdin); #endif  int n, m;  scanf(\"%d%d%d\", \u0026n, \u0026m, \u0026k);  for(int i = 1; i  m; i++){  for(int j = 1; j  k; j++){  col_stk[i].push(A(i, j), j);  }  }  LL ans = 0;  for(int i = 1; i  n-k+1; i++){  for(int j = 1; j  m; j++){  col_stk[j].push(A(i+k-1,j), i+k-1);  }  for(int j = 1; j  k; j++){  row_stk.push(col_stk[j].max(), j);  }  for(int j = k; j  m; j++){  row_stk.push(col_stk[j].max(), j);  ans += (LL) row_stk.max();  }  row_stk.clear();  }  printf(\"%lld\\n\", ans);  return 0; } G Greater and Greater 题意\n给一个长度为$n$的序列A, 和一个长度位$m$的序列B，求A有多少位置对应元素都大于B\nSolution\n考虑bitset，$f(i, j)$表示序列A位置$i$,序列B位置$j$，后面的元素A对应大于B，要求的就是$\\sum f(i, 1)$\n A : 1 4 2 8 5 7 B : 2 3 3 比如$f(3, 1)$可以通过$f(4, 2)$转移过来，$f(3, 2)$可以用$f(4, 3)$转移过来，$f(3, 3)$直接比较A[3],B[3]，可以发现这些转移都要比较A[3],B[i]\n所以对每个A[i]求一个新的bitset\\ S，A[i]大于B[j]第$j$位就为1\n转移就是 $f_i=(f_{i+1}»1 | I_m) \u0026 S_i$\nint a[MAX], b[MAX]; P A[MAX], B[MAX]; vectorbitsetN bits; int idx[MAX];  int main(){ #ifdef DEBUG  freopen64(\"in\", \"r\", stdin); #endif  int n, m;  scanf(\"%d%d\", \u0026n, \u0026m);  for(int i = 1; i  n; i++) {  scanf(\"%d\", \u0026a[i]);  A[i] = make_pair(a[i], i);  }  for(int i = 1; i  m; i++){  scanf(\"%d\", \u0026b[i]);  B[i] = make_pair(b[i], i);  }  sort(A+1, A+1+n);  sort(B+1, B+1+m);  int i = 1, j = 0;  bitsetN cur;  bits.push_back(cur);  while(i  n){  bool new_bit = 0;  while(j  m \u0026\u0026 A[i].first = B[j+1].first){  new_bit = 1;  cur[B[j+1].second] = 1;  j++;  }  if(new_bit) {  bits.push_back(cur);  }  idx[A[i].second] = bits.size()-1;  i++;  }  bitsetN f;  int ans = 0;  for(int i = n; i = 1; i--){  f = 1;  f[m] = 1;  f \u0026= bits[idx[i]];  ans += f[1];  }  printf(\"%d\\n\", ans); } J Just Shuffle 题意\n要求一个置换$P$，使得${1,2,\\dots,n}$在$P$置换$k$次后成为排列$A$\n k是素数\n Solution\n就是说$A=P^k$,已知$A,k$，求$P$。把$A$分解成$(cir_1)(cir_2)\\dots$，对每个循环$cir$,我们知道$P^k(cir_i)=cir_{i+1}$。\n我们想让$cir_i$置换$sk$次，让$sk\\ mod\\ len(cir)=1$，就可以求出$P(cir_i)$\nint a[MAX]; int ans[MAX]; bool vis[MAX]; void extend_Euclid(int a, int b, int \u0026x, int \u0026y) {  if(b == 0){  x = 1;  y = 0;  return;  }  extend_Euclid(b, a % b, x, y);  int tmp = x;  x = y;  y = tmp - (a / b) * y; } int main(){ #ifdef DEBUG  freopen(\"in\", \"r\",stdin); #endif  int n, k;  scanf(\"%d%d\", \u0026n, \u0026k);  for(int i = 1; i  n; i++){  scanf(\"%d\", \u0026a[i]);  }  for(int i = 1; i  n; i++){  if(vis[i]) continue;  vectorint cir;  int x = i;  while(!vis[x]) {  cir.push_back(x);  vis[x] = 1;  x = a[x];  }  int s = k % cir.size();  int y = 1;  int w, m;  extend_Euclid(s, cir.size(), w, m);  if(w  0) {  int ww = -w;  int tmp = (ww + cir.size() -1) / cir.size();  w += tmp * cir.size();  }  y = w;  // while(s * y % cir.size() != 1){  // y ++;  // // printf(\"%d\", s * y % cir.size());  // }  for(int j = 0; j  cir.size(); j++){  ans[cir[j]] = cir[(j+y)%cir.size()];  }  }  for(int i = 1; i  n; i++)  printf(\"%d \", ans[i]);  puts(\"\");  return 0; } ","wordCount":"1073","inLanguage":"en","datePublished":"2020-07-14T23:18:00+08:00","dateModified":"2020-07-14T23:18:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/"},"publisher":{"@type":"Organization","name":"Hi-^_^","logo":{"@type":"ImageObject","url":"https://Anlarry.github.io/icon/ai512.png"}}}</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
 <script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous onload=renderMathInElement(document.body)></script>
-<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
-</head>
-<body id=top>
-<script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add('dark'):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove('dark'):window.matchMedia('(prefers-color-scheme: dark)').matches&&document.body.classList.add('dark')</script>
-<header class=header>
-<nav class=nav>
-<div class=logo>
-<a href=https://Anlarry.github.io/ accesskey=h title="Jiali's Blog (Alt + H)">
-<img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
-<span class=logo-switches>
-<button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-</button>
-</span>
-</div>
-<ul id=menu>
-<li>
-<a href=https://Anlarry.github.io/archives/ title="Archives 📦">
-<span>Archives 📦</span>
-</a>
-</li>
-<li>
-<a href=https://Anlarry.github.io/categories/ title="Categories 📂">
-<span>Categories 📂</span>
-</a>
-</li>
-<li>
-<a href=https://Anlarry.github.io/tags/ title="Tags 🏷">
-<span>Tags 🏷</span>
-</a>
-</li>
-<li>
-<a href=https://Anlarry.github.io/book_reading/ title="Book-Reading 📚">
-<span>Book-Reading 📚</span>
-</a>
-</li>
-<li>
-<a href=https://Anlarry.github.io/links/ title="Links 🔗">
-<span>Links 🔗</span>
-</a>
-</li>
-<li>
-<a href=https://Anlarry.github.io/search/ title="Search 🔍 (Alt + /)" accesskey=/>
-<span>Search 🔍</span>
-</a>
-</li>
-</ul>
-</nav>
-</header>
-<main class=main>
-<link rel=stylesheet href=https://Anlarry.github.io/sass/single-main.css>
-<article class=post-single>
-<header class=post-header>
-<div class=breadcrumbs><a href=https://Anlarry.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://Anlarry.github.io/posts/>Posts</a></div>
-<h1 class=post-title>
-nowcoder 2020 多校 第二场
-</h1>
-<div class=post-meta>📝 July 14, 2020&nbsp;·&nbsp;⌛ 6 min&nbsp;|&nbsp;
-<a href=https://github.com/Anlarry/Anlarry.github.io/issues rel="noopener noreferrer" target=_blank>Suggest Changes</a>
-</div>
-</header> <div class=toc>
-<details open>
-<summary accesskey=c title="(Alt + C)">
-<span class=details>Table of Contents</span>
-</summary>
-<div class=inner><ul>
-<li>
-<a href=#nowcoder-2020-%e5%a4%9a%e6%a0%a1-%e7%ac%ac%e4%ba%8c%e5%9c%ba aria-label="nowcoder 2020 多校 第二场">nowcoder 2020 多校 第二场</a><ul>
-<li>
-<a href=#a-all-with-pairs aria-label="A All with Pairs">A All with Pairs</a></li>
-<li>
-<a href=#b-boundary aria-label="B Boundary">B Boundary</a></li>
-<li>
-<a href=#f-fake-maxpooling aria-label="F Fake Maxpooling">F Fake Maxpooling</a></li>
-<li>
-<a href=#g-greater-and-greater aria-label="G Greater and Greater">G Greater and Greater</a></li>
-<li>
-<a href=#j-just-shuffle aria-label="J Just Shuffle">J Just Shuffle</a>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-</details>
-</div>
-<div class=post-content><h1 id=nowcoder-2020-多校-第二场>nowcoder 2020 多校 第二场<a hidden class=anchor aria-hidden=true href=#nowcoder-2020-多校-第二场>#</a></h1>
-<blockquote>
-<p><a href=https://ac.nowcoder.com/acm/contest/5667>https://ac.nowcoder.com/acm/contest/5667</a></p>
-</blockquote>
-<h2 id=a-all-with-pairs>A All with Pairs<a hidden class=anchor aria-hidden=true href=#a-all-with-pairs>#</a></h2>
-<p><strong>题意</strong></p>
-<p>给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$</p>
-<p><strong>Solution</strong></p>
-<p>先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出
-对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> base <span style=color:#f92672>=</span> <span style=color:#ae81ff>131</span>;
-<span style=color:#75715e>// vector&lt;string&gt; str;
-</span><span style=color:#75715e></span>string str[MAX];
-unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> mp;
-<span style=color:#66d9ef>int</span> nex[MAX];
-<span style=color:#66d9ef>int</span> cnt[MAX];
-<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>get_hash</span>(<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span>s){
-    <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> res <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> p <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> s.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
-        <span style=color:#75715e>// unsigned long long x = s[i] - &#39;a&#39;+1;
-</span><span style=color:#75715e></span>        res <span style=color:#f92672>+=</span> (s[i]<span style=color:#f92672>-</span><span style=color:#e6db74>&#39;a&#39;</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> p;
-        p <span style=color:#f92672>*=</span> base;
-        mp[res]<span style=color:#f92672>++</span>;
-    }
-}
-<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>get_next</span>(<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span>t){
-    nex[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;   
-    <span style=color:#66d9ef>int</span> k <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;</span> t.size(); i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>while</span>(k <span style=color:#f92672>&gt;</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span> and t[k<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>!=</span> t[i])   
-            k <span style=color:#f92672>=</span> nex[k];
-        <span style=color:#66d9ef>if</span>(t[k<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>==</span> t[i]) k<span style=color:#f92672>++</span>;
-        nex[i] <span style=color:#f92672>=</span> k;
-    }
-}
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
-<span style=color:#75715e>#ifdef DEBUG
-</span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
-<span style=color:#75715e>#endif
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n;
-    scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>n);
-    <span style=color:#75715e>// cin &gt;&gt; n;
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
-        <span style=color:#75715e>// string s;
-</span><span style=color:#75715e></span>        cin <span style=color:#f92672>&gt;&gt;</span> str[i];
-        <span style=color:#75715e>// str.push_back(s);
-</span><span style=color:#75715e></span>        get_hash(str[i]);
-    }
-    LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> cur_has <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> ;
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> str[i].size(); j<span style=color:#f92672>++</span>){
-            cur_has <span style=color:#f92672>=</span> cur_has <span style=color:#f92672>*</span> base <span style=color:#f92672>+</span> (str[i][j] <span style=color:#f92672>-</span> <span style=color:#e6db74>&#39;a&#39;</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>);
-            <span style=color:#75715e>// cnt[j] = mp[cur_has];
-</span><span style=color:#75715e></span>            <span style=color:#66d9ef>auto</span> it <span style=color:#f92672>=</span> mp.find(cur_has);
-            <span style=color:#66d9ef>if</span>(it <span style=color:#f92672>!=</span> mp.end()) cnt[j] <span style=color:#f92672>=</span> it<span style=color:#f92672>-&gt;</span>second;
-            <span style=color:#66d9ef>else</span> cnt[j] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-        }
-        get_next(str[i]);
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> str[i].size(); j<span style=color:#f92672>++</span>){
-            <span style=color:#66d9ef>if</span>(nex[j] <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>)
-            cnt[nex[j]] <span style=color:#f92672>-=</span> cnt[j];
-        }
-        <span style=color:#66d9ef>for</span>(LL j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> str[i].size(); j<span style=color:#f92672>++</span>){
-            ans <span style=color:#f92672>=</span> (ans <span style=color:#f92672>+</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> cnt[j] <span style=color:#f92672>*</span> (j<span style=color:#f92672>+</span><span style=color:#ae81ff>1LL</span>) <span style=color:#f92672>%</span> mod <span style=color:#f92672>*</span> (j<span style=color:#f92672>+</span><span style=color:#ae81ff>1LL</span>) <span style=color:#f92672>%</span> mod) <span style=color:#f92672>%</span> mod;
-        }
-    }
-    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
-    <span style=color:#75715e>// cout &lt;&lt; ans &lt;&lt; &#39;\n&#39;;
-</span><span style=color:#75715e></span>}
-</code></pre></div><h2 id=b-boundary>B Boundary<a hidden class=anchor aria-hidden=true href=#b-boundary>#</a></h2>
-<p><strong>题意</strong></p>
-<p>圆是过原点的，选一个能经过最多点的圆</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp>P pts[<span style=color:#ae81ff>5000</span>];
-<span style=color:#75715e>// map&lt;tuple&lt;LL, LL, LL, LL&gt;, int&gt; cnt;
-</span><span style=color:#75715e></span>vector<span style=color:#f92672>&lt;</span>pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>, <span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;&gt;</span> p;
-<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>update</span>(LL x1, LL y1, LL x2, LL y2){
-    LL cir_x1 <span style=color:#f92672>=</span> (x1<span style=color:#f92672>*</span>x1 <span style=color:#f92672>+</span> y1<span style=color:#f92672>*</span>y1) <span style=color:#f92672>*</span> y2 <span style=color:#f92672>-</span> (x2<span style=color:#f92672>*</span>x2 <span style=color:#f92672>+</span> y2<span style=color:#f92672>*</span>y2) <span style=color:#f92672>*</span> y1;
-    LL cir_x2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> (x1 <span style=color:#f92672>*</span> y2 <span style=color:#f92672>-</span> x2 <span style=color:#f92672>*</span> y1);
-    LL cir_y1 <span style=color:#f92672>=</span> (x2<span style=color:#f92672>*</span>x2 <span style=color:#f92672>+</span> y2<span style=color:#f92672>*</span>y2) <span style=color:#f92672>*</span> x1 <span style=color:#f92672>-</span> (x1<span style=color:#f92672>*</span>x1 <span style=color:#f92672>+</span> y1<span style=color:#f92672>*</span>y1) <span style=color:#f92672>*</span> x2;
-    LL cir_y2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> (x1 <span style=color:#f92672>*</span> y2 <span style=color:#f92672>-</span> x2 <span style=color:#f92672>*</span> y1);
- 
-    <span style=color:#66d9ef>if</span>(cir_x2 <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) <span style=color:#66d9ef>return</span> ;
- 
-    p.push_back(make_pair(<span style=color:#ae81ff>1.0</span> <span style=color:#f92672>*</span> cir_x1 <span style=color:#f92672>/</span> cir_x2, <span style=color:#ae81ff>1.0</span> <span style=color:#f92672>*</span> cir_y1 <span style=color:#f92672>/</span> cir_y2));
- 
-}
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
-<span style=color:#75715e>#ifdef DEBUG
-</span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
-<span style=color:#75715e>#endif
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n;
-    scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>n);
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
-        scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>pts[i].first, <span style=color:#f92672>&amp;</span>pts[i].second);
-    }
-    <span style=color:#66d9ef>if</span>(n <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>2</span>) {
-        printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, n);
-        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-    }
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> i; j<span style=color:#f92672>++</span>){
-            update(pts[i].first, pts[i].second, pts[j].first, pts[j].second);
-        }
-    }
-    sort(p.begin(), p.end());
-    <span style=color:#66d9ef>if</span>(p.size() <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>){
-        printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#ae81ff>1</span>);
-        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-    }
-    pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>, <span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> cur <span style=color:#f92672>=</span> p[<span style=color:#ae81ff>0</span>];
-    <span style=color:#66d9ef>int</span> ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, tmp <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> p.size(); i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>if</span>(p[i] <span style=color:#f92672>==</span> cur) {tmp<span style=color:#f92672>++</span>; ans <span style=color:#f92672>=</span> max(ans, tmp);}
-        <span style=color:#66d9ef>else</span> {
-            cur <span style=color:#f92672>=</span> p[i];
-            tmp <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-            ans <span style=color:#f92672>=</span> max(ans, tmp);
-        }
-    }
-    ans <span style=color:#f92672>*=</span> <span style=color:#ae81ff>2</span>;
-    <span style=color:#66d9ef>int</span> res ;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>int</span> cur <span style=color:#f92672>=</span> i;
-        <span style=color:#66d9ef>if</span>(cur <span style=color:#f92672>*</span> (cur<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>==</span> ans) {
-            res <span style=color:#f92672>=</span> cur;
-            <span style=color:#66d9ef>break</span>;
-        }
-    }
-    printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, res);
-}
-</code></pre></div><h2 id=f-fake-maxpooling>F Fake Maxpooling<a hidden class=anchor aria-hidden=true href=#f-fake-maxpooling>#</a></h2>
-<p><strong>题意</strong></p>
-<p>给一个矩阵，$A_{i,j}=lcm(i,j)$，在每个$k\times k$子矩阵中选出最大的元素求和</p>
-<p><strong>Solution</strong></p>
-<p>维护横竖的单调队列，或者暴力</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> k;
-<span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>stk</span>
-{
-    P stack[<span style=color:#ae81ff>5050</span>];
-    <span style=color:#66d9ef>int</span> lenth;
-    <span style=color:#66d9ef>int</span> start_idx;
-    <span style=color:#66d9ef>int</span> front;
-    stk() <span style=color:#f92672>:</span> lenth(<span style=color:#ae81ff>0</span>), start_idx(<span style=color:#ae81ff>0</span>), front(<span style=color:#ae81ff>0</span>) {}
-    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>push</span>(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> idx){
-        <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>empty() and top() <span style=color:#f92672>&lt;</span> x) {
-            pop();
-        }
-        stack[lenth<span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> {x, idx};
-        start_idx <span style=color:#f92672>=</span> idx;
-    }
-    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>max</span>(){
-        <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>empty() and stack[front].second <span style=color:#f92672>&lt;</span> start_idx <span style=color:#f92672>-</span> k <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>) 
-            front <span style=color:#f92672>++</span>; 
-        <span style=color:#66d9ef>return</span> stack[front].first;
-    }
-    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>top</span>(){
-        <span style=color:#66d9ef>return</span> stack[lenth<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>].first;
-    }
-    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>pop</span>(){
-        lenth<span style=color:#f92672>--</span>;
-    }
-    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>empty</span>(){
-        <span style=color:#66d9ef>return</span> lenth <span style=color:#f92672>==</span> front;
-    }
-    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>clear</span>(){
-        lenth <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-        front <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-        start_idx <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    }
-};
-
-
-<span style=color:#66d9ef>inline</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>A</span>(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> y){
-    <span style=color:#66d9ef>return</span> x <span style=color:#f92672>*</span> y <span style=color:#f92672>/</span> __gcd(x, y);
-}
-
-stk col_stk[<span style=color:#ae81ff>5050</span>];
-stk row_stk;
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
-<span style=color:#75715e>#ifdef DEBUG
-</span><span style=color:#75715e></span>    freopen64(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
-<span style=color:#75715e>#endif
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n, m;
-    scanf(<span style=color:#e6db74>&#34;%d%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>m, <span style=color:#f92672>&amp;</span>k);
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> m; i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> k; j<span style=color:#f92672>++</span>){
-            col_stk[i].push(A(i, j), j);          
-        }
-    }
-    LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n<span style=color:#f92672>-</span>k<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;=</span> m; j<span style=color:#f92672>++</span>){
-            col_stk[j].push(A(i<span style=color:#f92672>+</span>k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,j), i<span style=color:#f92672>+</span>k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
-        }
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> k; j<span style=color:#f92672>++</span>){
-            row_stk.push(col_stk[j].max(), j);
-        }
-        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> k; j <span style=color:#f92672>&lt;=</span> m; j<span style=color:#f92672>++</span>){
-            row_stk.push(col_stk[j].max(), j);
-            ans <span style=color:#f92672>+=</span> (LL) row_stk.max();
-        }
-        row_stk.clear();
-    }
-    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
-    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div><h2 id=g-greater-and-greater>G Greater and Greater<a hidden class=anchor aria-hidden=true href=#g-greater-and-greater>#</a></h2>
-<p><strong>题意</strong></p>
-<p>给一个长度为$n$的序列A, 和一个长度位$m$的序列B，求A有多少位置对应元素都大于B</p>
-<p><strong>Solution</strong></p>
-<p>考虑bitset，$f(i, j)$表示序列A位置$i$,序列B位置$j$，后面的元素A对应大于B，要求的就是$\sum f(i, 1)$</p>
-<pre tabindex=0><code>   A : 1  4  2  8  5  7
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://Anlarry.github.io/ accesskey=h title="Jiali's Blog (Alt + H)"><img src=/icon/ai512.png alt=logo aria-label=logo height=35>Jiali's Blog</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=https://Anlarry.github.io/archives/ title="Archives 📦"><span>Archives 📦</span></a></li><li><a href=https://Anlarry.github.io/categories/ title="Categories 📂"><span>Categories 📂</span></a></li><li><a href=https://Anlarry.github.io/tags/ title="Tags 🏷"><span>Tags 🏷</span></a></li><li><a href=https://Anlarry.github.io/book_reading/ title="Book-Reading 📚"><span>Book-Reading 📚</span></a></li><li><a href=https://Anlarry.github.io/links/ title="Links 🔗"><span>Links 🔗</span></a></li><li><a href=https://Anlarry.github.io/search/ title="Search 🔍 (Alt + /)" accesskey=/><span>Search 🔍</span></a></li></ul></nav></header><main class=main><link rel=stylesheet href=https://Anlarry.github.io/sass/single-main.css><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://Anlarry.github.io/>Home</a>&nbsp;»&nbsp;<a href=https://Anlarry.github.io/posts/>Posts</a></div><h1 class=post-title>nowcoder 2020 多校 第二场</h1><div class=post-meta>📝 July 14, 2020&nbsp;·&nbsp;⌛ 6 min&nbsp;|&nbsp;
+<a href=https://github.com/Anlarry/Anlarry.github.io/issues rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><div class=toc><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#nowcoder-2020-%e5%a4%9a%e6%a0%a1-%e7%ac%ac%e4%ba%8c%e5%9c%ba aria-label="nowcoder 2020 多校 第二场">nowcoder 2020 多校 第二场</a><ul><li><a href=#a-all-with-pairs aria-label="A All with Pairs">A All with Pairs</a></li><li><a href=#b-boundary aria-label="B Boundary">B Boundary</a></li><li><a href=#f-fake-maxpooling aria-label="F Fake Maxpooling">F Fake Maxpooling</a></li><li><a href=#g-greater-and-greater aria-label="G Greater and Greater">G Greater and Greater</a></li><li><a href=#j-just-shuffle aria-label="J Just Shuffle">J Just Shuffle</a></li></ul></li></ul></div></details></div><div class=post-content><h1 id=nowcoder-2020-多校-第二场>nowcoder 2020 多校 第二场<a hidden class=anchor aria-hidden=true href=#nowcoder-2020-多校-第二场>#</a></h1><blockquote><p><a href=https://ac.nowcoder.com/acm/contest/5667>https://ac.nowcoder.com/acm/contest/5667</a></p></blockquote><h2 id=a-all-with-pairs>A All with Pairs<a hidden class=anchor aria-hidden=true href=#a-all-with-pairs>#</a></h2><p><strong>题意</strong></p><p>给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$</p><p><strong>Solution</strong></p><p>先把每个串的后缀hash的值存下来，对每个串$s_i$,求$\sum_j f(s_i, s_j)^2$。对于$s_i$的每个前缀都可以查询hash求出
+对应多少后缀，但是有可能一对$s_i, s_j$会有多个贡献，因此要用next数组去重</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> base <span style=color:#f92672>=</span> <span style=color:#ae81ff>131</span>;
+</span></span><span style=display:flex><span><span style=color:#75715e>// vector&lt;string&gt; str;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>string str[MAX];
+</span></span><span style=display:flex><span>unordered_map<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span>, <span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> mp;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> nex[MAX];
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> cnt[MAX];
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>get_hash</span>(<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span>s){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> res <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> p <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> s.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>; i<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// unsigned long long x = s[i] - &#39;a&#39;+1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        res <span style=color:#f92672>+=</span> (s[i]<span style=color:#f92672>-</span><span style=color:#e6db74>&#39;a&#39;</span><span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>*</span> p;
+</span></span><span style=display:flex><span>        p <span style=color:#f92672>*=</span> base;
+</span></span><span style=display:flex><span>        mp[res]<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>get_next</span>(<span style=color:#66d9ef>const</span> string <span style=color:#f92672>&amp;</span>t){
+</span></span><span style=display:flex><span>    nex[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;   
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> k <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;</span> t.size(); i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(k <span style=color:#f92672>&gt;</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span> and t[k<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>!=</span> t[i])   
+</span></span><span style=display:flex><span>            k <span style=color:#f92672>=</span> nex[k];
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(t[k<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>] <span style=color:#f92672>==</span> t[i]) k<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        nex[i] <span style=color:#f92672>=</span> k;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n;
+</span></span><span style=display:flex><span>    scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>n);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// cin &gt;&gt; n;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// string s;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        cin <span style=color:#f92672>&gt;&gt;</span> str[i];
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// str.push_back(s);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        get_hash(str[i]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>unsigned</span> <span style=color:#66d9ef>long</span> <span style=color:#66d9ef>long</span> cur_has <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span> ;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> str[i].size(); j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            cur_has <span style=color:#f92672>=</span> cur_has <span style=color:#f92672>*</span> base <span style=color:#f92672>+</span> (str[i][j] <span style=color:#f92672>-</span> <span style=color:#e6db74>&#39;a&#39;</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// cnt[j] = mp[cur_has];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>auto</span> it <span style=color:#f92672>=</span> mp.find(cur_has);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(it <span style=color:#f92672>!=</span> mp.end()) cnt[j] <span style=color:#f92672>=</span> it<span style=color:#f92672>-&gt;</span>second;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>else</span> cnt[j] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        get_next(str[i]);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> str[i].size(); j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(nex[j] <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span>)
+</span></span><span style=display:flex><span>            cnt[nex[j]] <span style=color:#f92672>-=</span> cnt[j];
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(LL j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> str[i].size(); j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            ans <span style=color:#f92672>=</span> (ans <span style=color:#f92672>+</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> cnt[j] <span style=color:#f92672>*</span> (j<span style=color:#f92672>+</span><span style=color:#ae81ff>1LL</span>) <span style=color:#f92672>%</span> mod <span style=color:#f92672>*</span> (j<span style=color:#f92672>+</span><span style=color:#ae81ff>1LL</span>) <span style=color:#f92672>%</span> mod) <span style=color:#f92672>%</span> mod;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// cout &lt;&lt; ans &lt;&lt; &#39;\n&#39;;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><h2 id=b-boundary>B Boundary<a hidden class=anchor aria-hidden=true href=#b-boundary>#</a></h2><p><strong>题意</strong></p><p>圆是过原点的，选一个能经过最多点的圆</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span>P pts[<span style=color:#ae81ff>5000</span>];
+</span></span><span style=display:flex><span><span style=color:#75715e>// map&lt;tuple&lt;LL, LL, LL, LL&gt;, int&gt; cnt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>vector<span style=color:#f92672>&lt;</span>pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>, <span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;&gt;</span> p;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>update</span>(LL x1, LL y1, LL x2, LL y2){
+</span></span><span style=display:flex><span>    LL cir_x1 <span style=color:#f92672>=</span> (x1<span style=color:#f92672>*</span>x1 <span style=color:#f92672>+</span> y1<span style=color:#f92672>*</span>y1) <span style=color:#f92672>*</span> y2 <span style=color:#f92672>-</span> (x2<span style=color:#f92672>*</span>x2 <span style=color:#f92672>+</span> y2<span style=color:#f92672>*</span>y2) <span style=color:#f92672>*</span> y1;
+</span></span><span style=display:flex><span>    LL cir_x2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> (x1 <span style=color:#f92672>*</span> y2 <span style=color:#f92672>-</span> x2 <span style=color:#f92672>*</span> y1);
+</span></span><span style=display:flex><span>    LL cir_y1 <span style=color:#f92672>=</span> (x2<span style=color:#f92672>*</span>x2 <span style=color:#f92672>+</span> y2<span style=color:#f92672>*</span>y2) <span style=color:#f92672>*</span> x1 <span style=color:#f92672>-</span> (x1<span style=color:#f92672>*</span>x1 <span style=color:#f92672>+</span> y1<span style=color:#f92672>*</span>y1) <span style=color:#f92672>*</span> x2;
+</span></span><span style=display:flex><span>    LL cir_y2 <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> (x1 <span style=color:#f92672>*</span> y2 <span style=color:#f92672>-</span> x2 <span style=color:#f92672>*</span> y1);
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(cir_x2 <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>) <span style=color:#66d9ef>return</span> ;
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    p.push_back(make_pair(<span style=color:#ae81ff>1.0</span> <span style=color:#f92672>*</span> cir_x1 <span style=color:#f92672>/</span> cir_x2, <span style=color:#ae81ff>1.0</span> <span style=color:#f92672>*</span> cir_y1 <span style=color:#f92672>/</span> cir_y2));
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n;
+</span></span><span style=display:flex><span>    scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>n);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>pts[i].first, <span style=color:#f92672>&amp;</span>pts[i].second);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(n <span style=color:#f92672>&lt;=</span> <span style=color:#ae81ff>2</span>) {
+</span></span><span style=display:flex><span>        printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, n);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> i; j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            update(pts[i].first, pts[i].second, pts[j].first, pts[j].second);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    sort(p.begin(), p.end());
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(p.size() <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>){
+</span></span><span style=display:flex><span>        printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    pair<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>double</span>, <span style=color:#66d9ef>double</span><span style=color:#f92672>&gt;</span> cur <span style=color:#f92672>=</span> p[<span style=color:#ae81ff>0</span>];
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>, tmp <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> p.size(); i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(p[i] <span style=color:#f92672>==</span> cur) {tmp<span style=color:#f92672>++</span>; ans <span style=color:#f92672>=</span> max(ans, tmp);}
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>            cur <span style=color:#f92672>=</span> p[i];
+</span></span><span style=display:flex><span>            tmp <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>            ans <span style=color:#f92672>=</span> max(ans, tmp);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    ans <span style=color:#f92672>*=</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> res ;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> cur <span style=color:#f92672>=</span> i;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(cur <span style=color:#f92672>*</span> (cur<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>==</span> ans) {
+</span></span><span style=display:flex><span>            res <span style=color:#f92672>=</span> cur;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, res);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=f-fake-maxpooling>F Fake Maxpooling<a hidden class=anchor aria-hidden=true href=#f-fake-maxpooling>#</a></h2><p><strong>题意</strong></p><p>给一个矩阵，$A_{i,j}=lcm(i,j)$，在每个$k\times k$子矩阵中选出最大的元素求和</p><p><strong>Solution</strong></p><p>维护横竖的单调队列，或者暴力</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>int</span> k;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>stk</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    P stack[<span style=color:#ae81ff>5050</span>];
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> lenth;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> start_idx;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> front;
+</span></span><span style=display:flex><span>    stk() <span style=color:#f92672>:</span> lenth(<span style=color:#ae81ff>0</span>), start_idx(<span style=color:#ae81ff>0</span>), front(<span style=color:#ae81ff>0</span>) {}
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>push</span>(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> idx){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>empty() and top() <span style=color:#f92672>&lt;</span> x) {
+</span></span><span style=display:flex><span>            pop();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        stack[lenth<span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> {x, idx};
+</span></span><span style=display:flex><span>        start_idx <span style=color:#f92672>=</span> idx;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>max</span>(){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>empty() and stack[front].second <span style=color:#f92672>&lt;</span> start_idx <span style=color:#f92672>-</span> k <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>) 
+</span></span><span style=display:flex><span>            front <span style=color:#f92672>++</span>; 
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> stack[front].first;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>top</span>(){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> stack[lenth<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>].first;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>pop</span>(){
+</span></span><span style=display:flex><span>        lenth<span style=color:#f92672>--</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>bool</span> <span style=color:#a6e22e>empty</span>(){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> lenth <span style=color:#f92672>==</span> front;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>clear</span>(){
+</span></span><span style=display:flex><span>        lenth <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        front <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        start_idx <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>inline</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>A</span>(<span style=color:#66d9ef>int</span> x, <span style=color:#66d9ef>int</span> y){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> x <span style=color:#f92672>*</span> y <span style=color:#f92672>/</span> __gcd(x, y);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>stk col_stk[<span style=color:#ae81ff>5050</span>];
+</span></span><span style=display:flex><span>stk row_stk;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    freopen64(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n, m;
+</span></span><span style=display:flex><span>    scanf(<span style=color:#e6db74>&#34;%d%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>m, <span style=color:#f92672>&amp;</span>k);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> m; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> k; j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            col_stk[i].push(A(i, j), j);          
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    LL ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n<span style=color:#f92672>-</span>k<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;=</span> m; j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            col_stk[j].push(A(i<span style=color:#f92672>+</span>k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>,j), i<span style=color:#f92672>+</span>k<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; j <span style=color:#f92672>&lt;</span> k; j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            row_stk.push(col_stk[j].max(), j);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> k; j <span style=color:#f92672>&lt;=</span> m; j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            row_stk.push(col_stk[j].max(), j);
+</span></span><span style=display:flex><span>            ans <span style=color:#f92672>+=</span> (LL) row_stk.max();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        row_stk.clear();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=g-greater-and-greater>G Greater and Greater<a hidden class=anchor aria-hidden=true href=#g-greater-and-greater>#</a></h2><p><strong>题意</strong></p><p>给一个长度为$n$的序列A, 和一个长度位$m$的序列B，求A有多少位置对应元素都大于B</p><p><strong>Solution</strong></p><p>考虑bitset，$f(i, j)$表示序列A位置$i$,序列B位置$j$，后面的元素A对应大于B，要求的就是$\sum f(i, 1)$</p><pre tabindex=0><code>   A : 1  4  2  8  5  7
    B : 2  3  3
-</code></pre><p>比如$f(3, 1)$可以通过$f(4, 2)$转移过来，$f(3, 2)$可以用$f(4, 3)$转移过来，$f(3, 3)$直接比较A[3],B[3]，可以发现这些转移都要比较A[3],B[i]</p>
-<p>所以对每个A[i]求一个新的bitset\ S，A[i]大于B[j]第$j$位就为1</p>
-<p>转移就是 $f_i=(f_{i+1}&#187;1 | I_m) & S_i$</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=color:#66d9ef>int</span> a[MAX], b[MAX];
-P A[MAX], B[MAX];
-vector<span style=color:#f92672>&lt;</span>bitset<span style=color:#f92672>&lt;</span>N<span style=color:#f92672>&gt;&gt;</span> bits;
-<span style=color:#66d9ef>int</span> idx[MAX];
-
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
-<span style=color:#75715e>#ifdef DEBUG
-</span><span style=color:#75715e></span>    freopen64(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
-<span style=color:#75715e>#endif
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n, m;
-    scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>m);
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
-        scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>a[i]);
-        A[i] <span style=color:#f92672>=</span> make_pair(a[i], i);
-    }
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> m; i<span style=color:#f92672>++</span>){
-        scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>b[i]);
-        B[i] <span style=color:#f92672>=</span> make_pair(b[i], i);
-    }
-    sort(A<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, A<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>+</span>n);
-    sort(B<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, B<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>+</span>m);
-    <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>, j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    bitset<span style=color:#f92672>&lt;</span>N<span style=color:#f92672>&gt;</span> cur;
-    bits.push_back(cur);
-    <span style=color:#66d9ef>while</span>(i <span style=color:#f92672>&lt;=</span> n){
-        <span style=color:#66d9ef>bool</span> new_bit <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-        <span style=color:#66d9ef>while</span>(j <span style=color:#f92672>&lt;</span> m <span style=color:#f92672>&amp;&amp;</span> A[i].first <span style=color:#f92672>&gt;=</span> B[j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>].first){
-            new_bit <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-            cur[B[j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>].second] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-            j<span style=color:#f92672>++</span>;
-        }
-        <span style=color:#66d9ef>if</span>(new_bit) {
-            bits.push_back(cur);
-        }
-        idx[A[i].second] <span style=color:#f92672>=</span> bits.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
-        i<span style=color:#f92672>++</span>;
-    }
-    bitset<span style=color:#f92672>&lt;</span>N<span style=color:#f92672>&gt;</span> f;
-    <span style=color:#66d9ef>int</span> ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> n; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>; i<span style=color:#f92672>--</span>){
-        f <span style=color:#f92672>&gt;&gt;=</span> <span style=color:#ae81ff>1</span>;
-        f[m] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-        f <span style=color:#f92672>&amp;=</span> bits[idx[i]];
-        ans <span style=color:#f92672>+=</span> f[<span style=color:#ae81ff>1</span>];
-    }
-    printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
-}
-</code></pre></div><h2 id=j-just-shuffle>J Just Shuffle<a hidden class=anchor aria-hidden=true href=#j-just-shuffle>#</a></h2>
-<p><strong>题意</strong></p>
-<p>要求一个置换$P$，使得${1,2,\dots,n}$在$P$置换$k$次后成为排列$A$</p>
-<blockquote>
-<p>k是素数</p>
-</blockquote>
-<p><strong>Solution</strong></p>
-<p>就是说$A=P^k$,已知$A,k$，求$P$。把$A$分解成$(cir_1)(cir_2)\dots$，对每个循环$cir$,我们知道$P^k(cir_i)=cir_{i+1}$。</p>
-<p>我们想让$cir_i$置换$sk$次，让$sk\ mod\ len(cir)=1$，就可以求出$P(cir_i)$</p>
-<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> a[MAX];
-<span style=color:#66d9ef>int</span> ans[MAX];
-<span style=color:#66d9ef>bool</span> vis[MAX];
-<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>extend_Euclid</span>(<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b, <span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>x, <span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>y)
-{
-    <span style=color:#66d9ef>if</span>(b <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>){
-        x <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-        y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-        <span style=color:#66d9ef>return</span>;
-    }
-    extend_Euclid(b, a <span style=color:#f92672>%</span> b, x, y);
-    <span style=color:#66d9ef>int</span> tmp <span style=color:#f92672>=</span> x;
-    x <span style=color:#f92672>=</span> y;
-    y <span style=color:#f92672>=</span> tmp <span style=color:#f92672>-</span> (a <span style=color:#f92672>/</span> b) <span style=color:#f92672>*</span> y;
-}
-<span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
-<span style=color:#75715e>#ifdef DEBUG
-</span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>,stdin);
-<span style=color:#75715e>#endif
-</span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n, k;
-    scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>k);
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
-        scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>a[i]);
-    }
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
-        <span style=color:#66d9ef>if</span>(vis[i]) <span style=color:#66d9ef>continue</span>;
-        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> cir;
-        <span style=color:#66d9ef>int</span> x <span style=color:#f92672>=</span> i;
-        <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>vis[x]) {
-            cir.push_back(x);
-            vis[x] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-            x <span style=color:#f92672>=</span> a[x];
-        }
-        <span style=color:#66d9ef>int</span> s <span style=color:#f92672>=</span> k <span style=color:#f92672>%</span> cir.size();
-        <span style=color:#66d9ef>int</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
-        <span style=color:#66d9ef>int</span> w, m;
-        extend_Euclid(s, cir.size(), w, m);
-        <span style=color:#66d9ef>if</span>(w <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span>) {
-            <span style=color:#66d9ef>int</span> ww <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>w;
-            <span style=color:#66d9ef>int</span> tmp <span style=color:#f92672>=</span> (ww <span style=color:#f92672>+</span> cir.size() <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>/</span> cir.size();
-            w <span style=color:#f92672>+=</span> tmp <span style=color:#f92672>*</span> cir.size();
-        }
-        y <span style=color:#f92672>=</span> w;
-        <span style=color:#75715e>// while(s * y % cir.size() != 1){
-</span><span style=color:#75715e></span>        <span style=color:#75715e>//     y ++;
-</span><span style=color:#75715e></span>        <span style=color:#75715e>//     // printf(&#34;%d&#34;, s * y % cir.size());
-</span><span style=color:#75715e></span>        <span style=color:#75715e>// }
-</span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> cir.size(); j<span style=color:#f92672>++</span>){
-            ans[cir[j]] <span style=color:#f92672>=</span> cir[(j<span style=color:#f92672>+</span>y)<span style=color:#f92672>%</span>cir.size()];
-        } 
-    }
-    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>)
-        printf(<span style=color:#e6db74>&#34;%d &#34;</span>, ans[i]);
-    puts(<span style=color:#e6db74>&#34;&#34;</span>);
-    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
-}
-</code></pre></div>
-</div>
-<footer class=post-footer>
-<ul class=post-tags>
-<li><a href=https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li>
-</ul>
-<nav class=paginav>
-<a class=prev href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/>
-<span class=title>« Prev Page</span>
-<br>
-<span>POJ 3376</span>
-</a>
-<a class=next href=https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/>
-<span class=title>Next Page »</span>
-<br>
-<span>AtCoder-Sum of gcd of Tuples</span>
-</a>
-</nav>
-</footer>
-</article>
-</main>
-<footer class=footer>
-<span>&copy; 2022 <a href=https://Anlarry.github.io/>Jiali Wang</a></span>
-<span>
-Powered by
+</code></pre><p>比如$f(3, 1)$可以通过$f(4, 2)$转移过来，$f(3, 2)$可以用$f(4, 3)$转移过来，$f(3, 3)$直接比较A[3],B[3]，可以发现这些转移都要比较A[3],B[i]</p><p>所以对每个A[i]求一个新的bitset\ S，A[i]大于B[j]第$j$位就为1</p><p>转移就是 $f_i=(f_{i+1}&#187;1 | I_m) & S_i$</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#66d9ef>int</span> a[MAX], b[MAX];
+</span></span><span style=display:flex><span>P A[MAX], B[MAX];
+</span></span><span style=display:flex><span>vector<span style=color:#f92672>&lt;</span>bitset<span style=color:#f92672>&lt;</span>N<span style=color:#f92672>&gt;&gt;</span> bits;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> idx[MAX];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    freopen64(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n, m;
+</span></span><span style=display:flex><span>    scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>m);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>        scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>a[i]);
+</span></span><span style=display:flex><span>        A[i] <span style=color:#f92672>=</span> make_pair(a[i], i);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> m; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>b[i]);
+</span></span><span style=display:flex><span>        B[i] <span style=color:#f92672>=</span> make_pair(b[i], i);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    sort(A<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, A<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>+</span>n);
+</span></span><span style=display:flex><span>    sort(B<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>, B<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>+</span>m);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>, j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    bitset<span style=color:#f92672>&lt;</span>N<span style=color:#f92672>&gt;</span> cur;
+</span></span><span style=display:flex><span>    bits.push_back(cur);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span>(i <span style=color:#f92672>&lt;=</span> n){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>bool</span> new_bit <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(j <span style=color:#f92672>&lt;</span> m <span style=color:#f92672>&amp;&amp;</span> A[i].first <span style=color:#f92672>&gt;=</span> B[j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>].first){
+</span></span><span style=display:flex><span>            new_bit <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>            cur[B[j<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>].second] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>            j<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(new_bit) {
+</span></span><span style=display:flex><span>            bits.push_back(cur);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        idx[A[i].second] <span style=color:#f92672>=</span> bits.size()<span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        i<span style=color:#f92672>++</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    bitset<span style=color:#f92672>&lt;</span>N<span style=color:#f92672>&gt;</span> f;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> ans <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> n; i <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>1</span>; i<span style=color:#f92672>--</span>){
+</span></span><span style=display:flex><span>        f <span style=color:#f92672>&gt;&gt;=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        f[m] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        f <span style=color:#f92672>&amp;=</span> bits[idx[i]];
+</span></span><span style=display:flex><span>        ans <span style=color:#f92672>+=</span> f[<span style=color:#ae81ff>1</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=j-just-shuffle>J Just Shuffle<a hidden class=anchor aria-hidden=true href=#j-just-shuffle>#</a></h2><p><strong>题意</strong></p><p>要求一个置换$P$，使得${1,2,\dots,n}$在$P$置换$k$次后成为排列$A$</p><blockquote><p>k是素数</p></blockquote><p><strong>Solution</strong></p><p>就是说$A=P^k$,已知$A,k$，求$P$。把$A$分解成$(cir_1)(cir_2)\dots$，对每个循环$cir$,我们知道$P^k(cir_i)=cir_{i+1}$。</p><p>我们想让$cir_i$置换$sk$次，让$sk\ mod\ len(cir)=1$，就可以求出$P(cir_i)$</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=display:flex><span><span style=color:#66d9ef>int</span> a[MAX];
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> ans[MAX];
+</span></span><span style=display:flex><span><span style=color:#66d9ef>bool</span> vis[MAX];
+</span></span><span style=display:flex><span><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>extend_Euclid</span>(<span style=color:#66d9ef>int</span> a, <span style=color:#66d9ef>int</span> b, <span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>x, <span style=color:#66d9ef>int</span> <span style=color:#f92672>&amp;</span>y)
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span>(b <span style=color:#f92672>==</span> <span style=color:#ae81ff>0</span>){
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    extend_Euclid(b, a <span style=color:#f92672>%</span> b, x, y);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> tmp <span style=color:#f92672>=</span> x;
+</span></span><span style=display:flex><span>    x <span style=color:#f92672>=</span> y;
+</span></span><span style=display:flex><span>    y <span style=color:#f92672>=</span> tmp <span style=color:#f92672>-</span> (a <span style=color:#f92672>/</span> b) <span style=color:#f92672>*</span> y;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
+</span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>,stdin);
+</span></span><span style=display:flex><span><span style=color:#75715e>#endif
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>int</span> n, k;
+</span></span><span style=display:flex><span>    scanf(<span style=color:#e6db74>&#34;%d%d&#34;</span>, <span style=color:#f92672>&amp;</span>n, <span style=color:#f92672>&amp;</span>k);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>a[i]);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(vis[i]) <span style=color:#66d9ef>continue</span>;
+</span></span><span style=display:flex><span>        vector<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>int</span><span style=color:#f92672>&gt;</span> cir;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> x <span style=color:#f92672>=</span> i;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>while</span>(<span style=color:#f92672>!</span>vis[x]) {
+</span></span><span style=display:flex><span>            cir.push_back(x);
+</span></span><span style=display:flex><span>            vis[x] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>            x <span style=color:#f92672>=</span> a[x];
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> s <span style=color:#f92672>=</span> k <span style=color:#f92672>%</span> cir.size();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> y <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> w, m;
+</span></span><span style=display:flex><span>        extend_Euclid(s, cir.size(), w, m);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(w <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> ww <span style=color:#f92672>=</span> <span style=color:#f92672>-</span>w;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> tmp <span style=color:#f92672>=</span> (ww <span style=color:#f92672>+</span> cir.size() <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>) <span style=color:#f92672>/</span> cir.size();
+</span></span><span style=display:flex><span>            w <span style=color:#f92672>+=</span> tmp <span style=color:#f92672>*</span> cir.size();
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        y <span style=color:#f92672>=</span> w;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// while(s * y % cir.size() != 1){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     y ++;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     // printf(&#34;%d&#34;, s * y % cir.size());
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> cir.size(); j<span style=color:#f92672>++</span>){
+</span></span><span style=display:flex><span>            ans[cir[j]] <span style=color:#f92672>=</span> cir[(j<span style=color:#f92672>+</span>y)<span style=color:#f92672>%</span>cir.size()];
+</span></span><span style=display:flex><span>        } 
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>; i <span style=color:#f92672>&lt;=</span> n; i<span style=color:#f92672>++</span>)
+</span></span><span style=display:flex><span>        printf(<span style=color:#e6db74>&#34;%d &#34;</span>, ans[i]);
+</span></span><span style=display:flex><span>    puts(<span style=color:#e6db74>&#34;&#34;</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></div><footer class=post-footer><ul class=post-tags><li><a href=https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li></ul><nav class=paginav><a class=prev href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/><span class=title>« Prev Page</span><br><span>POJ 3376</span></a>
+<a class=next href=https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/><span class=title>Next Page »</span><br><span>AtCoder-Sum of gcd of Tuples</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2022 <a href=https://Anlarry.github.io/>Jiali Wang</a></span>
+<span>Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
-        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a>
-</span>
-</footer>
-<a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
-</a>
-<script>let menu=document.getElementById('menu');menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener("click",function(b){b.preventDefault();var a=this.getAttribute("href").substr(1);window.matchMedia('(prefers-reduced-motion: reduce)').matches?document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(a)}']`).scrollIntoView({behavior:"smooth"}),a==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${a}`)})})</script>
-<script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script>
-<script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove('dark'),localStorage.setItem("pref-theme",'light')):(document.body.classList.add('dark'),localStorage.setItem("pref-theme",'dark'))})</script>
-<script>document.querySelectorAll('pre > code').forEach(b=>{const c=b.parentNode.parentNode,a=document.createElement('button');a.classList.add('copy-code'),a.innerText='📄';function d(){a.innerText='✔',setTimeout(()=>{a.innerText='📄'},2e3)}a.addEventListener('click',e=>{if('clipboard'in navigator){navigator.clipboard.writeText(b.textContent),d();return}const a=document.createRange();a.selectNodeContents(b);const c=window.getSelection();c.removeAllRanges(),c.addRange(a);try{document.execCommand('copy'),d()}catch(a){}c.removeRange(a)}),c.classList.contains("highlight")?c.appendChild(a):c.parentNode.firstChild==c||(b.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?b.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(a):b.parentNode.appendChild(a))})</script>
-</body>
-</html>
+        <a href=https://git.io/hugopapermod rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)},document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(t){t.preventDefault();var e=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(e)}']`).scrollIntoView({behavior:"smooth"}),e==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${e}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(t=>{const n=t.parentNode.parentNode,e=document.createElement("button");e.classList.add("copy-code"),e.innerText="📄";function s(){e.innerText="✔",setTimeout(()=>{e.innerText="📄"},2e3)}e.addEventListener("click",o=>{if("clipboard"in navigator){navigator.clipboard.writeText(t.textContent),s();return}const e=document.createRange();e.selectNodeContents(t);const n=window.getSelection();n.removeAllRanges(),n.addRange(e);try{document.execCommand("copy"),s()}catch(e){}n.removeRange(e)}),n.classList.contains("highlight")?n.appendChild(e):n.parentNode.firstChild==n||(t.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?t.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(e):t.parentNode.appendChild(e))})</script></body></html>
