@@ -13,9 +13,9 @@
       <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
       
       <guid>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</guid>
-      <description>POJ 3376  tire + manacher
- 题意  http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
- Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
+      <description>POJ 3376 tire + manacher
+题意 http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
+Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。
 case 1： s=reverse(t)
 $$ \begin{cases} s = a_0\dots a_{n-1} \newline t = a_{n-1}\dots a_0 \end{cases} $$

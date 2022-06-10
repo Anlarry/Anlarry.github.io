@@ -13,21 +13,24 @@
       <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
       
       <guid>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</guid>
-      <description>Polya计数  将波利亚计数定理整理在这里，作为一个总结和介绍，也方便以后复习
- 为什么学习Polya计数定理
+      <description>Polya计数 将波利亚计数定理整理在这里，作为一个总结和介绍，也方便以后复习
+为什么学习Polya计数定理
 通过Polya计数定理，我们可以计算等价类的数量，比如下面这个问题：
 用$m$种颜色给一个正方形染色，如果正方形可以自由转动，求染色方案数
- 让我们从一些概念开始
- 1 等价关系 1.1 等价关系的定义 假设$V$是一个集合，$S$是定义在$V$上的一个关系，若$S$有如下性质：
- 自反性 传递性 对称性  那么， $S$就是一个等价关系
+让我们从一些概念开始
+1 等价关系 1.1 等价关系的定义 假设$V$是一个集合，$S$是定义在$V$上的一个关系，若$S$有如下性质：
+自反性 传递性 对称性 那么， $S$就是一个等价关系
 $a$和$b$有关系$S$,可以记为$aSb$
- 假设定义关系$S$，图形$a$可以旋转得到$b$ $\Leftrightarrow$ $aSb$
+假设定义关系$S$，图形$a$可以旋转得到$b$ $\Leftrightarrow$ $aSb$
 例如图中的$方块_1$和$方块_2$具有关系$S$，即他们可以通过旋转得到彼此，而$方块_1$和$方块_2$则没有关系$S$
- 1.2 等价类 通过上图，可以看出来：$方块_1$和$方块_2$是同一类的，而$方块_1$和$方块_2$则是另外两类，于是可以想到集合$V$上的等价关系$S$将集合的元素划分到不同的类中，我们把它称为等价类
+1.2 等价类 通过上图，可以看出来：$方块_1$和$方块_2$是同一类的，而$方块_1$和$方块_2$则是另外两类，于是可以想到集合$V$上的等价关系$S$将集合的元素划分到不同的类中，我们把它称为等价类
 而包含元素$a$的等价类则是由满足$aSb$的所有元素$b$组成的(当然也包含元素$a$),即$C(a)={b\in V | \ aSb}$
 仔细想一想，不难发现两个不同等价类是不相交的
 2 置换群 2.1 置换群的定义 假设$A={1,2,\dotsc, n}$，通过置换，将$A$中的元素重新排列，得到另一个排列$a_1, a_2, \dotsc, a_n$，可以把这个过程写成
-$$ \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; \dotsc &amp;amp; n \newline a_1 &amp;amp; a_2 &amp;amp; \dotsc &amp;amp; a_n \end{matrix} \right ) $$</description>
+$$ \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; \dotsc &amp;amp; n \newline a_1 &amp;amp; a_2 &amp;amp; \dotsc &amp;amp; a_n \end{matrix} \right ) $$
+所以，可以将置换看成一个双射函数$f:{1,2,\dotsc, n} \rightarrow {1,2,\dotsc, n}$
+置换之间也可进行合成运算
+$$ \pi_1 = \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; 3 &amp;amp; 4 \newline 4 &amp;amp; 2 &amp;amp; 1 &amp;amp; 3 \end{matrix} \right ) \ \ \pi_2 = \left ( \begin{matrix} 1 &amp;amp; 2 &amp;amp; 3 &amp;amp; 4 \newline 2 &amp;amp; 1 &amp;amp; 4 &amp;amp; 3 \end{matrix} \right ) $$</description>
     </item>
     
   </channel>

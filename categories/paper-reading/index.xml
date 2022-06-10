@@ -15,14 +15,16 @@
       <guid>https://Anlarry.github.io/posts/paper-reading/flexsc/</guid>
       <description>System Call Cost 应用程序通过System Call向kernel请求服务。一般应用程序发起系统调用后，从用户态进入内核态，最后从异常退出，返回用户态。
 但是这种同步的系统调用机制可能对应用的性能带来限制：
- Direct Cost: 在系统调用后，CPU会清空流水线。 Indirect Cost: 程序的局部性以及cache可以提升性能。但是在系统调用后，要在kernel空间执行代码，这就会影响cache性能。而且在kernel处理结束返回用户后，相比与原来的cache，cache受到了污染，带来间接性能损失。  可以看到在系统调用后，IPC(Instructions Per Cycle)降低。
- Exception-Less System Call exception-less系统调用，让系统调用异步完成。在user和kernel共享一些syscall pages，用这些syscall page记录当前请求的系统调用。用户发起系统调用后，在syscall pages中添加新的entry后就可以返回。同时，有一些特殊的kernel thread，syscall thread，在syscall pages中找到请求的系统调用，把返回值写在相应的条目。最后用户就通过可以检查syscall pages，拿到返回值。
- 那这种将invoke和execute解耦的设计怎么做有什么好处呢？
- 可以推迟执行，把syscall按batch执行，降低mode之间转化的代价，improve temporal locality。 对于多核系统，可以把syscall放在另一个核上执行，这样就可以降低间接代价，improved spatial locality。  Implementation 在实现时，作者添加两个新的系统调用，都采用同步的系统调用机制。
- flexsc_register，做一些syscall page的映射，并创建syscall thread，数量等于page中entry的数量。 flexsc_wait，因为这种异步机制，会出现用户需要停下来等待系统调用的完成。  syscall thread的调度，会影响exception-less syscall的性能。对于单核，调用flexsc_wait后，调度syscall thread处理page中每个entry，如果出现阻塞，就用新的syscall thread接着处理一下个entry。多核时，one syscall thread per application and core，这样就带来了并行处理的可能。
+Direct Cost: 在系统调用后，CPU会清空流水线。 Indirect Cost: 程序的局部性以及cache可以提升性能。但是在系统调用后，要在kernel空间执行代码，这就会影响cache性能。而且在kernel处理结束返回用户后，相比与原来的cache，cache受到了污染，带来间接性能损失。 可以看到在系统调用后，IPC(Instructions Per Cycle)降低。
+Exception-Less System Call exception-less系统调用，让系统调用异步完成。在user和kernel共享一些syscall pages，用这些syscall page记录当前请求的系统调用。用户发起系统调用后，在syscall pages中添加新的entry后就可以返回。同时，有一些特殊的kernel thread，syscall thread，在syscall pages中找到请求的系统调用，把返回值写在相应的条目。最后用户就通过可以检查syscall pages，拿到返回值。
+那这种将invoke和execute解耦的设计怎么做有什么好处呢？
+可以推迟执行，把syscall按batch执行，降低mode之间转化的代价，improve temporal locality。 对于多核系统，可以把syscall放在另一个核上执行，这样就可以降低间接代价，improved spatial locality。 Implementation 在实现时，作者添加两个新的系统调用，都采用同步的系统调用机制。
+flexsc_register，做一些syscall page的映射，并创建syscall thread，数量等于page中entry的数量。 flexsc_wait，因为这种异步机制，会出现用户需要停下来等待系统调用的完成。 syscall thread的调度，会影响exception-less syscall的性能。对于单核，调用flexsc_wait后，调度syscall thread处理page中每个entry，如果出现阻塞，就用新的syscall thread接着处理一下个entry。多核时，one syscall thread per application and core，这样就带来了并行处理的可能。
 FlexSC Threads 但是这样异步方式，可能会让使用变得复杂，而且随着多核的发展，作者就实现了FlexSC-Threads。利用dynamic loading，系统调用时，调用一个wrapper，这样就可以让应用得到free lunch。
- 维护$M$个user-mod thread，对一个process，每个核上只有一个可以被kernel看见。发起系统调用的线程，在写好entry后，就会被切换执行一下thread。用完ready的user-mode thread，就看看syscall page上有没有完成的。如果还没有ready的，就需要调用下flexsc_wait。
-对于这种设计，需要提高并发，来提升性能。highly threaded workloads是FlexSC-Threads的理想环境。</description>
+维护$M$个user-mod thread，对一个process，每个核上只有一个可以被kernel看见。发起系统调用的线程，在写好entry后，就会被切换执行一下thread。用完ready的user-mode thread，就看看syscall page上有没有完成的。如果还没有ready的，就需要调用下flexsc_wait。
+对于这种设计，需要提高并发，来提升性能。highly threaded workloads是FlexSC-Threads的理想环境。
+Reference
+[1] Soares L, Stumm M. FlexSC: Flexible System Call Scheduling with Exception-Less System Calls[C]//Osdi.</description>
     </item>
     
     <item>
@@ -34,20 +36,22 @@ FlexSC Threads 但是这样异步方式，可能会让使用变得复杂，而�
       <description>Background 基本各种东西都可以用图来表示，也就促成了GNN的快速发展。然而很多图都有这样的特点，一些节点的度数很高然而大多数节点的度数很低。
 训练时要用邻居更新当前节点，不能将整个图全部拿来训练，因此一般采用graph sampling+mini batch，比如，给$n$个节点，每个节点对邻居采样后在进行训练。
 然而产生了新的问题，采样在整个训练过程中占了很多时间。
- 因此，大家也会去想用GPU加速采样，但是naive的方法并不能很好的利用GPU。
+因此，大家也会去想用GPU加速采样，但是naive的方法并不能很好的利用GPU。
 &amp;ldquo;Transit-Parallelism&amp;rdquo; 作者首先对采样进行了抽象，采样从一节点开始，扩展出新的节点加入sample，再从新的节点扩展$\cdots$，每次遍历邻居扩展新节点的节点，作者把它叫做&amp;quot;transit vertices&amp;quot;
 将采样分成两类：
- Individual Transit Sampling，这个是按节点来的，每个transit节点从邻居中采样一定数量的节点 Collective Transit Sampling，这个是按层来，每一层从所有transit节点的邻居中采样一定数量的节点    CUDA &amp;amp; GPU
+Individual Transit Sampling，这个是按节点来的，每个transit节点从邻居中采样一定数量的节点 Collective Transit Sampling，这个是按层来，每一层从所有transit节点的邻居中采样一定数量的节点 CUDA &amp;amp; GPU
 一个CUDA程序被划分给很多blocks of threads完成并行，而GPU又由很多StreamingMultiprocessors (SMs)构成，每个block被放到SM上执行
- 一个block的线程数是有限的，但是相同的大小block可以被组织成grid，于是kernel(a c++ function)就可以用grid里面所有的线程。 $$ thread \xrightarrow[]{array} block \xrightarrow[]{array} grid $$ 众所周知，内存层次结构，GPU当然也有：
- 前面已经提到了block会在SM上执行，在物理实现时会用到SIMT(Single-Instruction, Multiple-Thread)。multiprocessor用warp(a group of 32 threads)来管理线程。
+一个block的线程数是有限的，但是相同的大小block可以被组织成grid，于是kernel(a c++ function)就可以用grid里面所有的线程。 $$ thread \xrightarrow[]{array} block \xrightarrow[]{array} grid $$ 众所周知，内存层次结构，GPU当然也有：
+前面已经提到了block会在SM上执行，在物理实现时会用到SIMT(Single-Instruction, Multiple-Thread)。multiprocessor用warp(a group of 32 threads)来管理线程。
 warp中的线程都从相同的起点开始，但是每个线程都有自己的pc，寄存器状态也可能不一样。而且一个warp的thread执行的指令还是相同的。
 如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。
- Sample-Parallelism，对于Individual Transit Sampling可以将每一对sample和transit分配$m_i$个线程，每个sample放到一个block里。对于Collective Transit Sampling，需要先把所有的邻居存到global memory里，再采样。
- 在采样时，邻居多的节点计算的时间就会更久。如果同一个warp里面的两个thread被分给两个邻居数量不同的transit，就会有divergence。而且，图得存在gobal memory，shared memory利用不充分。
+Sample-Parallelism，对于Individual Transit Sampling可以将每一对sample和transit分配$m_i$个线程，每个sample放到一个block里。对于Collective Transit Sampling，需要先把所有的邻居存到global memory里，再采样。
+在采样时，邻居多的节点计算的时间就会更久。如果同一个warp里面的两个thread被分给两个邻居数量不同的transit，就会有divergence。而且，图得存在gobal memory，shared memory利用不充分。
 但是如果是按transit划分，局部性就会更好，按照工作量需求分配线程数量。是不是有点像倒排索引 :-)
- 线程组中的线程，他们做的事情更相似，而且工作量也差不多。他们访问的邻居也是同一个transit的，能更好利用share memory。
-Sampling Large Graphs NextDoor还可以去对超出GPU memory的图采样。方法有点像mini batch，把图分成不相交的子图，每次对一个子图和和其transit节点采样。</description>
+线程组中的线程，他们做的事情更相似，而且工作量也差不多。他们访问的邻居也是同一个transit的，能更好利用share memory。
+Sampling Large Graphs NextDoor还可以去对超出GPU memory的图采样。方法有点像mini batch，把图分成不相交的子图，每次对一个子图和和其transit节点采样。
+Reference
+[1] Jangda A, Polisetty S, Guha A, et al.</description>
     </item>
     
     <item>
@@ -56,15 +60,16 @@ Sampling Large Graphs NextDoor还可以去对超出GPU memory的图采样。方�
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
       
       <guid>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</guid>
-      <description>figcaption { text-align: center; }  Intro &amp;amp; Background ML模型会因为训练和测试时的数据分布不同，导致很多预测错误。将ML模型优化database也面对这个问题。
-Active learning  Active leraning  主动学习采用的方法是，可以在unlabled的数据中再选出一些数据，从orcale得到数据的lable，从新的知识中学习。
- An illustrative example of pool-based active learning  Execution cost prediction &amp;amp; Plan regression prediction  ECP是一个回归任务，需要预测执行plan需要的时间。在优化查询中，可以用ECP来寻找最优的plan PRP是一个分类任务，给出两个plan，需要找到哪个plan代价更高  Architecture 在这里oracle可以用database的副本执行plan，获取plan的执行时间。因此不同的plan就有不同的cost。
- 开始，用户指定budget，之后ADCP获取lable数据时会消耗budget。ADCP获取target data，选出unlabeled data给交给副本执行。获得新知识后retrain ML模型，再对target data数据进行预测，这时错误就会降低。
+      <description>Intro &amp;amp; Background ML模型会因为训练和测试时的数据分布不同，导致很多预测错误。将ML模型优化database也面对这个问题。
+Active learning Active leraning 主动学习采用的方法是，可以在unlabled的数据中再选出一些数据，从orcale得到数据的lable，从新的知识中学习。
+An illustrative example of pool-based active learning Execution cost prediction &amp;amp; Plan regression prediction ECP是一个回归任务，需要预测执行plan需要的时间。在优化查询中，可以用ECP来寻找最优的plan PRP是一个分类任务，给出两个plan，需要找到哪个plan代价更高 Architecture 在这里oracle可以用database的副本执行plan，获取plan的执行时间。因此不同的plan就有不同的cost。
+开始，用户指定budget，之后ADCP获取lable数据时会消耗budget。ADCP获取target data，选出unlabeled data给交给副本执行。获得新知识后retrain ML模型，再对target data数据进行预测，这时错误就会降低。
 但是新的环境就有新的问题。active learning需要选出要标注的数据，noise会带来一些问题。因此需要综合考虑cost、robust、以及active learning最不确定的unlabel数据。 $$ w_x=\frac{u(x)}{c(x)} $$ $c(x)$表示cost，$u(x)$表示uncertainty，因此x的权重可以理解成“uncertainty per cost”。
 同时为了解决noise，转化为概率并加入Gumbel噪音
 $$ p(x)=\frac{w_x}{\sum_{x&amp;rsquo;}w_{x&amp;rsquo;}} \newline {\rm arg}\ \max\limits_{x} \log p(x)+G_x $$
 另外，还需要减少sample时的冗余。
-  Algo &amp; Example  -- Comparison &amp;amp; Why it works  HAL相比于其他AL策略利用了各种不同的特点。感觉这是为什么HAL可以work的一个原因。在实验中，OPT(A crude baseline)直接用cost估计(for PRP)，Huber回归(for ECP)得到label不用retrain也不需要额外的label，比其它AL错误要高出很多。</description>
+Algo &amp; Example Comparison &amp;amp; Why it works HAL相比于其他AL策略利用了各种不同的特点。感觉这是为什么HAL可以work的一个原因。在实验中，OPT(A crude baseline)直接用cost估计(for PRP)，Huber回归(for ECP)得到label不用retrain也不需要额外的label，比其它AL错误要高出很多。
+Strategy Properties 在同样的bugdet下，HAL选出了更多的label，也就是说平均每个label的cost更低(a)。但是，对cost超过平均值的数据，error也更低(b)。</description>
     </item>
     
     <item>
@@ -76,24 +81,26 @@ $$ p(x)=\frac{w_x}{\sum_{x&amp;rsquo;}w_{x&amp;rsquo;}} \newline {\rm arg}\ \max
       <description>Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
 另外在宏内核中也会经常使用IPC，如Android Binder。
 Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
- seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
- 另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
- 在seL4上测试负载，IPC占用的时间是很多的。
+seL4用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。
+另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。
+在seL4上测试负载，IPC占用的时间是很多的。
 SkyBridge 为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，EPT(extended page table) 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。
 但是为了利用EPT切换，就需要在增加一个hypervisor。（有可能会影响性能）
- 在虚拟机中运行的进程，如果要访问内存会经过
+在虚拟机中运行的进程，如果要访问内存会经过
 GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)
 这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA
- 同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
-  从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
+同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。
+从上图可以看到SkyBridge的两个kernel：RootKernel( a tiny hypervisor)和SubKernel(即microkernel)。
 首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。
 Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用direct_server_call，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。
- 在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
+在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。
 something else RootKernel &amp;amp; 虚拟化开销，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。
 illegal VMFUNC，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。
- XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
+XPC 但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。
 XPC从两个方面提高IPC性能，
- 让IPC不经过kernel 不复制传递消息   和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。</description>
+让IPC不经过kernel 不复制传递消息 和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。
+XPC engine提供了两个硬件原语：User-level Cross Process Call，Lightweight Message Transfer
+Cross Procss Call x-entry, 和其他进程的procedure绑定。每个进程可以创建多个x-entry,所有的x-entry都存在x-entry-table（x-entry-table-reg指向的一个全局内存空间）中。通过x-entry-table-size控制x-entry-table的大小。xcall-cap(XPC call capability)记录每个entry的capability。</description>
     </item>
     
   </channel>
