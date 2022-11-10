@@ -59,7 +59,7 @@ Ha!现在ᛤ已经可以正常显示了, 𓄅却变成了一个奇怪字符. 其
 
 因此我们可以发现, 在xelatex中使用Unicode, **需要使用正确的字体**, 即字体中要包含应相应的unicode字符. 
 
-那新的问题来了, 怎么知道什么字体包含了𓄅? 逛了一圈stackover发现[fileformat.info](https://www.fileformat.info/search/)可以解决这个问题. 
+那新的问题来了, 怎么知道什么字体包含了𓄅? 逛了一圈stackoverflow发现[fileformat.info](https://www.fileformat.info/search/)可以解决这个问题. 
 
 𓄅其实在Egyptian Hieroglyphs中, 找到相应的字体[Noto Sans Egyptian Hieroglyphs](https://fonts.google.com/noto/specimen/Noto+Sans+Egyptian+Hieroglyphs)
 
