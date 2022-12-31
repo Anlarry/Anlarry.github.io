@@ -74,3 +74,10 @@ content: hide
 ![](Screenshot_20221230_000413.png#center-small)
 
 权衡各方因素，同时也Keep Open Mind！
+
+
+### 我与父辈
+
+![](2022-12-31-12-09-36.png#center-small)
+
+发展中的城乡差距之大，与描绘的年代相近的《繁花》中的上海，天壤之别啊。
