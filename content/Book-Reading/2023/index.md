@@ -1,5 +1,5 @@
 ---
-title: "2023-Fabula"
+title: "2023"
 date: 2023
 content: hide
 ---
