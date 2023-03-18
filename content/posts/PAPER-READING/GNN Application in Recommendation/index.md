@@ -84,7 +84,7 @@ GNN训练基本都是大同小异，而推理任务是部署和落地中主要wo
 
 GNN虽然网络层数少，计算资源需求不大，但是图和特征需要占用大量的存储资源，这给GNN部署和落地带来了一些挑战 [^6]。
 
-![](2023-03-18-13-38-30.png#center-medium)
+![](2023-03-18-13-38-30.png#center-large)
 
 这就产生了一个新的问题，在部署GNN时我们希望可以降低存储的开销，Serving graph compression for GNNs。Model compression、Coreset selection、 Dataset distillation是目前的一些常见的方法。
 
