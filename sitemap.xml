@@ -3,18 +3,30 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://Anlarry.github.io/categories/</loc>
-    <lastmod>2022-11-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/gnn/</loc>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/</loc>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/</loc>
-    <lastmod>2022-11-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://Anlarry.github.io/tags/latex/</loc>
-    <lastmod>2022-11-10T00:00:00+00:00</lastmod>
+    <loc>https://Anlarry.github.io/categories/paper-reading/</loc>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/posts/</loc>
-    <lastmod>2022-11-10T00:00:00+00:00</lastmod>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/recommendation/</loc>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/tags/</loc>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/tags/latex/</loc>
     <lastmod>2022-11-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/categories/tool/</loc>
@@ -32,14 +44,8 @@
     <loc>https://Anlarry.github.io/posts/paper-reading/flexsc/</loc>
     <lastmod>2021-12-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://Anlarry.github.io/categories/paper-reading/</loc>
-    <lastmod>2021-12-10T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://Anlarry.github.io/tags/syscall/</loc>
     <lastmod>2021-12-10T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/tags/gnn/</loc>
-    <lastmod>2021-11-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/tags/gpu/</loc>
     <lastmod>2021-11-14T00:00:00+00:00</lastmod>
