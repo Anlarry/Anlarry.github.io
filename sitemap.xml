@@ -26,6 +26,12 @@
     <loc>https://Anlarry.github.io/tags/</loc>
     <lastmod>2023-03-18T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://Anlarry.github.io/book-reading/2023/</loc>
+    <lastmod>2023-01-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/book_reading/</loc>
+    <lastmod>2023-01-01T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://Anlarry.github.io/tags/latex/</loc>
     <lastmod>2022-11-10T00:00:00+00:00</lastmod>
   </url><url>
@@ -40,6 +46,9 @@
   </url><url>
     <loc>https://Anlarry.github.io/tags/xelatex/</loc>
     <lastmod>2022-11-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/book-reading/2022-fabula/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/posts/paper-reading/flexsc/</loc>
     <lastmod>2021-12-10T00:00:00+00:00</lastmod>
@@ -73,6 +82,9 @@
   </url><url>
     <loc>https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</loc>
     <lastmod>2021-09-16T19:17:00+00:00</lastmod>
+  </url><url>
+    <loc>https://Anlarry.github.io/book-reading/2021-primusliber/</loc>
+    <lastmod>2021-01-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/</loc>
     <lastmod>2020-09-01T19:40:00+00:00</lastmod>
@@ -137,23 +149,12 @@
     <loc>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</loc>
     <lastmod>2020-02-11T12:54:00+08:00</lastmod>
   </url><url>
-    <loc>https://Anlarry.github.io/book-reading/2023/</loc>
-    <lastmod>1970-01-01T00:33:43+00:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/book_reading/</loc>
-    <lastmod>1970-01-01T00:33:43+00:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/book-reading/2022-fabula/</loc>
-    <lastmod>1970-01-01T00:33:42+00:00</lastmod>
-  </url><url>
-    <loc>https://Anlarry.github.io/book-reading/2021-primusliber/</loc>
-    <lastmod>1970-01-01T00:33:41+00:00</lastmod>
+    <loc>https://Anlarry.github.io/links/</loc>
+    <lastmod>1970-01-01T00:32:50+00:00</lastmod>
   </url><url>
     <loc>https://Anlarry.github.io/categories/acm/icpc/</loc>
   </url><url>
     <loc>https://Anlarry.github.io/archives/</loc>
-  </url><url>
-    <loc>https://Anlarry.github.io/links/</loc>
   </url><url>
     <loc>https://Anlarry.github.io/search/</loc>
   </url>

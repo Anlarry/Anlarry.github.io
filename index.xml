@@ -37,6 +37,19 @@ GNN虽然网络层数少，计算资源需求不大，但是图和特征需要�
     </item>
     
     <item>
+      <title>2023</title>
+      <link>https://Anlarry.github.io/book-reading/2023/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://Anlarry.github.io/book-reading/2023/</guid>
+      <description>繁花 描绘上海20世纪60年代至90年代市民生活，字里行间洋溢着上海话的风格。
+江南三部曲 理想与现实，最终以别样方式的和解。
+毛泽东传 毛泽东，无产阶级革命的领导者，有着强烈的民族主义精神和斗争精神， 带领军队从井冈山走遍祖国大江南北，最终夺取统治权，在此期间作为一个诗人， 抒发对山河的感叹，洋溢着激情和傲气，“是风流人物还看今朝”。 在晚年，成为“半神半人式的人物”，“集真理和权力于一身”， 而中国政治局势则左右摇摆，处于各种混沌之中。
+“如果我们今天不反对新八股和新教条主义，” 毛泽东在延安批评28个布尔什维克时曾说，“则中国人民的思想又将受另一种形式主义的束缚。”
+Anyway, 毛主席还是非常伟大的，真正地改变了历史进程。</description>
+    </item>
+    
+    <item>
       <title>Unicode with xelatex</title>
       <link>https://Anlarry.github.io/posts/tool/xelatexunicode/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
@@ -51,6 +64,24 @@ Tex Engine使用xelatex
 因此我们可以发现, 在xelatex中使用Unicode, 需要使用正确的字体, 即字体中要包含应相应的unicode字符.
 那新的问题来了, 怎么知道什么字体包含了𓄅? 逛了一圈stackoverflow发现fileformat.info可以解决这个问题.
 𓄅其实在Egyptian Hieroglyphs中, 找到相应的字体Noto Sans Egyptian Hieroglyphs</description>
+    </item>
+    
+    <item>
+      <title>2022-Fabula</title>
+      <link>https://Anlarry.github.io/book-reading/2022-fabula/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://Anlarry.github.io/book-reading/2022-fabula/</guid>
+      <description>Fabula means story, which is a topic in A brief history of humankind
+简史三部曲 A brief history of humankind Homo Deus：A Brief History of Tomorrow 21 Lessons for the 21st Century 从史前到未来，再回到21世纪的旅行，有各种各样的意义之网。
+To Kill a Mocking Bird “依然是夏天，孩子们走近了。男孩身后拖着根鱼竿踯躅不前。一个男人双手叉腰站在那里等他。夏天，他的孩子们在前院和朋友玩耍，自编自演着他们古怪的小话剧。
+秋天，他的孩子们在杜博斯太太房前的人行道上打架。男孩扶着他妹妹站起来，过后他们一起走回家去。秋天，他的孩子们小跑着来回经过那个街角，每天的苦恼和得意都写在脸上。他们在橡树前停下了，表情又欣喜又困惑，还带着忧虑。
+冬天，他的孩子们在院门前哆嗦着，黑色的剪影衬着熊熊燃烧的房屋。冬天，那男人走上街头，扔下眼镜，射死了一只疯狗。
+夏天，他眼看着他的孩子们心碎了。又到了秋天，怪人的孩子们需要他了。”
+进化心理学 从人类进化以适应生存问题的角度解释人类的行为。
+饮食的思迷 以摄入的能量等指标来衡量也可能并不合理，即使是相同的东西在不同人身上也会有不同的效果。我们不得不考虑微生物在这一过程中的 影响。虽然很多东西还不能得以解释，但总之多样性应该是对的。
+权衡 权衡各方因素，同时也Keep Open Mind！
+我与父辈 发展中的城乡差距之大，与描绘的年代相近的《繁花》中的上海，天壤之别啊。</description>
     </item>
     
     <item>
@@ -147,6 +178,19 @@ XPC从两个方面提高IPC性能，
 让IPC不经过kernel 不复制传递消息 和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。
 XPC engine提供了两个硬件原语：User-level Cross Process Call，Lightweight Message Transfer
 Cross Procss Call x-entry, 和其他进程的procedure绑定。每个进程可以创建多个x-entry,所有的x-entry都存在x-entry-table（x-entry-table-reg指向的一个全局内存空间）中。通过x-entry-table-size控制x-entry-table的大小。xcall-cap(XPC call capability)记录每个entry的capability。</description>
+    </item>
+    
+    <item>
+      <title>2021-PrimusLiber</title>
+      <link>https://Anlarry.github.io/book-reading/2021-primusliber/</link>
+      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://Anlarry.github.io/book-reading/2021-primusliber/</guid>
+      <description>Primus liber means the first book in latin, and means first commit here in some way.
+2021 Project Hail Mary
+讲述Grace和外星人Rocky一起“用魔法对抗魔法”（Astrophag和Taumoeba）的星际旅行故事，Save Earth &amp;amp; Save Erid。
+Rich Dad, Poor Dad
+从一个与众不同的思路，讲述理财的重要性，从不同的角度再思考这个问题。</description>
     </item>
     
     <item>
@@ -383,54 +427,9 @@ $$ \sum_{i+j=posm-1} a_j * b&amp;rsquo;_j $$
     </item>
     
     <item>
-      <title>2023</title>
-      <link>https://Anlarry.github.io/book-reading/2023/</link>
-      <pubDate>Thu, 01 Jan 1970 00:33:43 +0000</pubDate>
-      
-      <guid>https://Anlarry.github.io/book-reading/2023/</guid>
-      <description>繁花 描绘上海20世纪60年代至90年代市民生活，字里行间洋溢着上海话的风格。
-江南三部曲 理想与现实，最终以别样方式的和解。
-毛泽东传 毛泽东，无产阶级革命的领导者，有着强烈的民族主义精神和斗争精神， 带领军队从井冈山走遍祖国大江南北，最终夺取统治权，在此期间作为一个诗人， 抒发对山河的感叹，洋溢着激情和傲气，“是风流人物还看今朝”。 在晚年，成为“半神半人式的人物”，“集真理和权力于一身”， 而中国政治局势则左右摇摆，处于各种混沌之中。
-“如果我们今天不反对新八股和新教条主义，” 毛泽东在延安批评28个布尔什维克时曾说，“则中国人民的思想又将受另一种形式主义的束缚。”
-Anyway, 毛主席还是非常伟大的，真正地改变了历史进程。</description>
-    </item>
-    
-    <item>
-      <title>2022-Fabula</title>
-      <link>https://Anlarry.github.io/book-reading/2022-fabula/</link>
-      <pubDate>Thu, 01 Jan 1970 00:33:42 +0000</pubDate>
-      
-      <guid>https://Anlarry.github.io/book-reading/2022-fabula/</guid>
-      <description>Fabula means story, which is a topic in A brief history of humankind
-简史三部曲 A brief history of humankind Homo Deus：A Brief History of Tomorrow 21 Lessons for the 21st Century 从史前到未来，再回到21世纪的旅行，有各种各样的意义之网。
-To Kill a Mocking Bird “依然是夏天，孩子们走近了。男孩身后拖着根鱼竿踯躅不前。一个男人双手叉腰站在那里等他。夏天，他的孩子们在前院和朋友玩耍，自编自演着他们古怪的小话剧。
-秋天，他的孩子们在杜博斯太太房前的人行道上打架。男孩扶着他妹妹站起来，过后他们一起走回家去。秋天，他的孩子们小跑着来回经过那个街角，每天的苦恼和得意都写在脸上。他们在橡树前停下了，表情又欣喜又困惑，还带着忧虑。
-冬天，他的孩子们在院门前哆嗦着，黑色的剪影衬着熊熊燃烧的房屋。冬天，那男人走上街头，扔下眼镜，射死了一只疯狗。
-夏天，他眼看着他的孩子们心碎了。又到了秋天，怪人的孩子们需要他了。”
-进化心理学 从人类进化以适应生存问题的角度解释人类的行为。
-饮食的思迷 以摄入的能量等指标来衡量也可能并不合理，即使是相同的东西在不同人身上也会有不同的效果。我们不得不考虑微生物在这一过程中的 影响。虽然很多东西还不能得以解释，但总之多样性应该是对的。
-权衡 权衡各方因素，同时也Keep Open Mind！
-我与父辈 发展中的城乡差距之大，与描绘的年代相近的《繁花》中的上海，天壤之别啊。</description>
-    </item>
-    
-    <item>
-      <title>2021-PrimusLiber</title>
-      <link>https://Anlarry.github.io/book-reading/2021-primusliber/</link>
-      <pubDate>Thu, 01 Jan 1970 00:33:41 +0000</pubDate>
-      
-      <guid>https://Anlarry.github.io/book-reading/2021-primusliber/</guid>
-      <description>Primus liber means the first book in latin, and means first commit here in some way.
-2021 Project Hail Mary
-讲述Grace和外星人Rocky一起“用魔法对抗魔法”（Astrophag和Taumoeba）的星际旅行故事，Save Earth &amp;amp; Save Erid。
-Rich Dad, Poor Dad
-从一个与众不同的思路，讲述理财的重要性，从不同的角度再思考这个问题。</description>
-    </item>
-    
-    
-    <item>
       <title>Links</title>
       <link>https://Anlarry.github.io/links/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Jan 1970 00:32:50 +0000</pubDate>
       
       <guid>https://Anlarry.github.io/links/</guid>
       <description>Friends 🐳 Wang Shuai, and his Github.
@@ -440,6 +439,7 @@ Rich Dad, Poor Dad
 🐳 Tao Wu, and his Github.
 🐳 yuanya, and his Github.</description>
     </item>
+    
     
     
   </channel>
