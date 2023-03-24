@@ -85,7 +85,7 @@ params:
         - name: github
           url: "https://github.com/Anlarry"
         - name: rss
-          url: ""
+          url: "https://anlarry.github.io/index.xml"
 
     analytics:
         google:

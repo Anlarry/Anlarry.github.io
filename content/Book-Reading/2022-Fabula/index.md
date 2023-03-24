@@ -1,6 +1,6 @@
 ---
 title: "2022-Fabula"
-date: 2022
+date: 2022-01-01
 content: hide
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "Links"
 layout: "links"
+date: 1970
+
 # url: "/archives/"
 ---
 
