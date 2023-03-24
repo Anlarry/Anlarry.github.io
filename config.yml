@@ -9,6 +9,9 @@ buildFuture: false
 buildExpired: false
 
 googleAnalytics: G-VHNG5P8WWQ
+privacy:
+    googleAnalytics:
+        disable: false
 
 copyright: "Jiali Wang"
 
