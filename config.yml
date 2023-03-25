@@ -131,7 +131,7 @@ menu:
           url: /categories/
           weight: 20
         - identifier: tags
-          name: Tags 🏷
+          name: Tags 🔖
           url: /tags/
           weight: 30
         - identifier: book_reading
