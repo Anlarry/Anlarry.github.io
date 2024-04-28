@@ -104,10 +104,10 @@ Strategy Properties 在同样的bugdet下，HAL选出了更多的label，也就�
     
     <item>
       <title>SkyBridge &amp; XPC</title>
-      <link>https://Anlarry.github.io/posts/paper-reading/skybridge-xpc/</link>
+      <link>https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
       
-      <guid>https://Anlarry.github.io/posts/paper-reading/skybridge-xpc/</guid>
+      <guid>https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/</guid>
       <description>Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
 另外在宏内核中也会经常使用IPC，如Android Binder。
 Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。

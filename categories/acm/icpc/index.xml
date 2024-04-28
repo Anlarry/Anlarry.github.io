@@ -6,7 +6,8 @@
     <description>Recent content in ACM/ICPC on Hi-^_^</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>Jiali Wang</copyright><atom:link href="https://Anlarry.github.io/categories/acm/icpc/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>Jiali Wang</copyright>
+    <lastBuildDate>Tue, 01 Sep 2020 19:40:00 +0000</lastBuildDate><atom:link href="https://Anlarry.github.io/categories/acm/icpc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Codeforces Round #664</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/</link>
@@ -154,10 +155,10 @@ $$ Ans=\sum_{d=1}^{K}dF(\lfloor\frac{K}{d}\rfloor, N) $$
     
     <item>
       <title>CodeChef - PRIMEDST</title>
-      <link>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codechef---primedst/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
       
-      <guid>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codechef---primedst/</guid>
       <description>Prime Distance On Tree 题意 Prime Distance On Tree
 给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
 Solution 可以从生成函数的角度考虑
@@ -212,10 +213,10 @@ $$ \begin{aligned} t&amp;rsquo;_i &amp;amp;=(reverse\ t_i == op ? 1 : 0) \newlin
     
     <item>
       <title>URAL - 1996</title>
-      <link>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</link>
       <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
       
-      <guid>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</guid>
       <description>URAL - 1996 题意： URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
 Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
 记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&amp;rsquo;$, 在此处的的代价为

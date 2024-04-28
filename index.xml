@@ -43,7 +43,8 @@ GNN虽然网络层数少，计算资源需求不大，但是图和特征需要�
       <pubDate>Wed, 15 Feb 2023 00:00:00 +0000</pubDate>
       
       <guid>https://Anlarry.github.io/book-reading/2024/</guid>
-      <description>海伯利安 伯劳教会、光阴冢、霸主、技术内核&amp;hellip;，神父、上校、诗人、学者、圣徒、侦探、领事踏上了朝圣之旅。</description>
+      <description>海伯利安 伯劳教会、光阴冢、霸主、技术内核&amp;hellip;，神父、上校、诗人、学者、圣徒、侦探、领事踏上了朝圣之旅。
+邓小平时代 「抓大放小」，「黑猫白猫，抓到老鼠就是好猫」&amp;hellip;, 他带来了中国现代经济快速发展，用他作为领导人的智慧指引改革开放的未来。</description>
     </item>
     
     <item>
@@ -165,10 +166,10 @@ Strategy Properties 在同样的bugdet下，HAL选出了更多的label，也就�
     
     <item>
       <title>SkyBridge &amp; XPC</title>
-      <link>https://Anlarry.github.io/posts/paper-reading/skybridge-xpc/</link>
+      <link>https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
       
-      <guid>https://Anlarry.github.io/posts/paper-reading/skybridge-xpc/</guid>
+      <guid>https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/</guid>
       <description>Inter-Process Communication 微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。
 另外在宏内核中也会经常使用IPC，如Android Binder。
 Optimize synchronous IPC 一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。
@@ -368,10 +369,10 @@ sum.ys： 遍历链表求和
     
     <item>
       <title>CodeChef - PRIMEDST</title>
-      <link>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/codechef---primedst/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
       
-      <guid>https://Anlarry.github.io/posts/acm-icpc/codechef-primedst/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/codechef---primedst/</guid>
       <description>Prime Distance On Tree 题意 Prime Distance On Tree
 给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率
 Solution 可以从生成函数的角度考虑
@@ -426,10 +427,10 @@ $$ \begin{aligned} t&amp;rsquo;_i &amp;amp;=(reverse\ t_i == op ? 1 : 0) \newlin
     
     <item>
       <title>URAL - 1996</title>
-      <link>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</link>
+      <link>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</link>
       <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
       
-      <guid>https://Anlarry.github.io/posts/acm-icpc/ural-1996/</guid>
+      <guid>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</guid>
       <description>URAL - 1996 题意： URAL - 1996 给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价
 Solution : 因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$
 记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&amp;rsquo;$, 在此处的的代价为
