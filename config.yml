@@ -138,10 +138,6 @@ menu:
           name: Book-Reading 📚
           url: /book_reading/
           weight: 40
-        - identifier: links
-          name: Links 🔗
-          url: /links/
-          weight: 50
         - identifier: search
           name: Search 🔍
           url: /search/
