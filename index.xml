@@ -47,7 +47,9 @@ GNN虽然网络层数少，计算资源需求不大，但是图和特征需要�
 邓小平时代 「抓大放小」，「黑猫白猫，抓到老鼠就是好猫」&amp;hellip;, 他带来了中国现代经济快速发展，用他作为领导人的智慧指引改革开放的未来。
 海伯利安的陨落 两个终极智能的战争，超越空间和时间&amp;hellip;
 置身事内 “发展”事关每个人，影响生活的方方面面，然而经济发展错中复杂，涉及政府和市场多方博弈和权衡（e.g.，土地财政/土地金融）。
-《置身事内》揭开中国经济发展现状的冰山一角。对经济发展进程的总结和理解越是深刻，则越是能理解发展问题的盘根错节，理解“向什么方向发展？按什么路线发展？”之难。</description>
+《置身事内》揭开中国经济发展现状的冰山一角。对经济发展进程的总结和理解越是深刻，则越是能理解发展问题的盘根错节，理解“向什么方向发展？按什么路线发展？”之难。
+他改变了中国 向老学长学习！字里行间可以感受到老学长作为领导人的魅力、对于国情的深沉而长久的思考、以及作为知识分子对科学和艺术的热爱。
+“在江看来，他在工程学方面所受的教育和20多年来在工业部门的从业经验使他的思维架构得以成型，在政府部门工作的30多年中，尽管江学会了像政治家那样运筹和抗争，但他从来没有忘记像下程师那样去分析和计算。他还是一个求知若渴的知识分子，一个喜欢吟诗作诗的文学爱好者。他热爱科学，钟情艺术。各种各样的知识积累使他得以用自己的方式来看待这个世界。再加上他的民族自豪感、爱困主义和他对马克思主义的信仰，江形成了一整套独特的思维方式。这种兴趣利经验的独特组合，集中在一个人身上实属罕见.集中在一个国家领导人身上则更为罕见，这种独特的组合赋予了江泽民特殊的品质。”</description>
     </item>
     
     <item>
@@ -442,20 +444,6 @@ $$ \sum_{i+j=pos+m-1} [a_i \ne b&amp;rsquo;_j ] $$
 $$ \sum_{i+j=posm-1} a_j * b&amp;rsquo;_j $$
 可以算出来相等的$1$的个数$cnt_1$，再将$a,b$串取反，再做一次卷积就可以算出$0$相等的个数$cnt_2$，$ans=m-cnt_1-cnt_2$
 #include &amp;lt;cstdio&amp;gt; #include &amp;lt;stack&amp;gt; #include &amp;lt;set&amp;gt; #include &amp;lt;cmath&amp;gt; #include &amp;lt;map&amp;gt; #include &amp;lt;time.h&amp;gt; #include &amp;lt;vector&amp;gt; #include &amp;lt;iostream&amp;gt; #include &amp;lt;string&amp;gt; #include &amp;lt;cstring&amp;gt; #include &amp;lt;algorithm&amp;gt; #include &amp;lt;memory.h&amp;gt; #include &amp;lt;cstdlib&amp;gt; #include &amp;lt;queue&amp;gt; #include &amp;lt;iomanip&amp;gt; #include &amp;lt;unordered_map&amp;gt; #define P pair&amp;lt;int, int&amp;gt; #define LL long long #define LD long double #define PLL pair&amp;lt;LL, LL&amp;gt; #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i &amp;lt; b; i++) #define PI acos(-1.</description>
-    </item>
-    
-    <item>
-      <title>Links</title>
-      <link>https://Anlarry.github.io/links/</link>
-      <pubDate>Thu, 01 Jan 1970 00:32:50 +0000</pubDate>
-      
-      <guid>https://Anlarry.github.io/links/</guid>
-      <description>Friends 🐳 Wang Shuai, and his Github.
-🐳 SHEN Haiyang, and his Github.
-🐳 Peng Guanwen, and his Github.
-🐳 Yiming Chen, and his Github.
-🐳 Tao Wu, and his Github.
-🐳 yuanya, and his Github.</description>
     </item>
     
     
