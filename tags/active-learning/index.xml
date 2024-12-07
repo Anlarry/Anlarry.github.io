@@ -4,15 +4,15 @@
     <title>Active Learning on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/active-learning/</link>
     <description>Recent content in Active Learning on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/active-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 22 Oct 2021 16:35:00 +0800</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/tags/active-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Active Learning for ML Enhanced Database Systems</title>
       <link>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</guid>
       <description>&lt;style type=&#34;text/css&#34;&gt;
 figcaption {
@@ -64,6 +64,5 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;center&gt;&lt;img src=&#34;image-20211021160444681.png&#34; style=&#34;width:70%;&#34;&gt;&lt;/center&gt;
 &lt;p&gt;HAL相比于其他AL策略利用了各种不同的特点。感觉这是为什么HAL可以work的一个原因。在实验中，OPT(A crude baseline)直接用cost估计(for PRP)，Huber回归(for ECP)得到label不用retrain也不需要额外的label，比其它AL错误要高出很多。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -4,15 +4,15 @@
     <title>SysCall on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/syscall/</link>
     <description>Recent content in SysCall on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Fri, 10 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/syscall/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/tags/syscall/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>FlexSC</title>
       <link>https://Anlarry.github.io/posts/paper-reading/flexsc/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/flexsc/</guid>
       <description>&lt;h2 id=&#34;system-call-cost&#34;&gt;System Call Cost&lt;/h2&gt;
 &lt;p&gt;应用程序通过System Call向kernel请求服务。一般应用程序发起系统调用后，从用户态进入内核态，最后从异常退出，返回用户态。&lt;/p&gt;
@@ -22,20 +22,10 @@
 &lt;li&gt;Indirect Cost: 程序的局部性以及cache可以提升性能。但是在系统调用后，要在kernel空间执行代码，这就会影响cache性能。而且在kernel处理结束返回用户后，相比与原来的cache，cache受到了污染，带来间接性能损失。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;可以看到在系统调用后，IPC(&lt;strong&gt;I&lt;/strong&gt;nstructions &lt;strong&gt;P&lt;/strong&gt;er &lt;strong&gt;C&lt;/strong&gt;ycle)降低。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;image-20211210165541733.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/flexsc/image-20211210165541733.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;exception-less-system-call&#34;&gt;Exception-Less System Call&lt;/h2&gt;
 &lt;p&gt;exception-less系统调用，让系统调用异步完成。在user和kernel共享一些&lt;strong&gt;syscall pages&lt;/strong&gt;，用这些syscall page记录当前请求的系统调用。用户发起系统调用后，在syscall pages中添加新的entry后就可以返回。同时，有一些特殊的kernel thread，&lt;strong&gt;syscall thread&lt;/strong&gt;，在syscall pages中找到请求的系统调用，把返回值写在相应的条目。最后用户就通过可以检查syscall pages，拿到返回值。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2021-12-10-19-20-47.png#center-large&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-19-20-47.png#center-large&#34;&gt;&lt;/p&gt;
 &lt;p&gt;那这种将invoke和execute解耦的设计怎么做有什么好处呢？&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;可以推迟执行，把syscall按batch执行，降低mode之间转化的代价，&lt;em&gt;improve temporal locality&lt;/em&gt;。&lt;/li&gt;
@@ -50,17 +40,11 @@
 &lt;p&gt;syscall thread的调度，会影响exception-less syscall的性能。对于单核，调用&lt;code&gt;flexsc_wait&lt;/code&gt;后，调度syscall thread处理page中每个entry，如果出现阻塞，就用新的syscall thread接着处理一下个entry。多核时，one syscall thread per application and core，这样就带来了并行处理的可能。&lt;/p&gt;
 &lt;h2 id=&#34;flexsc-threads&#34;&gt;FlexSC Threads&lt;/h2&gt;
 &lt;p&gt;但是这样异步方式，可能会让使用变得复杂，而且随着多核的发展，作者就实现了FlexSC-Threads。利用dynamic loading，系统调用时，调用一个wrapper，这样就可以让应用得到&lt;em&gt;free lunch&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2021-12-10-20-03-50.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;维护$M$个user-mod thread，对一个process，每个核上只有一个可以被kernel看见。发起系统调用的线程，在写好entry后，就会被切换执行一下thread。用完ready的user-mode thread，就看看syscall page上有没有完成的。如果还没有ready的，就需要调用下&lt;code&gt;flexsc_wait&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;对于这种设计，需要提高并发，来提升性能。highly threaded workloads是FlexSC-Threads的理想环境。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;[1] Soares L, Stumm M. FlexSC: Flexible System Call Scheduling with Exception-Less System Calls[C]//Osdi. 2010, 10: 33-46.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -4,15 +4,15 @@
     <title>Posts on Hi-^_^</title>
     <link>https://Anlarry.github.io/posts/</link>
     <description>Recent content in Posts on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Sat, 18 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://Anlarry.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GNN Application in Recommendation</title>
       <link>https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/</link>
       <pubDate>Sat, 18 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/</guid>
       <description>&lt;h3 id=&#34;prelude&#34;&gt;Prelude&lt;/h3&gt;
 &lt;p&gt;GNN是最近几年中机器学习较新的一个发展方向，也是学术界和工业界研究的热点话题。相比于node2vec、PageRank，GNN具有更强大的学习能力，能够更好得感知图数据。&lt;/p&gt;
@@ -21,19 +21,9 @@
 &lt;h3 id=&#34;lets-begin-with-pinsage-1&#34;&gt;Let&amp;rsquo;s begin with PinSage &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 &lt;p&gt;GNN的开山制作——GCN &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;把GNN训练用矩阵乘法来刻画，这样会导致一个问题，每一层每个点都要从他的邻居中读取feature (i.e. 全图训练)，导致GNN的复杂度非常高。&lt;/p&gt;
 &lt;p&gt;后来，一个点在他的部分邻居中读取feature（i.e. 图采样）就可以保证模型的准确度，这样就减低了GNN训练的成本。PinSage也是一个基于采样的GNN算法，是一个早期同时也非常经典的GNN算法。和GraphSage相比，最大的不同点在于用random-walk，采样的子图的质量会好一些。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-20-42-27.png#center&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-20-42-27.png#center&#34;&gt;&lt;/p&gt;
 &lt;p&gt;比如上图就是一个两层的GNN, 在采样完成后我们会得到很多个子图（i.e. mini-batch）并喂给网络训练。每层网络都是如下图所示的图卷积操作，通过聚合特征（e.g. 取平均，求和）再通过一层神经网络得到一下层的输入。将多层图卷积stack到一起就构成了整个GNN，一般只有2-3层。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-20-54-29.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-20-54-29.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;然而这和推荐系统有什么关系呢？在Pinterest中，有很多&lt;em&gt;pin&lt;/em&gt;（类似淘宝的商品，在推荐系统中也称之为&lt;em&gt;item&lt;/em&gt;），每个item会包含图片、文本信息，将图片和文本的embedding拼接到一起得到item的初始特征向量。在训练完GNN之后，通过推理得到每个item的嵌入向量，之后推荐系统就可以根据embedding向用户推荐新的item。&lt;/p&gt;
 &lt;h3 id=&#34;recoommandation-system-at-pinterest&#34;&gt;Recoommandation System at Pinterest&lt;/h3&gt;
 &lt;p&gt;到推荐系统中，我们会认为每个item的embeddin向量是通过一个黑箱过程（i.e. PinSage），是提前已知的 &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;。我们的问题是，知道用户点击item历史序列$\mathcal{A}=\{a_1, a_2, &amp;hellip;\}$，我们想从$\mathcal{P}=\{p_1, p_2, &amp;hellip;\}$中预测下一个用户可能感兴趣的商品。&lt;/p&gt;
@@ -44,75 +34,37 @@
 &lt;li&gt;用户历史动作序列聚类&lt;/li&gt;
 &lt;li&gt;得到类中心嵌入向量（Medoid based）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-22-25-04.png#center-large&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-22-25-04.png#center-large&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;根据time decay计算类的重要度&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-21-18-03.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-21-18-03.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;找哪一个item最合适是一个索引过程，一般会通过cache加速查询。为了兼顾用户的长期兴趣和系统延迟，PinnerSage将任务分成两类，daily和online。在每天PinnerSage都会把用户的历史动作进行聚类的，得到类中心和重要度，这样可以保证和用户兴趣。而在online推荐的时候，只会对用最新的动作在已有的类上refine，降低推荐的延迟。&lt;/p&gt;
 &lt;h2 id=&#34;aligraph-3&#34;&gt;AliGraph &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;p&gt;图数据规模的增大给GNN训练带来新的挑战，在工业界，图的规模会非常大，点和边往往是billion量级的。Ali坐拥最大的电商平台之一，大规模图神经网络既有真实的场景，同时也是一个亟须解决的问题。&lt;/p&gt;
 &lt;p&gt;AliGraph是ali的一个图神经网络框架。从系统的角度来看，AliGraph需要为上层用户提供应有的支撑，使得上层算法和应用开发可以仅仅关注自身的逻辑，而不用担心资源如何分配的问题。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-22-43-30.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-22-43-30.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;面对超大规模的图，AliGraph通过parition把图分布式存在集群上，解决了存储的问题。同时通过维护cache，尽可能减少partition之间的通讯开销。同时AliGraph还需要实现常见的算子来支持上层GNN应用。AliGraph也进行了开源，GraphLearn &lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;，同时支持推理和训练任务。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-23-39-15.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-23-39-15.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;GNN训练基本都是大同小异，而推理任务是部署和落地中主要workload，而且大部分的计算资源也是花在推理上。考虑到真实场景下，图一般是动态（e.g. 新用户的加入），GraphLearn后来增加了Dynamic Graph Service (DGS)来支持动态图的推理任务。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-17-23-45-57.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-23-45-57.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;整个系统通过微服务的方式运行，每个模块被拆到subservices，模块之间都通过队列连接起来（e.g. kafka）。&lt;/p&gt;
 &lt;h2 id=&#34;美团广告推荐-4&#34;&gt;美团广告推荐 &lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;可以发现在和Pinterest的推荐系统其实在设计上有很多共同点。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;美团在推荐任务中有两个观察点：&lt;strong&gt;数据样本稀疏&lt;/strong&gt;，广告投放后点击量非常少；&lt;strong&gt;用户兴趣存在时空特点&lt;/strong&gt;，在不同时间点和地点用户有不同的兴趣点。通过异构图构建、注意力机制等方法解决的推荐不准确的问题。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-18-00-04-16.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-18-00-04-16.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;整个推荐也分成online任务，保证请求低延迟；以及offline任务，用来更新图节点embedding，学习用户的长期兴趣。而整个系统的部署方式和GraphLearn也有一些相似性。&lt;/p&gt;
 &lt;h2 id=&#34;challenges-still-exist&#34;&gt;Challenges still exist&lt;/h2&gt;
 &lt;p&gt;在很多业务场景下，图并不是静态不变的而是呈现出一种时间特征，一些点在$t_0$时加入，之后在$t_1$时删除。但是时序图GNN（TGNN）仍然是一个open的问题 &lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;。在近几年GNN的发展中，开放的标准数据集（e.g. OGB &lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;）有着巨大的贡献，不论是GNN算法还是GNN系统开发，都会将OGB作为数据集和其他baseline比较。然而目前TGNN并没有对应的标准数据集，这样我们很难去比较不同来自不同团队的工作。另一个方面，GNN的收敛性和表达能力是可以被证明的，但是TGNN还是一个相对较新的算法，并没有GNN成熟，缺少基础的理论支撑。&lt;/p&gt;
 &lt;p&gt;GNN虽然网络层数少，计算资源需求不大，但是图和特征需要占用大量的存储资源，这给GNN部署和落地带来了一些挑战 &lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2023-03-18-13-38-30.png#center-large&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
-&lt;p&gt;这就产生了一个新的问题，在部署GNN时我们希望可以降低存储的开销，Serving graph compression for GNNs。Model compression、Coreset selection、 Dataset distillation是目前的一些常见的方法。&lt;/p&gt;</description>
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-18-13-38-30.png#center-large&#34;&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Unicode with xelatex</title>
       <link>https://Anlarry.github.io/posts/tool/xelatexunicode/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/tool/xelatexunicode/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Unicode&#34;&gt;Unicode&lt;/a&gt;丰富了日常使用的字符集, 让我们可以使用一种简单便捷的方式表达各种奇怪的字符, 比如想要在输入一个雪人&lt;a href=&#34;https://unicodeplus.com/U+2603&#34;&gt;Snowman&lt;/a&gt;, &lt;code&gt;U+2603&lt;/code&gt;&lt;/p&gt;
 &lt;center&gt;
@@ -130,12 +82,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Unicode char &lt;span style=&#34;color:#66d9ef&#34;&gt;\texttt&lt;/span&gt;{U+25E6} is ◦
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而输出的PDF中并没有包含所有的Unicode字符, 看起来这个问题还存在一定的共性&lt;a href=&#34;https://tex.stackexchange.com/questions/45796/unicode-characters-not-displaying-in-xetex&#34;&gt;unicode-characters-not-displaying-in-xetex&lt;/a&gt;, 而且似乎是个字体问题.&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2022-11-10-22-08-15.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-08-15.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Tex Engine使用&lt;a href=&#34;https://en.wikipedia.org/wiki/XeTeX#Example&#34;&gt;xelatex&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -153,21 +100,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Unicode char &lt;span style=&#34;color:#66d9ef&#34;&gt;\texttt&lt;/span&gt;{U+25E6} is ◦
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-
-
-&lt;img src=&#34;2022-11-10-22-26-48.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
-&lt;p&gt;Ha!现在ᛤ已经可以正常显示了, 𓄅却变成了一个奇怪字符. 其实这是因为在FreeMono字体中缺失字符𓄅, 而ᛤ之所以能显示是因为FreeMono包含了这个字符.&lt;/p&gt;
-&lt;p&gt;因此我们可以发现, 在xelatex中使用Unicode, &lt;strong&gt;需要使用正确的字体&lt;/strong&gt;, 即字体中要包含应相应的unicode字符.&lt;/p&gt;</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-26-48.png#center-medium&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Ha!现在ᛤ已经可以正常显示了, 𓄅却变成了一个奇怪字符. 其实这是因为在FreeMono字体中缺失字符𓄅, 而ᛤ之所以能显示是因为FreeMono包含了这个字符.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>FlexSC</title>
       <link>https://Anlarry.github.io/posts/paper-reading/flexsc/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/flexsc/</guid>
       <description>&lt;h2 id=&#34;system-call-cost&#34;&gt;System Call Cost&lt;/h2&gt;
 &lt;p&gt;应用程序通过System Call向kernel请求服务。一般应用程序发起系统调用后，从用户态进入内核态，最后从异常退出，返回用户态。&lt;/p&gt;
@@ -177,20 +116,10 @@
 &lt;li&gt;Indirect Cost: 程序的局部性以及cache可以提升性能。但是在系统调用后，要在kernel空间执行代码，这就会影响cache性能。而且在kernel处理结束返回用户后，相比与原来的cache，cache受到了污染，带来间接性能损失。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;可以看到在系统调用后，IPC(&lt;strong&gt;I&lt;/strong&gt;nstructions &lt;strong&gt;P&lt;/strong&gt;er &lt;strong&gt;C&lt;/strong&gt;ycle)降低。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;image-20211210165541733.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/flexsc/image-20211210165541733.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;exception-less-system-call&#34;&gt;Exception-Less System Call&lt;/h2&gt;
 &lt;p&gt;exception-less系统调用，让系统调用异步完成。在user和kernel共享一些&lt;strong&gt;syscall pages&lt;/strong&gt;，用这些syscall page记录当前请求的系统调用。用户发起系统调用后，在syscall pages中添加新的entry后就可以返回。同时，有一些特殊的kernel thread，&lt;strong&gt;syscall thread&lt;/strong&gt;，在syscall pages中找到请求的系统调用，把返回值写在相应的条目。最后用户就通过可以检查syscall pages，拿到返回值。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2021-12-10-19-20-47.png#center-large&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-19-20-47.png#center-large&#34;&gt;&lt;/p&gt;
 &lt;p&gt;那这种将invoke和execute解耦的设计怎么做有什么好处呢？&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;可以推迟执行，把syscall按batch执行，降低mode之间转化的代价，&lt;em&gt;improve temporal locality&lt;/em&gt;。&lt;/li&gt;
@@ -205,34 +134,22 @@
 &lt;p&gt;syscall thread的调度，会影响exception-less syscall的性能。对于单核，调用&lt;code&gt;flexsc_wait&lt;/code&gt;后，调度syscall thread处理page中每个entry，如果出现阻塞，就用新的syscall thread接着处理一下个entry。多核时，one syscall thread per application and core，这样就带来了并行处理的可能。&lt;/p&gt;
 &lt;h2 id=&#34;flexsc-threads&#34;&gt;FlexSC Threads&lt;/h2&gt;
 &lt;p&gt;但是这样异步方式，可能会让使用变得复杂，而且随着多核的发展，作者就实现了FlexSC-Threads。利用dynamic loading，系统调用时，调用一个wrapper，这样就可以让应用得到&lt;em&gt;free lunch&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2021-12-10-20-03-50.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/flexsc/2021-12-10-20-03-50.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;维护$M$个user-mod thread，对一个process，每个核上只有一个可以被kernel看见。发起系统调用的线程，在写好entry后，就会被切换执行一下thread。用完ready的user-mode thread，就看看syscall page上有没有完成的。如果还没有ready的，就需要调用下&lt;code&gt;flexsc_wait&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;对于这种设计，需要提高并发，来提升性能。highly threaded workloads是FlexSC-Threads的理想环境。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;[1] Soares L, Stumm M. FlexSC: Flexible System Call Scheduling with Exception-Less System Calls[C]//Osdi. 2010, 10: 33-46.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>NextDoor</title>
       <link>https://Anlarry.github.io/posts/paper-reading/nextdoor/</link>
       <pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/nextdoor/</guid>
       <description>&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
 &lt;p&gt;基本各种东西都可以用图来表示，也就促成了GNN的快速发展。然而很多图都有这样的特点，一些节点的度数很高然而大多数节点的度数很低。&lt;/p&gt;
 &lt;p&gt;训练时要用邻居更新当前节点，不能将整个图全部拿来训练，因此一般采用graph sampling+mini batch，比如，给$n$个节点，每个节点对邻居采样后在进行训练。&lt;/p&gt;
 &lt;p&gt;然而产生了新的问题，采样在整个训练过程中占了很多时间。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;./image-20211114114025150.png#center-small#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114114025150.png#center-small#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;因此，大家也会去想用GPU加速采样，但是naive的方法并不能很好的利用GPU。&lt;/p&gt;
 &lt;h2 id=&#34;transit-parallelism&#34;&gt;&amp;ldquo;Transit-Parallelism&amp;rdquo;&lt;/h2&gt;
 &lt;p&gt;作者首先对采样进行了抽象，采样从一节点开始，扩展出新的节点加入sample，再从新的节点扩展$\cdots$，每次遍历邻居扩展新节点的节点，作者把它叫做&amp;quot;transit vertices&amp;quot;&lt;/p&gt;
@@ -241,63 +158,34 @@
 &lt;li&gt;&lt;strong&gt;Individual Transit Sampling&lt;/strong&gt;，这个是按节点来的，每个transit节点从邻居中采样一定数量的节点&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Collective Transit Sampling&lt;/strong&gt;，这个是按层来，每一层从所有transit节点的邻居中采样一定数量的节点&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;image-20211114114804228.png#center&#34; alt=&#34;image-20211114114804228&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20211114114804228&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114114804228.png#center&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;CUDA &amp;amp; GPU&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;一个CUDA程序被划分给很多blocks of threads完成并行，而GPU又由很多StreamingMultiprocessors (SMs)构成，每个block被放到SM上执行&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;automatic-scalability.png#center&#34; alt=&#34;Automatic Scalability.&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Automatic Scalability.&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/automatic-scalability.png#center&#34;&gt;&lt;/p&gt;
 &lt;p&gt;一个block的线程数是有限的，但是相同的大小block可以被组织成grid，于是kernel(a c++ function)就可以用grid里面所有的线程。
 $$
 thread \xrightarrow[]{array} block \xrightarrow[]{array} grid
 $$
 众所周知，内存层次结构，GPU当然也有：&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;memory-hierarchy.png#center&#34; alt=&#34;Memory Hierarchy.&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;Memory Hierarchy.&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/memory-hierarchy.png#center&#34;&gt;&lt;/p&gt;
 &lt;p&gt;前面已经提到了block会在SM上执行，在物理实现时会用到SIMT(Single-Instruction, Multiple-Thread)。multiprocessor用warp(a group of 32 threads)来管理线程。&lt;/p&gt;
 &lt;p&gt;warp中的线程都从相同的起点开始，但是每个线程都有自己的pc，寄存器状态也可能不一样。而且一个warp的thread执行的指令还是相同的。&lt;/p&gt;
 &lt;p&gt;如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Sample-Parallelism&lt;/strong&gt;，对于Individual Transit Sampling可以将每一对sample和transit分配$m_i$个线程，每个sample放到一个block里。对于Collective Transit Sampling，需要先把所有的邻居存到global memory里，再采样。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;image-20211114120722353.png#center-medium&#34; alt=&#34;image-20211114120722353&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20211114120722353&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114120722353.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在采样时，邻居多的节点计算的时间就会更久。如果同一个warp里面的两个thread被分给两个邻居数量不同的transit，就会有divergence。而且，图得存在gobal memory，shared memory利用不充分。&lt;/p&gt;
 &lt;p&gt;但是如果是按transit划分，局部性就会更好，按照工作量需求分配线程数量。是不是有点像倒排索引 :-)&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;image-20211114121110605.png#center-medium&#34; alt=&#34;image-20211114121110605&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20211114121110605&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114121110605.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;线程组中的线程，他们做的事情更相似，而且工作量也差不多。他们访问的邻居也是同一个transit的，能更好利用share memory。&lt;/p&gt;
 &lt;h2 id=&#34;sampling-large-graphs&#34;&gt;Sampling Large Graphs&lt;/h2&gt;
-&lt;p&gt;NextDoor还可以去对超出GPU memory的图采样。方法有点像mini batch，把图分成不相交的子图，每次对一个子图和和其transit节点采样。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;[1] Jangda A, Polisetty S, Guha A, et al. Accelerating graph sampling for  graph machine learning using gpus[C]//Proceedings of the Sixteenth  European Conference on Computer Systems. 2021: 311-326.&lt;/p&gt;</description>
+&lt;p&gt;NextDoor还可以去对超出GPU memory的图采样。方法有点像mini batch，把图分成不相交的子图，每次对一个子图和和其transit节点采样。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Active Learning for ML Enhanced Database Systems</title>
       <link>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/active-learning-for-ml-enhanced-database-systems/</guid>
       <description>&lt;style type=&#34;text/css&#34;&gt;
 figcaption {
@@ -349,12 +237,10 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;center&gt;&lt;img src=&#34;image-20211021160444681.png&#34; style=&#34;width:70%;&#34;&gt;&lt;/center&gt;
 &lt;p&gt;HAL相比于其他AL策略利用了各种不同的特点。感觉这是为什么HAL可以work的一个原因。在实验中，OPT(A crude baseline)直接用cost估计(for PRP)，Huber回归(for ECP)得到label不用retrain也不需要额外的label，比其它AL错误要高出很多。&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>SkyBridge &amp; XPC</title>
       <link>https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/</guid>
       <description>&lt;h2 id=&#34;inter-process-communication&#34;&gt;Inter-Process Communication&lt;/h2&gt;
 &lt;p&gt;微内核相比与宏内核，具有更好的扩展性、安全性，也能够更好地容忍错误。但是微内核只保留很基本的功能，很多服务都作为一个用户进程存在，进程之间大量使用IPC传递消息。&lt;/p&gt;
@@ -365,12 +251,7 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;p&gt;&lt;a href=&#34;https://sel4.systems/&#34;&gt;seL4&lt;/a&gt;用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;IPCtime.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/IPCtime.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在seL4上测试负载，IPC占用的时间是很多的。&lt;/p&gt;
 &lt;h2 id=&#34;skybridge&#34;&gt;SkyBridge&lt;/h2&gt;
 &lt;p&gt;为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，&lt;strong&gt;EPT(extended page table)&lt;/strong&gt; 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。&lt;/p&gt;
@@ -381,37 +262,17 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;p&gt;这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;skybridge.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;code.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/skybridge.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/code.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;从上图可以看到SkyBridge的两个kernel：&lt;code&gt;RootKernel&lt;/code&gt;( a tiny hypervisor)和&lt;code&gt;SubKernel&lt;/code&gt;(即microkernel)。&lt;/p&gt;
 &lt;p&gt;首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。&lt;/p&gt;
 &lt;p&gt;Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用&lt;code&gt;direct_server_call&lt;/code&gt;，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;addressT.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/addressT.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。&lt;/p&gt;
 &lt;h3 id=&#34;something-else&#34;&gt;something else&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;RootKernel &amp;amp; 虚拟化开销&lt;/strong&gt;，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;illegal VMFUNC&lt;/strong&gt;，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;rewrite.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/rewrite.png&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;xpc&#34;&gt;XPC&lt;/h2&gt;
 &lt;p&gt;但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。&lt;/p&gt;
 &lt;p&gt;XPC从两个方面提高IPC性能，&lt;/p&gt;
@@ -419,23 +280,14 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;li&gt;让IPC不经过kernel&lt;/li&gt;
 &lt;li&gt;不复制传递消息&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;xpc.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/xpc.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。&lt;/p&gt;
-&lt;p&gt;XPC engine提供了两个硬件原语：&lt;strong&gt;User-level Cross Process Call&lt;/strong&gt;，&lt;strong&gt;Lightweight Message Transfer&lt;/strong&gt;&lt;/p&gt;
-&lt;h3 id=&#34;cross-procss-call&#34;&gt;Cross Procss Call&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;x-entry&lt;/strong&gt;, 和其他进程的procedure绑定。每个进程可以创建多个&lt;code&gt;x-entry&lt;/code&gt;,所有的&lt;code&gt;x-entry&lt;/code&gt;都存在&lt;code&gt;x-entry-table&lt;/code&gt;（&lt;code&gt;x-entry-table-reg&lt;/code&gt;指向的一个全局内存空间）中。通过&lt;code&gt;x-entry-table-size&lt;/code&gt;控制&lt;code&gt;x-entry-table&lt;/code&gt;的大小。&lt;code&gt;xcall-cap&lt;/code&gt;(XPC call capability)记录每个entry的capability。&lt;/p&gt;</description>
+&lt;p&gt;XPC engine提供了两个硬件原语：&lt;strong&gt;User-level Cross Process Call&lt;/strong&gt;，&lt;strong&gt;Lightweight Message Transfer&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Codeforces Round #664</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/</link>
       <pubDate>Tue, 01 Sep 2020 19:40:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-664/</guid>
       <description>&lt;h1 id=&#34;codeforces-round-664&#34;&gt;Codeforces Round #664&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -534,12 +386,10 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;b&#34;&gt;B&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;题意&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gym 102501部分题解</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</link>
       <pubDate>Mon, 31 Aug 2020 21:18:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/gym-102501%E9%83%A8%E5%88%86%E9%A2%98%E8%A7%A3/</guid>
       <description>&lt;h1 id=&#34;gym---102501d-gnalcats&#34;&gt;Gym - 102501D Gnalcats&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -727,12 +577,10 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://codeforces.com/gym/102501/problem/J&#34;&gt;https://codeforces.com/gym/102501/problem/J&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Gym 102460L Largest Quadrilateral </title>
       <link>https://Anlarry.github.io/posts/acm-icpc/gym-102460l-largest-quadrilateral/</link>
       <pubDate>Thu, 27 Aug 2020 00:01:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/gym-102460l-largest-quadrilateral/</guid>
       <description>&lt;h1 id=&#34;gym-102460l-largest-quadrilateral&#34;&gt;Gym 102460L Largest Quadrilateral&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -947,12 +795,10 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>Codeforces Round #663</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-663/</link>
       <pubDate>Mon, 17 Aug 2020 22:42:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-663/</guid>
       <description>&lt;h1 id=&#34;codeforces-round-663&#34;&gt;Codeforces Round #663&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -1024,12 +870,10 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;d&#34;&gt;D&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;题意&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Codeforces Round #660</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-660/</link>
       <pubDate>Wed, 12 Aug 2020 01:01:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/codeforces-round-660/</guid>
       <description>&lt;h1 id=&#34;codeforces-round-660&#34;&gt;Codeforces Round #660&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -1234,12 +1078,10 @@ $$&lt;/p&gt;
 &lt;a href=&#34;https://codeforces.com/contest/1388/submission/88678461/&#34;&gt;C&lt;/a&gt;
 &lt;a href=&#34;https://codeforces.com/contest/1388/submission/88747196/&#34;&gt;D&lt;/a&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>nowcoder 2020 多校 第三场</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</link>
       <pubDate>Tue, 11 Aug 2020 16:08:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%B8%89%E5%9C%BA/</guid>
       <description>&lt;h1 id=&#34;nowcoder-2020-多校-第三场&#34;&gt;nowcoder 2020 多校 第三场&lt;/h1&gt;
 &lt;h2 id=&#34;e-two-matchings&#34;&gt;E Two Matchings&lt;/h2&gt;
@@ -1286,12 +1128,10 @@ $$&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;f---fraction-construction-problem&#34;&gt;F   Fraction Construction Problem&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;题意&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>nowcoder 2020 多校 第五场</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</link>
       <pubDate>Fri, 07 Aug 2020 16:34:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/</guid>
       <description>&lt;h1 id=&#34;nowcoder-2020-多校-第五场&#34;&gt;nowcoder 2020 多校 第五场&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -1456,12 +1296,10 @@ $$&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;最长上升子序列&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>POJ 3376</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</link>
       <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</guid>
       <description>&lt;h1 id=&#34;poj-3376&#34;&gt;POJ 3376&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -1503,12 +1341,10 @@ t = \overbrace{a_0\dots a_{i-1}} &amp;amp;a_i\dots a_{n-1}
 \end{cases}
 $$&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>nowcoder 2020 多校 第二场</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</link>
       <pubDate>Tue, 14 Jul 2020 23:18:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%8C%E5%9C%BA/</guid>
       <description>&lt;h1 id=&#34;nowcoder-2020-多校-第二场&#34;&gt;nowcoder 2020 多校 第二场&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -1584,12 +1420,10 @@ $$&lt;/p&gt;</description>
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;b-boundary&#34;&gt;B Boundary&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;题意&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>AtCoder-Sum of gcd of Tuples</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</link>
       <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/atcoder-sum-of-gcd-of-tuples/</guid>
       <description>&lt;h1 id=&#34;atcoder-sum-of-gcd-of-tuples-hard&#34;&gt;AtCoder-Sum of gcd of Tuples (Hard)&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意&lt;/h2&gt;
@@ -1699,12 +1533,10 @@ $$&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>CSAPP arch lab</title>
       <link>https://Anlarry.github.io/posts/csapp/csapp-arch-lab/</link>
       <pubDate>Mon, 16 Mar 2020 21:24:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/csapp/csapp-arch-lab/</guid>
       <description>&lt;h1 id=&#34;arch-lab&#34;&gt;arch lab&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/Anlarry/CSAPP/blob/master/archlab-handout.tar&#34;&gt;Download archlab-handout&lt;/a&gt;&lt;/p&gt;
@@ -1756,12 +1588,10 @@ L1:
 stack:
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;用&lt;code&gt;YAS&lt;/code&gt;编译后，再用&lt;code&gt;YIS&lt;/code&gt;运行&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>CodeChef - PRIMEDST</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/codechef---primedst/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/codechef---primedst/</guid>
       <description>&lt;h1 id=&#34;prime-distance-on-tree&#34;&gt;Prime Distance On Tree&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意&lt;/h2&gt;
@@ -1975,12 +1805,10 @@ $$&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>波里亚计数</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</link>
       <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</guid>
       <description>&lt;h1 id=&#34;polya计数&#34;&gt;Polya计数&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -2005,12 +1833,7 @@ $$&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;假设定义关系$S$，图形$a$可以旋转得到$b$ $\Leftrightarrow$ $aSb$&lt;br&gt;
 例如图中的$方块_1$和$方块_2$具有关系$S$，即他们可以通过旋转得到彼此，而$方块_1$和$方块_2$则没有关系$S$&lt;br&gt;
-
-
-
-&lt;img src=&#34;1.1.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/1.1.png&#34;&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;12-等价类&#34;&gt;1.2 等价类&lt;/h3&gt;
 &lt;p&gt;通过上图，可以看出来：$方块_1$和$方块_2$是同一类的，而$方块_1$和$方块_2$则是另外两类，于是可以想到集合$V$上的等价关系$S$将集合的元素划分到不同的类中，我们把它称为等价类&lt;/p&gt;
@@ -2054,24 +1877,17 @@ $$
 $$
 $\pi_1 \circ \pi_2 (1) = \pi_1(\pi_2(1))=2$&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Rock Paper Scissors Lizard Spock</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</link>
       <pubDate>Tue, 11 Feb 2020 15:40:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/</guid>
       <description>&lt;h1 id=&#34;rock-paper-scissors-lizard-spock&#34;&gt;Rock Paper Scissors Lizard Spock&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意：&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://nanti.jisuanke.com/t/41098&#34;&gt;Rock Paper Scissors Lizard Spock&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;image_b64.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/image_b64.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多&lt;/p&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution：&lt;/h2&gt;
 &lt;p&gt;将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,&lt;/p&gt;
@@ -2202,12 +2018,10 @@ $$&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
-    
     <item>
       <title>URAL - 1996</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</link>
       <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</guid>
       <description>&lt;h1 id=&#34;ural---1996httpsvjudgenetproblem47172origin&#34;&gt;&lt;a href=&#34;https://vjudge.net/problem/47172/origin&#34;&gt;URAL - 1996&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意：&lt;/h2&gt;
@@ -2380,6 +2194,5 @@ $$&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
-    
   </channel>
 </rss>

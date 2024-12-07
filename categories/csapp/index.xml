@@ -4,15 +4,15 @@
     <title>CSAPP on Hi-^_^</title>
     <link>https://Anlarry.github.io/categories/csapp/</link>
     <description>Recent content in CSAPP on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Mon, 16 Mar 2020 21:24:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/categories/csapp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Mar 2020 21:24:00 +0800</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/categories/csapp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CSAPP arch lab</title>
       <link>https://Anlarry.github.io/posts/csapp/csapp-arch-lab/</link>
       <pubDate>Mon, 16 Mar 2020 21:24:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/csapp/csapp-arch-lab/</guid>
       <description>&lt;h1 id=&#34;arch-lab&#34;&gt;arch lab&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/Anlarry/CSAPP/blob/master/archlab-handout.tar&#34;&gt;Download archlab-handout&lt;/a&gt;&lt;/p&gt;
@@ -64,6 +64,5 @@ L1:
 stack:
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;用&lt;code&gt;YAS&lt;/code&gt;编译后，再用&lt;code&gt;YIS&lt;/code&gt;运行&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

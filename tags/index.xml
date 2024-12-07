@@ -4,171 +4,136 @@
     <title>Tags on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/</link>
     <description>Recent content in Tags on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Sat, 18 Mar 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Mar 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GNN</title>
       <link>https://Anlarry.github.io/tags/gnn/</link>
       <pubDate>Sat, 18 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/gnn/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Recommendation</title>
       <link>https://Anlarry.github.io/tags/recommendation/</link>
       <pubDate>Sat, 18 Mar 2023 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/recommendation/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Latex</title>
       <link>https://Anlarry.github.io/tags/latex/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/latex/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Unicode</title>
       <link>https://Anlarry.github.io/tags/unicode/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/unicode/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Xelatex</title>
       <link>https://Anlarry.github.io/tags/xelatex/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/xelatex/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>SysCall</title>
       <link>https://Anlarry.github.io/tags/syscall/</link>
       <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/syscall/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>GPU</title>
       <link>https://Anlarry.github.io/tags/gpu/</link>
       <pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/gpu/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>GRAPH-SAMPLING</title>
       <link>https://Anlarry.github.io/tags/graph-sampling/</link>
       <pubDate>Sun, 14 Nov 2021 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/graph-sampling/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Active Learning</title>
       <link>https://Anlarry.github.io/tags/active-learning/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/active-learning/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ML for Sys</title>
       <link>https://Anlarry.github.io/tags/ml-for-sys/</link>
       <pubDate>Fri, 22 Oct 2021 16:35:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/ml-for-sys/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>“搬家”</title>
       <link>https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>IPC</title>
       <link>https://Anlarry.github.io/tags/ipc/</link>
       <pubDate>Thu, 16 Sep 2021 19:17:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/ipc/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>搬家</title>
       <link>https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</link>
       <pubDate>Tue, 01 Sep 2020 19:40:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>计算几何</title>
       <link>https://Anlarry.github.io/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</link>
       <pubDate>Thu, 27 Aug 2020 00:01:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>STRING</title>
       <link>https://Anlarry.github.io/tags/string/</link>
       <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/string/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>数论</title>
       <link>https://Anlarry.github.io/tags/%E6%95%B0%E8%AE%BA/</link>
       <pubDate>Sat, 25 Apr 2020 00:41:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/%E6%95%B0%E8%AE%BA/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>FFT</title>
       <link>https://Anlarry.github.io/tags/fft/</link>
       <pubDate>Sun, 01 Mar 2020 12:09:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/fft/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>POLYA</title>
       <link>https://Anlarry.github.io/tags/polya/</link>
       <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/tags/polya/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

@@ -4,15 +4,15 @@
     <title>Xelatex on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/xelatex/</link>
     <description>Recent content in Xelatex on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Thu, 10 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/xelatex/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Nov 2022 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/tags/xelatex/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Unicode with xelatex</title>
       <link>https://Anlarry.github.io/posts/tool/xelatexunicode/</link>
       <pubDate>Thu, 10 Nov 2022 00:00:00 +0000</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/tool/xelatexunicode/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/Unicode&#34;&gt;Unicode&lt;/a&gt;丰富了日常使用的字符集, 让我们可以使用一种简单便捷的方式表达各种奇怪的字符, 比如想要在输入一个雪人&lt;a href=&#34;https://unicodeplus.com/U+2603&#34;&gt;Snowman&lt;/a&gt;, &lt;code&gt;U+2603&lt;/code&gt;&lt;/p&gt;
 &lt;center&gt;
@@ -30,12 +30,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Unicode char &lt;span style=&#34;color:#66d9ef&#34;&gt;\texttt&lt;/span&gt;{U+25E6} is ◦
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而输出的PDF中并没有包含所有的Unicode字符, 看起来这个问题还存在一定的共性&lt;a href=&#34;https://tex.stackexchange.com/questions/45796/unicode-characters-not-displaying-in-xetex&#34;&gt;unicode-characters-not-displaying-in-xetex&lt;/a&gt;, 而且似乎是个字体问题.&lt;/p&gt;
-&lt;p&gt;
-
-
-&lt;img src=&#34;2022-11-10-22-08-15.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-08-15.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Tex Engine使用&lt;a href=&#34;https://en.wikipedia.org/wiki/XeTeX#Example&#34;&gt;xelatex&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -53,15 +48,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Unicode char &lt;span style=&#34;color:#66d9ef&#34;&gt;\texttt&lt;/span&gt;{U+25E6} is ◦
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;
-
-
-&lt;img src=&#34;2022-11-10-22-26-48.png#center-medium&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
-&lt;p&gt;Ha!现在ᛤ已经可以正常显示了, 𓄅却变成了一个奇怪字符. 其实这是因为在FreeMono字体中缺失字符𓄅, 而ᛤ之所以能显示是因为FreeMono包含了这个字符.&lt;/p&gt;
-&lt;p&gt;因此我们可以发现, 在xelatex中使用Unicode, &lt;strong&gt;需要使用正确的字体&lt;/strong&gt;, 即字体中要包含应相应的unicode字符.&lt;/p&gt;</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-26-48.png#center-medium&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Ha!现在ᛤ已经可以正常显示了, 𓄅却变成了一个奇怪字符. 其实这是因为在FreeMono字体中缺失字符𓄅, 而ᛤ之所以能显示是因为FreeMono包含了这个字符.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

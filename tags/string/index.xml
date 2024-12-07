@@ -4,15 +4,15 @@
     <title>STRING on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/string/</link>
     <description>Recent content in STRING on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Wed, 05 Aug 2020 10:08:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/string/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2020 10:08:00 +0800</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/tags/string/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>POJ 3376</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</link>
       <pubDate>Wed, 05 Aug 2020 10:08:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</guid>
       <description>&lt;h1 id=&#34;poj-3376&#34;&gt;POJ 3376&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -54,6 +54,5 @@ t = \overbrace{a_0\dots a_{i-1}} &amp;amp;a_i\dots a_{n-1}
 \end{cases}
 $$&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

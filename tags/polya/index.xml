@@ -4,15 +4,15 @@
     <title>POLYA on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/polya/</link>
     <description>Recent content in POLYA on Hi-^_^</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
-    <lastBuildDate>Fri, 14 Feb 2020 00:46:00 +0800</lastBuildDate><atom:link href="https://Anlarry.github.io/tags/polya/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Feb 2020 00:46:00 +0800</lastBuildDate>
+    <atom:link href="https://Anlarry.github.io/tags/polya/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>波里亚计数</title>
       <link>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</link>
       <pubDate>Fri, 14 Feb 2020 00:46:00 +0800</pubDate>
-      
       <guid>https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/</guid>
       <description>&lt;h1 id=&#34;polya计数&#34;&gt;Polya计数&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -37,12 +37,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;假设定义关系$S$，图形$a$可以旋转得到$b$ $\Leftrightarrow$ $aSb$&lt;br&gt;
 例如图中的$方块_1$和$方块_2$具有关系$S$，即他们可以通过旋转得到彼此，而$方块_1$和$方块_2$则没有关系$S$&lt;br&gt;
-
-
-
-&lt;img src=&#34;1.1.png&#34; alt=&#34;&#34;&gt; 
-
-&lt;/p&gt;
+&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/acm-icpc/%E6%B3%A2%E9%87%8C%E4%BA%9A%E8%AE%A1%E6%95%B0/1.1.png&#34;&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;12-等价类&#34;&gt;1.2 等价类&lt;/h3&gt;
 &lt;p&gt;通过上图，可以看出来：$方块_1$和$方块_2$是同一类的，而$方块_1$和$方块_2$则是另外两类，于是可以想到集合$V$上的等价关系$S$将集合的元素划分到不同的类中，我们把它称为等价类&lt;/p&gt;
@@ -86,6 +81,5 @@ $$
 $$
 $\pi_1 \circ \pi_2 (1) = \pi_1(\pi_2(1))=2$&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
