@@ -4,7 +4,7 @@
     <title>FFT on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/fft/</link>
     <description>Recent content in FFT on Hi-^_^</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Sun, 01 Mar 2020 12:09:00 +0800</lastBuildDate>
@@ -17,8 +17,7 @@
       <description>&lt;h1 id=&#34;prime-distance-on-tree&#34;&gt;Prime Distance On Tree&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://vjudge.net/problem/CodeChef-PRIMEDST&#34;&gt;Prime Distance On Tree&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://vjudge.net/problem/CodeChef-PRIMEDST&#34;&gt;Prime Distance On Tree&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;给个树，从树上随机选取一对点$u,v$,求$\delta(u,v)$是素数的概率&lt;/p&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;&lt;em&gt;可以从生成函数的角度考虑&lt;/em&gt;&lt;/p&gt;
@@ -234,8 +233,7 @@ $$&lt;/p&gt;
       <description>&lt;h1 id=&#34;rock-paper-scissors-lizard-spock&#34;&gt;Rock Paper Scissors Lizard Spock&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意：&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://nanti.jisuanke.com/t/41098&#34;&gt;Rock Paper Scissors Lizard Spock&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://nanti.jisuanke.com/t/41098&#34;&gt;Rock Paper Scissors Lizard Spock&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/image_b64.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多&lt;/p&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution：&lt;/h2&gt;
@@ -372,12 +370,11 @@ $$&lt;/p&gt;
       <link>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</link>
       <pubDate>Tue, 11 Feb 2020 12:54:00 +0800</pubDate>
       <guid>https://Anlarry.github.io/posts/acm-icpc/ural---1996/</guid>
-      <description>&lt;h1 id=&#34;ural---1996httpsvjudgenetproblem47172origin&#34;&gt;&lt;a href=&#34;https://vjudge.net/problem/47172/origin&#34;&gt;URAL - 1996&lt;/a&gt;&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;ural---1996&#34;&gt;&lt;a href=&#34;https://vjudge.net/problem/47172/origin&#34;&gt;URAL - 1996&lt;/a&gt;&lt;/h1&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意：&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://vjudge.net/problem/47172/origin&#34;&gt;URAL - 1996&lt;/a&gt;
-给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价&lt;/p&gt;
-&lt;/blockquote&gt;
+给两个长度分别为$n, m$的字节串$A,B$，$A$串的最后一位可以修改，代价为$1$，求使得$B$串为$A$串字串的最小代价&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution-&#34;&gt;Solution :&lt;/h2&gt;
 &lt;p&gt;因为$A$串只有最后最后一位可以修改，所以可以用KMP求出可能匹配的位置，然后计算每个位置的$cost$&lt;/p&gt;
 &lt;p&gt;记$A$串最后一位构成的串为$a$， $B$串的为$b$, 假设$pos(0\le pos \le n-m)是可能匹配的位置$，如果将$b$反转得到$b&amp;rsquo;$, 在此处的的代价为&lt;/p&gt;

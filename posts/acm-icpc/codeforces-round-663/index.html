@@ -2,7 +2,6 @@
 <meta name=keywords content="搬家"><meta name=description content='Codeforces Round #663
 
 http://codeforces.com/contest/1391
-
 C
 题意
 对于一个排列${p_1, p_2, \dots, p_n}$，对于每个数字$p_i$，向前找第一个大于$p_i$的$p_j$，$i$和$j$连一条边，向后同理。求多少种排列生成的图是有环的
@@ -74,7 +73,6 @@ Solution
 对于$p_i$，如果存在$p_j>p_i(j<i)$, $p_k>p_i(k>i)$，那么就是存在环的 那么对于$\forall i$都不成立时，就没有环 此时就是序列的特点就是,数字$n$左边和右边向两边递减 因此排列数就是$n!-2^{n-1}$ #include <cstdio> #include <stack> #include <set> #include <cmath> #include <map> #include <time.h> #include <vector> #include <iostream> #include <string> #include <cstring> #include <algorithm> #include <cstdlib> #include <queue> #include <iomanip> #include <cassert> #define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout << #x << " " << x << "\n" using namespace std; const LL inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 2e3 + 50; #else const int MAX = 2e6 + 50; #endif const int mod = 1e9+7; void file_read(){ #ifdef DEBUG freopen("in", "r", stdin); #endif } int main(){ file_read(); LL n; scanf("%lld\n", &amp;n); LL fact = 1; for(LL i = 1; i <= n; i++) { fact = fact * i % mod; } LL pow2 = 1; for(int i = 1; i < n; i++) { pow2 = pow2 * 2 % mod; } LL res = (fact - pow2) % mod; if(res < 0) res += mod; printf("%lld\n", res); } D 题意'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-08-17T22:42:00+08:00"><meta property="article:modified_time" content="2020-08-17T22:42:00+08:00"><meta property="article:tag" content="搬家"><meta name=twitter:card content="summary"><meta name=twitter:title content="Codeforces Round #663"><meta name=twitter:description content='Codeforces Round #663
 
 http://codeforces.com/contest/1391
-
 C
 题意
 对于一个排列${p_1, p_2, \dots, p_n}$，对于每个数字$p_i$，向前找第一个大于$p_i$的$p_j$，$i$和$j$连一条边，向后同理。求多少种排列生成的图是有环的

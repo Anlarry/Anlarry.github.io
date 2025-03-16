@@ -2,12 +2,10 @@
 <meta name=keywords content="STRING,搬家"><meta name=description content="POJ 3376
 
 tire + manacher
-
 题意
 
 http://poj.org/problem?id=3376
 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
-
 Solution
 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。
@@ -47,12 +45,10 @@ case 2
 $$ \begin{cases} \begin{matrix} &\mathrm{palindrome} \newline s = a_0\dots a_i &\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \newline \newline t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \newline \begin{matrix} \ \ \ \ \ \mathrm{palindrome} &\newline t = \overbrace{a_0\dots a_{i-1}} &amp;a_i\dots a_{n-1} \end{matrix} \end{cases} $$"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-08-05T10:08:00+08:00"><meta property="article:modified_time" content="2020-08-05T10:08:00+08:00"><meta property="article:tag" content="STRING"><meta property="article:tag" content="搬家"><meta name=twitter:card content="summary"><meta name=twitter:title content="POJ 3376"><meta name=twitter:description content="POJ 3376
 
 tire + manacher
-
 题意
 
 http://poj.org/problem?id=3376
 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
-
 Solution
 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。

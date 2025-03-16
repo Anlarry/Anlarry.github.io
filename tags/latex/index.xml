@@ -4,7 +4,7 @@
     <title>Latex on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/latex/</link>
     <description>Recent content in Latex on Hi-^_^</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Thu, 10 Nov 2022 00:00:00 +0000</lastBuildDate>
@@ -32,8 +32,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而输出的PDF中并没有包含所有的Unicode字符, 看起来这个问题还存在一定的共性&lt;a href=&#34;https://tex.stackexchange.com/questions/45796/unicode-characters-not-displaying-in-xetex&#34;&gt;unicode-characters-not-displaying-in-xetex&lt;/a&gt;, 而且似乎是个字体问题.&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-08-15.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Tex Engine使用&lt;a href=&#34;https://en.wikipedia.org/wiki/XeTeX#Example&#34;&gt;xelatex&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;Tex Engine使用&lt;a href=&#34;https://en.wikipedia.org/wiki/XeTeX#Example&#34;&gt;xelatex&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;我们来试试更换为&lt;a href=&#34;https://en.wikipedia.org/wiki/GNU_FreeFont&#34;&gt;FreeMono&lt;/a&gt;字体&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\documentclass&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;[utf8]&lt;/span&gt;{article}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;

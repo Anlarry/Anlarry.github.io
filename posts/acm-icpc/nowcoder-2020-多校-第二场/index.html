@@ -2,7 +2,6 @@
 <meta name=keywords content="搬家"><meta name=description content="nowcoder 2020 多校 第二场
 
 https://ac.nowcoder.com/acm/contest/5667
-
 A All with Pairs
 题意
 给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$
@@ -79,7 +78,6 @@ Solution
 const unsigned long long base = 131; // vector<string> str; string str[MAX]; unordered_map<unsigned long long, int> mp; int nex[MAX]; int cnt[MAX]; void get_hash(const string &amp;s){ unsigned long long res = 0; unsigned long long p = 1; for(int i = s.size()-1; i >= 0; i--){ // unsigned long long x = s[i] - 'a'+1; res += (s[i]-'a'+1) * p; p *= base; mp[res]++; } } void get_next(const string &amp;t){ nex[0] = -1; int k = -1; for(int i = 1; i < t.size(); i++){ while(k > -1 and t[k+1] != t[i]) k = nex[k]; if(t[k+1] == t[i]) k++; nex[i] = k; } } int main(){ #ifdef DEBUG freopen(&#34;in&#34;, &#34;r&#34;, stdin); #endif int n; scanf(&#34;%d&#34;, &amp;n); // cin >> n; for(int i = 0; i < n; i++){ // string s; cin >> str[i]; // str.push_back(s); get_hash(str[i]); } LL ans = 0; for(int i = 0; i < n; i++){ unsigned long long cur_has = 0 ; for(int j = 0; j < str[i].size(); j++){ cur_has = cur_has * base + (str[i][j] - 'a' + 1); // cnt[j] = mp[cur_has]; auto it = mp.find(cur_has); if(it != mp.end()) cnt[j] = it->second; else cnt[j] = 0; } get_next(str[i]); for(int j = 1; j < str[i].size(); j++){ if(nex[j] >= 0) cnt[nex[j]] -= cnt[j]; } for(LL j = 0; j < str[i].size(); j++){ ans = (ans + 1LL * cnt[j] * (j+1LL) % mod * (j+1LL) % mod) % mod; } } printf(&#34;%lld\n&#34;, ans); // cout << ans << '\n'; } B Boundary 题意"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-07-14T23:18:00+08:00"><meta property="article:modified_time" content="2020-07-14T23:18:00+08:00"><meta property="article:tag" content="搬家"><meta name=twitter:card content="summary"><meta name=twitter:title content="nowcoder 2020 多校 第二场"><meta name=twitter:description content="nowcoder 2020 多校 第二场
 
 https://ac.nowcoder.com/acm/contest/5667
-
 A All with Pairs
 题意
 给$n$个串，定义$f(s,t)$为$s$前缀和$t$后缀最长的长度，求$\sum_i\sum_j f(s_i, s_j)^2$

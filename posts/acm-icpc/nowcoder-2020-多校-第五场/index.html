@@ -2,11 +2,9 @@
 <meta name=keywords content="搬家"><meta name=description content='nowcoder 2020 多校 第五场
 
 https://ac.nowcoder.com/acm/contest/5670
-
 B Graph
 
 tire树，最小生成树
-
 题意：
 给一个带有边权的树，可以删除或添加边，但要保证：
 
@@ -171,11 +169,9 @@ $$ \min\limits_{u\in S_1 v\in S_2} {\mathord{dis}(u,v)} $$
 #include <cstdio> #include <stack> #include <set> #include <cmath> #include <map> #include <time.h> #include <vector> #include <iostream> #include <string> #include <cstring> #include <algorithm> #include <memory.h> #include <cstdlib> #include <queue> #include <iomanip> #include <bitset> #include <unordered_map> #include <assert.h> #define P pair<int, int> #define LL long long #define LD long double #define PLL pair<LL, LL> #define mset(a, b) memset(a, b, sizeof(a)) #define rep(i, a, b) for (int i = a; i < b; i++) #define PI acos(-1.0) #define random(x) rand() % x #define debug(x) cout << #x << " " << x << "\n" using namespace std; const int inf = 0x3f3f3f3f; const LL __64inf = 0x3f3f3f3f3f3f3f3f; #ifdef DEBUG const int MAX = 1e3 + 50; #else const int MAX = 3e6 + 50; #endif const int mod = 10007; LL pow2[100]; vector<P> G[MAX]; int dis[MAX]; struct Tire{ int nex[MAX][2]; int siz[MAX]; int tot ; LL ans; void init(){ ans = 0; siz[0] = 0; mset(nex[0], 0); tot = 1; } void add(int x, int d) { int rt = 0; for(int i = d; i >= 0; i--){ int e = x & pow2[i] ? 1 : 0; if(!nex[rt][e]) { mset(nex[tot], 0); siz[tot] = 0; nex[rt][e] = tot ++; } rt = nex[rt][e]; siz[rt] ++; } } LL query(int val, int u, int d) { int rt = u; LL res = val; for(int i = d; i >= 0; i--){ if(res & pow2[i]) { if(nex[rt][1]) { res ^= pow2[i]; rt = nex[rt][1]; } else rt = nex[rt][0]; } else { if(nex[rt][0]) { rt = nex[rt][0]; } else { res ^= pow2[i]; rt = nex[rt][1]; } } } return res; } LL merge(int l, int r, int val, int d, int row_d){ if(!nex[l][0] and !nex[l][1]) { return query(val, r, row_d); } LL res = inf; if(nex[l][0]) res = min(res, merge(nex[l][0], r, val, d-1, row_d)); if(nex[l][1]) res = min(res, merge(nex[l][1], r, val^pow2[d], d-1, row_d)); return res; } void dfs(int u, int val, int d) { if(nex[u][0]) dfs(nex[u][0], val, d-1); if(nex[u][1]) dfs(nex[u][1], val ^ pow2[d], d-1); if(!nex[u][0] or !nex[u][1]) return; int l = nex[u][0], r = nex[u][1]; if(siz[l] > siz[r]) swap(l, r); ans += 1LL * merge(l, r, 0, d-1, d-1) + pow2[d]; } }tire; void dfs(int u, int p, int d){ dis[u] = d; for(int i = 0; i < G[u].size(); i++){ int v = G[u][i].first; if(v == p) continue; dfs(v, u, d^G[u][i].second); } } int main(){ #ifdef DEBUG freopen64("in", "r", stdin); #endif pow2[0] = 1; for(int i = 1; i < 32; i++) pow2[i] = pow2[i-1] << 1; int n; scanf("%d", &amp;n); for(int i = 1; i < n; i++) { int u, v, c; scanf("%d%d%d", &amp;u, &amp;v, &amp;c); u++, v++; G[u].emplace_back(v, c); G[v].emplace_back(u, c); } dfs(1, -1, 0); tire.init(); for(int i = 1; i <= n; i++) tire.add(dis[i], 29); tire.dfs(0, 0, 29); printf("%lld\n", tire.ans); return 0; } D Drop Voicing 最长上升子序列'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-08-07T16:34:00+08:00"><meta property="article:modified_time" content="2020-08-07T16:34:00+08:00"><meta property="article:tag" content="搬家"><meta name=twitter:card content="summary"><meta name=twitter:title content="nowcoder 2020 多校 第五场"><meta name=twitter:description content='nowcoder 2020 多校 第五场
 
 https://ac.nowcoder.com/acm/contest/5670
-
 B Graph
 
 tire树，最小生成树
-
 题意：
 给一个带有边权的树，可以删除或添加边，但要保证：
 

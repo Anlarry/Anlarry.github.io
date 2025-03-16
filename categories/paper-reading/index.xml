@@ -4,7 +4,7 @@
     <title>PAPER-READING on Hi-^_^</title>
     <link>https://Anlarry.github.io/categories/paper-reading/</link>
     <description>Recent content in PAPER-READING on Hi-^_^</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Sat, 18 Mar 2023 00:00:00 +0000</lastBuildDate>
@@ -18,7 +18,7 @@
 &lt;p&gt;GNN是最近几年中机器学习较新的一个发展方向，也是学术界和工业界研究的热点话题。相比于node2vec、PageRank，GNN具有更强大的学习能力，能够更好得感知图数据。&lt;/p&gt;
 &lt;p&gt;GNN的一个经典应用场景是推荐系统。像淘宝这样的电商平台，大量的用户和商品，自然而然地形成了一个复杂异构图，一个直观想法是，可以利用GNN学习用户的兴趣特征，根据用户的历史浏览推荐用户更感兴趣的商品。而且这种方法的推荐质量也更高。&lt;/p&gt;
 &lt;h2 id=&#34;pinterest&#34;&gt;Pinterest&lt;/h2&gt;
-&lt;h3 id=&#34;lets-begin-with-pinsage-1&#34;&gt;Let&amp;rsquo;s begin with PinSage &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;lets-begin-with-pinsage&#34;&gt;Let&amp;rsquo;s begin with PinSage &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h3&gt;
 &lt;p&gt;GNN的开山制作——GCN &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;把GNN训练用矩阵乘法来刻画，这样会导致一个问题，每一层每个点都要从他的邻居中读取feature (i.e. 全图训练)，导致GNN的复杂度非常高。&lt;/p&gt;
 &lt;p&gt;后来，一个点在他的部分邻居中读取feature（i.e. 图采样）就可以保证模型的准确度，这样就减低了GNN训练的成本。PinSage也是一个基于采样的GNN算法，是一个早期同时也非常经典的GNN算法。和GraphSage相比，最大的不同点在于用random-walk，采样的子图的质量会好一些。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-20-42-27.png#center&#34;&gt;&lt;/p&gt;
@@ -40,7 +40,7 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-21-18-03.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;找哪一个item最合适是一个索引过程，一般会通过cache加速查询。为了兼顾用户的长期兴趣和系统延迟，PinnerSage将任务分成两类，daily和online。在每天PinnerSage都会把用户的历史动作进行聚类的，得到类中心和重要度，这样可以保证和用户兴趣。而在online推荐的时候，只会对用最新的动作在已有的类上refine，降低推荐的延迟。&lt;/p&gt;
-&lt;h2 id=&#34;aligraph-3&#34;&gt;AliGraph &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;aligraph&#34;&gt;AliGraph &lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;p&gt;图数据规模的增大给GNN训练带来新的挑战，在工业界，图的规模会非常大，点和边往往是billion量级的。Ali坐拥最大的电商平台之一，大规模图神经网络既有真实的场景，同时也是一个亟须解决的问题。&lt;/p&gt;
 &lt;p&gt;AliGraph是ali的一个图神经网络框架。从系统的角度来看，AliGraph需要为上层用户提供应有的支撑，使得上层算法和应用开发可以仅仅关注自身的逻辑，而不用担心资源如何分配的问题。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-22-43-30.png#center-medium&#34;&gt;&lt;/p&gt;
@@ -49,17 +49,15 @@
 &lt;p&gt;GNN训练基本都是大同小异，而推理任务是部署和落地中主要workload，而且大部分的计算资源也是花在推理上。考虑到真实场景下，图一般是动态（e.g. 新用户的加入），GraphLearn后来增加了Dynamic Graph Service (DGS)来支持动态图的推理任务。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-17-23-45-57.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;整个系统通过微服务的方式运行，每个模块被拆到subservices，模块之间都通过队列连接起来（e.g. kafka）。&lt;/p&gt;
-&lt;h2 id=&#34;美团广告推荐-4&#34;&gt;美团广告推荐 &lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;美团广告推荐&#34;&gt;美团广告推荐 &lt;sup id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;可以发现在和Pinterest的推荐系统其实在设计上有很多共同点。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;可以发现在和Pinterest的推荐系统其实在设计上有很多共同点。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;美团在推荐任务中有两个观察点：&lt;strong&gt;数据样本稀疏&lt;/strong&gt;，广告投放后点击量非常少；&lt;strong&gt;用户兴趣存在时空特点&lt;/strong&gt;，在不同时间点和地点用户有不同的兴趣点。通过异构图构建、注意力机制等方法解决的推荐不准确的问题。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-18-00-04-16.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;整个推荐也分成online任务，保证请求低延迟；以及offline任务，用来更新图节点embedding，学习用户的长期兴趣。而整个系统的部署方式和GraphLearn也有一些相似性。&lt;/p&gt;
 &lt;h2 id=&#34;challenges-still-exist&#34;&gt;Challenges still exist&lt;/h2&gt;
 &lt;p&gt;在很多业务场景下，图并不是静态不变的而是呈现出一种时间特征，一些点在$t_0$时加入，之后在$t_1$时删除。但是时序图GNN（TGNN）仍然是一个open的问题 &lt;sup id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;。在近几年GNN的发展中，开放的标准数据集（e.g. OGB &lt;sup id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;8&lt;/a&gt;&lt;/sup&gt;）有着巨大的贡献，不论是GNN算法还是GNN系统开发，都会将OGB作为数据集和其他baseline比较。然而目前TGNN并没有对应的标准数据集，这样我们很难去比较不同来自不同团队的工作。另一个方面，GNN的收敛性和表达能力是可以被证明的，但是TGNN还是一个相对较新的算法，并没有GNN成熟，缺少基础的理论支撑。&lt;/p&gt;
-&lt;p&gt;GNN虽然网络层数少，计算资源需求不大，但是图和特征需要占用大量的存储资源，这给GNN部署和落地带来了一些挑战 &lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/gnn-application-in-recommendation/2023-03-18-13-38-30.png#center-large&#34;&gt;&lt;/p&gt;</description>
+&lt;p&gt;GNN虽然网络层数少，计算资源需求不大，但是图和特征需要占用大量的存储资源，这给GNN部署和落地带来了一些挑战 &lt;sup id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;</description>
     </item>
     <item>
       <title>FlexSC</title>
@@ -129,8 +127,7 @@ $$
 &lt;p&gt;&lt;img alt=&#34;Memory Hierarchy.&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/memory-hierarchy.png#center&#34;&gt;&lt;/p&gt;
 &lt;p&gt;前面已经提到了block会在SM上执行，在物理实现时会用到SIMT(Single-Instruction, Multiple-Thread)。multiprocessor用warp(a group of 32 threads)来管理线程。&lt;/p&gt;
 &lt;p&gt;warp中的线程都从相同的起点开始，但是每个线程都有自己的pc，寄存器状态也可能不一样。而且一个warp的thread执行的指令还是相同的。&lt;/p&gt;
-&lt;p&gt;如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Sample-Parallelism&lt;/strong&gt;，对于Individual Transit Sampling可以将每一对sample和transit分配$m_i$个线程，每个sample放到一个block里。对于Collective Transit Sampling，需要先把所有的邻居存到global memory里，再采样。&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&#34;image-20211114120722353&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114120722353.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在采样时，邻居多的节点计算的时间就会更久。如果同一个warp里面的两个thread被分给两个邻居数量不同的transit，就会有divergence。而且，图得存在gobal memory，shared memory利用不充分。&lt;/p&gt;
@@ -206,8 +203,7 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;h2 id=&#34;optimize-synchronous-ipc&#34;&gt;Optimize synchronous IPC&lt;/h2&gt;
 &lt;p&gt;一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://sel4.systems/&#34;&gt;seL4&lt;/a&gt;用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://sel4.systems/&#34;&gt;seL4&lt;/a&gt;用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/IPCtime.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在seL4上测试负载，IPC占用的时间是很多的。&lt;/p&gt;
@@ -217,8 +213,7 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在虚拟机中运行的进程，如果要访问内存会经过&lt;/p&gt;
 &lt;p&gt;GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)&lt;/p&gt;
-&lt;p&gt;这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/skybridge.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/code.png&#34;&gt;&lt;/p&gt;
@@ -239,8 +234,7 @@ yle=&#34;zoom:100%; margin-top: 5px;&#34; /&gt;&lt;/center&gt;
 &lt;li&gt;不复制传递消息&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/xpc.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。&lt;/p&gt;
-&lt;p&gt;XPC engine提供了两个硬件原语：&lt;strong&gt;User-level Cross Process Call&lt;/strong&gt;，&lt;strong&gt;Lightweight Message Transfer&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

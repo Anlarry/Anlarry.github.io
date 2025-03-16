@@ -4,7 +4,7 @@
     <title>IPC on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/ipc/</link>
     <description>Recent content in IPC on Hi-^_^</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Thu, 16 Sep 2021 19:17:00 +0000</lastBuildDate>
@@ -20,8 +20,7 @@
 &lt;h2 id=&#34;optimize-synchronous-ipc&#34;&gt;Optimize synchronous IPC&lt;/h2&gt;
 &lt;p&gt;一般IPC过程需要经过内核，这个过程需要保存用户态状态，当退出内核时还需恢复用户状态。因为每个进程都在自己的虚拟地址空间中，IPC过程还需要切换虚拟地址空间。另外还有一些逻辑需要处理。这些都导致IPC有较高的延迟。&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://sel4.systems/&#34;&gt;seL4&lt;/a&gt;用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://sel4.systems/&#34;&gt;seL4&lt;/a&gt;用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/IPCtime.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在seL4上测试负载，IPC占用的时间是很多的。&lt;/p&gt;
@@ -31,8 +30,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;在虚拟机中运行的进程，如果要访问内存会经过&lt;/p&gt;
 &lt;p&gt;GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)&lt;/p&gt;
-&lt;p&gt;这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/skybridge.png&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/code.png&#34;&gt;&lt;/p&gt;
@@ -53,8 +51,7 @@
 &lt;li&gt;不复制传递消息&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/xpc.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。&lt;/p&gt;
-&lt;p&gt;XPC engine提供了两个硬件原语：&lt;strong&gt;User-level Cross Process Call&lt;/strong&gt;，&lt;strong&gt;Lightweight Message Transfer&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;p&gt;和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

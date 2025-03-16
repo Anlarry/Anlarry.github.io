@@ -4,7 +4,7 @@
     <title>计算几何 on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/</link>
     <description>Recent content in 计算几何 on Hi-^_^</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Thu, 27 Aug 2020 00:01:00 +0800</lastBuildDate>
@@ -16,8 +16,7 @@
       <guid>https://Anlarry.github.io/posts/acm-icpc/gym-102460l-largest-quadrilateral/</guid>
       <description>&lt;h1 id=&#34;gym-102460l-largest-quadrilateral&#34;&gt;Gym 102460L Largest Quadrilateral&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&#34;https://codeforces.com/gym/102460/&#34;&gt;Largest Quadrilateral&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://codeforces.com/gym/102460/&#34;&gt;Largest Quadrilateral&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意&lt;/h2&gt;
 &lt;p&gt;给$n$个点从中选出四个点，使得面积最大&lt;/p&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
@@ -31,8 +30,7 @@
 &lt;ul&gt;
 &lt;li&gt;输出的格式&lt;/li&gt;
 &lt;li&gt;凸包上应该留下共线的点&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;cstdio&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;stack&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;set&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;

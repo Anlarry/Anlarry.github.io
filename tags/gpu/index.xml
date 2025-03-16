@@ -4,7 +4,7 @@
     <title>GPU on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/gpu/</link>
     <description>Recent content in GPU on Hi-^_^</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Sun, 14 Nov 2021 00:00:00 +0000</lastBuildDate>
@@ -40,8 +40,7 @@ $$
 &lt;p&gt;&lt;img alt=&#34;Memory Hierarchy.&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/memory-hierarchy.png#center&#34;&gt;&lt;/p&gt;
 &lt;p&gt;前面已经提到了block会在SM上执行，在物理实现时会用到SIMT(Single-Instruction, Multiple-Thread)。multiprocessor用warp(a group of 32 threads)来管理线程。&lt;/p&gt;
 &lt;p&gt;warp中的线程都从相同的起点开始，但是每个线程都有自己的pc，寄存器状态也可能不一样。而且一个warp的thread执行的指令还是相同的。&lt;/p&gt;
-&lt;p&gt;如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;如果就是普通的没有控制流的代码，大家就一起执行。那遇到分支怎么办，每个线程可能有不同的路径。这时就会变成串行。warp去执行每个分支路径，不在路径上的thread就等着。这就可能会很影响并行，也就是Branch divergence。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Sample-Parallelism&lt;/strong&gt;，对于Individual Transit Sampling可以将每一对sample和transit分配$m_i$个线程，每个sample放到一个block里。对于Collective Transit Sampling，需要先把所有的邻居存到global memory里，再采样。&lt;/p&gt;
 &lt;p&gt;&lt;img alt=&#34;image-20211114120722353&#34; loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/nextdoor/image-20211114120722353.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;在采样时，邻居多的节点计算的时间就会更久。如果同一个warp里面的两个thread被分给两个邻居数量不同的transit，就会有divergence。而且，图得存在gobal memory，shared memory利用不充分。&lt;/p&gt;
