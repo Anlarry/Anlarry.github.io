@@ -1,6 +1,6 @@
 baseURL: "https://Anlarry.github.io/"
 title: Hi-^_^
-paginate: 5 
+paginate.pagerSize: 5 
 theme: PaperMod
 
 enableRobotsTXT: true
