@@ -4,7 +4,7 @@
     <title>FFT on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/fft/</link>
     <description>Recent content in FFT on Hi-^_^</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo -- 0.147.5</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Sun, 01 Mar 2020 12:09:00 +0800</lastBuildDate>
@@ -234,7 +234,9 @@ $$&lt;/p&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意：&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://nanti.jisuanke.com/t/41098&#34;&gt;Rock Paper Scissors Lizard Spock&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/acm-icpc/rock-paper-scissors-lizard-spock/image_b64.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;image_b64.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;image_b64.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;
 &lt;p&gt;有五种手势，类似于石头剪刀布，有两个串$s, t$,由这五种手势组成，从某个位置开始匹配，如果$t_i$能赢$s_j$得一分，求一个$pos(0\le pos \le len(s)-len(t))$，使得得分最多&lt;/p&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution：&lt;/h2&gt;
 &lt;p&gt;将上图记为$G$，如果$op_1$可以赢$op_2$，则$G(op_1, op_2)=1$,&lt;/p&gt;

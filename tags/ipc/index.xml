@@ -4,7 +4,7 @@
     <title>IPC on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/ipc/</link>
     <description>Recent content in IPC on Hi-^_^</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo -- 0.147.5</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Thu, 16 Sep 2021 19:17:00 +0000</lastBuildDate>
@@ -22,7 +22,9 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://sel4.systems/&#34;&gt;seL4&lt;/a&gt;用fastpath降低IPC延迟，消息会被立即发送，让kernel直接切换到server进程避免了调度器，因此可以提升IPC性能。但是也无法避免kernel。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;另一方面当传递的消息较大时，IPC一般需要将消息复制到内核，再从内核复制到另一个进程。或者使用共享内存，减少一次复制。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/IPCtime.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;IPCtime.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;IPCtime.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;
 &lt;p&gt;在seL4上测试负载，IPC占用的时间是很多的。&lt;/p&gt;
 &lt;h2 id=&#34;skybridge&#34;&gt;SkyBridge&lt;/h2&gt;
 &lt;p&gt;为了提高IPC性能，SkyBridge想法是IPC不经过kernel,sender可以直接调用receiver的procedure。不进过kernel如何调用receiver呢？似乎需要一个新的模块完成这个功能，SkyBridge利用Intel为虚拟化提供的硬件，&lt;strong&gt;EPT(extended page table)&lt;/strong&gt; 切换，允许在用户态下切换EPT，这样就可以实现在用户态下切换虚拟地址空间。&lt;/p&gt;
@@ -32,17 +34,25 @@
 &lt;p&gt;GVA(Guest virtual address)➡GPA(Guest physical address)➡HPA(Host physical address)&lt;/p&gt;
 &lt;p&gt;这样的两级地址转换，经过Guest页表得到GPA，再经过EPT得到HPA&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;同时SkyBridge中的每个进程都在自己的虚拟空间中，彼此之间相互隔离。如果通过将进程放在同一个虚拟空间，然后用EPT将他们隔离，这样的话当进程数很多的时候就会比较复杂。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/skybridge.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/code.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;skybridge.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;skybridge.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;
+&lt;p&gt;code.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;code.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;
 &lt;p&gt;从上图可以看到SkyBridge的两个kernel：&lt;code&gt;RootKernel&lt;/code&gt;( a tiny hypervisor)和&lt;code&gt;SubKernel&lt;/code&gt;(即microkernel)。&lt;/p&gt;
 &lt;p&gt;首先server在kernel中注册。kernel会吧trapoline-related代码和数据映射到server的虚拟空间，并返回一个ID用来给client调用。client向kernel注册时提供1server ID,kernel同样将代码和数据映射到他的虚拟空间。&lt;/p&gt;
 &lt;p&gt;Subkernel调用Rootkernel的借口让server和client在EPT level上绑定，kernel会为client和server配置EPT。配置server的EPT时，SkyBridge把client的页表映射到相应server的页表。client调用&lt;code&gt;direct_server_call&lt;/code&gt;，切换至server的EPT后使用server的页表翻译后续的地址。trapoline代码安装server的stack,调用handler。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/addressT.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;addressT.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;addressT.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;
 &lt;p&gt;在执行过程中，client的CR3(页表地址)不会发生改变，SkyBridge将client CR3的HPA映射为server C3的HPA，这样就相当于切换到了server的空间。&lt;/p&gt;
 &lt;h3 id=&#34;something-else&#34;&gt;something else&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;RootKernel &amp;amp; 虚拟化开销&lt;/strong&gt;，Rootkernel只提供最基本的功能，同时为了降低VM exit，Rootkernel允许像更改CR3的指令不触发VM exit、让外部中断直接到microkernel处理。为了解决EPT violation，Rootkernel用1GB的页，把大部分host物理内存映射到microkernel（除了Rootkernel保留的部分，大概100MB）。这样microkernel访问物理地址时，就不会有EPT iolation。这样不仅降低了处理TLB miss的时间，也降低了TLS miss的次数。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;illegal VMFUNC&lt;/strong&gt;，可能会导致一些安全问题。SkyBrdige的方法是功能相同的指令替换之前的指令。&lt;/p&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/rewrite.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;rewrite.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;rewrite.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;
 &lt;h2 id=&#34;xpc&#34;&gt;XPC&lt;/h2&gt;
 &lt;p&gt;但是SkyBridge需要工作在虚拟化环境中，而且当出现调用链的时候（e.g., A$\rightarrow$B$\rightarrow$C）这样出现消息被多次复制的情况。&lt;/p&gt;
 &lt;p&gt;XPC从两个方面提高IPC性能，&lt;/p&gt;
@@ -50,8 +60,9 @@
 &lt;li&gt;让IPC不经过kernel&lt;/li&gt;
 &lt;li&gt;不复制传递消息&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/paper-reading/skybridge--xpc/xpc.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;和SkyBridge一样XPC也属于硬件优化IPC，SkyBridge通过VMFUNC, XPC则通过在新的硬件，XPC engine。XPC engine提供了IPC的基本功能，如capability检查、上下文切换、高效轻量级的消息传递机制(relay-seg)。&lt;/p&gt;</description>
+&lt;p&gt;xpc.png
+&lt;img class=&#34;img-fluid&#34; src=&#34;xpc.png&#34; alt=&#39;&#39; /&gt;
+&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
