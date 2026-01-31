@@ -1,5 +1,5 @@
 ---
-title: "2022-Fabula"
+title: "2022"
 date: 2022-01-01
 content: hide
 ---

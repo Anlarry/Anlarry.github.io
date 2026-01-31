@@ -63,3 +63,30 @@ content: hide
 
 “用火与剑来征服世界，用路与法来治理万邦”
 
+### 平面国
+
+![](2025-x.png#center-small)
+
+妙趣横生的二维世界，对于高维空间的描述生动而形象。
+
+### 欧洲中世纪史
+
+![](2025-x1.png#center-small)
+
+一本不错的欧洲中世纪史概览，从多个角度——神权、王权、教会、城市、经济、文化等——来理解中世纪的欧洲。
+
+### 银河帝国 —— 基地三部曲
+
+<div class="row">
+    <div class="column"> 
+        <img src="2025-x2.png" style="width: 95%"> 
+    </div>
+    <div class="column">
+        <img src="2025-x3.png" style="width: 95%"> 
+    </div>
+    <div class="column">
+        <img src="2025-x4.png" style="width: 95%">
+    </div>
+</div>
+
+时隔多年再度基地三部曲，融合多种元素的经典，银河帝国折射着古罗马帝国的辉煌与衰落，心理史学综合数学与历史，第二基地是对构建社会体系的思考。
