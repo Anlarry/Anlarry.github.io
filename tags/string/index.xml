@@ -4,7 +4,7 @@
     <title>STRING on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/string/</link>
     <description>Recent content in STRING on Hi-^_^</description>
-    <generator>Hugo -- 0.147.5</generator>
+    <generator>Hugo -- 0.155.1</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Wed, 05 Aug 2020 10:08:00 +0800</lastBuildDate>
@@ -16,11 +16,13 @@
       <guid>https://Anlarry.github.io/posts/acm-icpc/poj-3376/</guid>
       <description>&lt;h1 id=&#34;poj-3376&#34;&gt;POJ 3376&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;tire + manacher&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;tire + manacher&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;题意&#34;&gt;题意&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;http://poj.org/problem?id=3376&#34;&gt;http://poj.org/problem?id=3376&lt;/a&gt;
-给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$&lt;/p&gt;&lt;/blockquote&gt;
+给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
 &lt;p&gt;在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。&lt;/p&gt;
 &lt;p&gt;首先考虑什么情况下，两个串拼接会是一个回文串。&lt;/p&gt;

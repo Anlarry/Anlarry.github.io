@@ -1,10 +1,12 @@
 <!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>POJ 3376 | Hi-^_^</title><meta name=keywords content="STRING,搬家"><meta name=description content="POJ 3376
 
 tire + manacher
+
 题意
 
 http://poj.org/problem?id=3376
 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
+
 Solution
 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。
@@ -34,7 +36,7 @@ s = a_{n-1}\dots a_i \newline
 t = \overbrace{a_0\dots a_{i-1}} &amp;a_i\dots a_{n-1}
 \end{matrix}
 \end{cases}
-$$"><meta name=author content><link rel=canonical href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/><meta name=google-site-verification content="XYZabc"><meta name=yandex-verification content="XYZabc"><meta name=msvalidate.01 content="XYZabc"><link crossorigin=anonymous href=/assets/css/stylesheet.361fce73b7c052bc5b12f4a90af18a7f4a9172dc13575d87069b65acacb6a876.css integrity="sha256-Nh/Oc7fAUrxbEvSpCvGKf0qRctwTV12HBptlrKy2qHY=" rel="preload stylesheet" as=style><link rel=icon href=https://Anlarry.github.io/icon/ai512.png><link rel=icon type=image/png sizes=16x16 href=https://Anlarry.github.io/icon/ai16.png><link rel=icon type=image/png sizes=32x32 href=https://Anlarry.github.io/icon/ai32.png><link rel=apple-touch-icon href=https://Anlarry.github.io/apple-touch-icon.png><link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script async src="https://www.googletagmanager.com/gtag/js?id=G-VHNG5P8WWQ"></script><script>var dnt,doNotTrack=!1;if(!1&&(dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes"),!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-VHNG5P8WWQ")}</script><meta property="og:url" content="https://Anlarry.github.io/posts/acm-icpc/poj-3376/"><meta property="og:site_name" content="Hi-^_^"><meta property="og:title" content="POJ 3376"><meta property="og:description" content="POJ 3376 tire + manacher
+$$"><meta name=author content><link rel=canonical href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/><meta name=google-site-verification content="XYZabc"><meta name=yandex-verification content="XYZabc"><meta name=msvalidate.01 content="XYZabc"><link crossorigin=anonymous href=/assets/css/stylesheet.7f1ac8b080e85ee8d2f0c5df6cae451882d6c317300428a0d21158c978a5020b.css integrity="sha256-fxrIsIDoXujS8MXfbK5FGILWwxcwBCig0hFYyXilAgs=" rel="preload stylesheet" as=style><link rel=icon href=https://Anlarry.github.io/icon/ai512.png><link rel=icon type=image/png sizes=16x16 href=https://Anlarry.github.io/icon/ai16.png><link rel=icon type=image/png sizes=32x32 href=https://Anlarry.github.io/icon/ai32.png><link rel=apple-touch-icon href=https://Anlarry.github.io/apple-touch-icon.png><link rel=mask-icon href=https://Anlarry.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://Anlarry.github.io/posts/acm-icpc/poj-3376/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script async src="https://www.googletagmanager.com/gtag/js?id=G-VHNG5P8WWQ"></script><script>var doNotTrack=!1,dnt=navigator.doNotTrack||window.doNotTrack||navigator.msDoNotTrack,doNotTrack=dnt=="1"||dnt=="yes";if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-VHNG5P8WWQ")}</script><meta property="og:url" content="https://Anlarry.github.io/posts/acm-icpc/poj-3376/"><meta property="og:site_name" content="Hi-^_^"><meta property="og:title" content="POJ 3376"><meta property="og:description" content="POJ 3376 tire + manacher
 题意 http://poj.org/problem?id=3376 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
 Solution 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。
@@ -44,10 +46,12 @@ case 2
 $$ \begin{cases} \begin{matrix} &\mathrm{palindrome} \newline s = a_0\dots a_i &\overbrace{a_{i+1}\dots a_{n-1}} \end{matrix} \newline \newline t = a_i\dots a_0 \end{cases} $$ 以及对称的情况 $$ \begin{cases} s = a_{n-1}\dots a_i \newline \begin{matrix} \ \ \ \ \ \mathrm{palindrome} &\newline t = \overbrace{a_0\dots a_{i-1}} &amp;a_i\dots a_{n-1} \end{matrix} \end{cases} $$"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2020-08-05T10:08:00+08:00"><meta property="article:modified_time" content="2020-08-05T10:08:00+08:00"><meta property="article:tag" content="STRING"><meta property="article:tag" content="搬家"><meta name=twitter:card content="summary"><meta name=twitter:title content="POJ 3376"><meta name=twitter:description content="POJ 3376
 
 tire + manacher
+
 题意
 
 http://poj.org/problem?id=3376
 给$n$个串，两两连接，一共$n^2$种，求其中有多少是回文， 字符串的长度和小于$2e6$
+
 Solution
 在考虑第$i$个串$t$和多少个串$s$拼接是回文时，计算$s+t$是回文的数量，将所有数量累加就是最终的回文数。
 首先考虑什么情况下，两个串拼接会是一个回文串。
@@ -103,7 +107,7 @@ s = a_{n-1}\dots a_i \newline
 t = \overbrace{a_0\dots a_{i-1}} &amp;a_i\dots a_{n-1}
 \end{matrix}
 \end{cases}
-$$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把所有的串放到tire树上，统计答案。</p><blockquote><p>用stl可能会TLE</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
+$$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把所有的串放到tire树上，统计答案。</p><blockquote><p>用stl可能会TLE</p></blockquote><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-c++ data-lang=c++><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdio&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;stack&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;set&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cmath&gt;</span><span style=color:#75715e>
@@ -114,13 +118,13 @@ $$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把�
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;string&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstring&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;algorithm&gt;</span><span style=color:#75715e>
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>//#include &lt;memory.h&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//#include &lt;memory.h&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cstdlib&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;queue&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;iomanip&gt;</span><span style=color:#75715e>
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#include</span> <span style=color:#75715e>&lt;cassert&gt;</span><span style=color:#75715e>
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>// #include &lt;unordered_map&gt;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#define P pair&lt;int, int&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// #include &lt;unordered_map&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>#define P pair&lt;int, int&gt;
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#define LL long long
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#define LD long double
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#define PLL pair&lt;LL, LL&gt;
@@ -129,15 +133,15 @@ $$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把�
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#define PI acos(-1.0)
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#define random(x) rand() % x
 </span></span></span><span style=display:flex><span><span style=color:#75715e>#define debug(x) cout &lt;&lt; #x &lt;&lt; &#34; &#34; &lt;&lt; x &lt;&lt; &#34;\n&#34;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>using</span> <span style=color:#66d9ef>namespace</span> std;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f</span>;
 </span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> LL __64inf <span style=color:#f92672>=</span> <span style=color:#ae81ff>0x3f3f3f3f3f3f3f3f</span>;
 </span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
 </span></span><span style=display:flex><span><span style=color:#75715e>#else
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span>  <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> MAX <span style=color:#f92672>=</span> <span style=color:#ae81ff>2e6</span>  <span style=color:#f92672>+</span> <span style=color:#ae81ff>50</span>;
 </span></span><span style=display:flex><span><span style=color:#75715e>#endif
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>998244353</span>;
+</span></span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> <span style=color:#66d9ef>int</span> mod <span style=color:#f92672>=</span> <span style=color:#ae81ff>998244353</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> str_len[MAX];
 </span></span><span style=display:flex><span><span style=color:#66d9ef>char</span> str[MAX<span style=color:#f92672>&lt;&lt;</span><span style=color:#ae81ff>1</span>];
@@ -258,9 +262,9 @@ $$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把�
 </span></span><span style=display:flex><span>}
 </span></span><span style=display:flex><span><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>(){
 </span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
+</span></span></span><span style=display:flex><span>    freopen(<span style=color:#e6db74>&#34;in&#34;</span>, <span style=color:#e6db74>&#34;r&#34;</span>, stdin);
 </span></span><span style=display:flex><span><span style=color:#75715e>#endif
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    tire.init();
+</span></span></span><span style=display:flex><span>    tire.init();
 </span></span><span style=display:flex><span>    scanf(<span style=color:#e6db74>&#34;%d&#34;</span>, <span style=color:#f92672>&amp;</span>n);
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>int</span> cur <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>) {
@@ -282,14 +286,14 @@ $$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把�
 </span></span><span style=display:flex><span>    tire.rest_palin[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> tire.siz[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
 </span></span><span style=display:flex><span>    <span style=color:#75715e>#ifdef DEBUG
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        printf(<span style=color:#e6db74>&#34;debug i:%d calcu:%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, i, calcu(i, str_p[i]));
+</span></span></span><span style=display:flex><span>        printf(<span style=color:#e6db74>&#34;debug i:%d calcu:%d</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, i, calcu(i, str_p[i]));
 </span></span><span style=display:flex><span>    <span style=color:#75715e>#endif
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ans <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> calcu(i, str_p[i]);        
+</span></span></span><span style=display:flex><span>        ans <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> calcu(i, str_p[i]);        
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span>    ans <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> zero <span style=color:#f92672>*</span> zero;
 </span></span><span style=display:flex><span>    ans <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1LL</span> <span style=color:#f92672>*</span> zero <span style=color:#f92672>*</span> palin <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
 </span></span><span style=display:flex><span><span style=color:#75715e>#ifdef DEBUG
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
+</span></span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; i <span style=color:#f92672>&lt;</span> n; i<span style=color:#f92672>++</span>){
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span>(<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; j <span style=color:#f92672>&lt;</span> str_len[i]; j<span style=color:#f92672>++</span>)
 </span></span><span style=display:flex><span>            cout <span style=color:#f92672>&lt;&lt;</span> prefix_parlin_p[i][j] <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34; &#34;</span>;
 </span></span><span style=display:flex><span>        puts(<span style=color:#e6db74>&#34;&#34;</span>);
@@ -298,7 +302,7 @@ $$</p><p>因此可以对每个串，求出前缀和后缀是否是回文。把�
 </span></span><span style=display:flex><span>        puts(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>); 
 </span></span><span style=display:flex><span>    }
 </span></span><span style=display:flex><span><span style=color:#75715e>#endif
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
+</span></span></span><span style=display:flex><span>    printf(<span style=color:#e6db74>&#34;%lld</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, ans);
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div></div><footer class=post-footer><ul class=post-tags><li><a href=https://Anlarry.github.io/tags/string/>STRING</a></li><li><a href=https://Anlarry.github.io/tags/%E6%90%AC%E5%AE%B6/>搬家</a></li></ul><nav class=paginav><a class=prev href=https://Anlarry.github.io/posts/acm-icpc/nowcoder-2020-%E5%A4%9A%E6%A0%A1-%E7%AC%AC%E4%BA%94%E5%9C%BA/><span class=title>« Prev</span><br><span>nowcoder 2020 多校 第五场</span>

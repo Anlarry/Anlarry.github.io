@@ -4,7 +4,7 @@
     <title>Xelatex on Hi-^_^</title>
     <link>https://Anlarry.github.io/tags/xelatex/</link>
     <description>Recent content in Xelatex on Hi-^_^</description>
-    <generator>Hugo -- 0.147.5</generator>
+    <generator>Hugo -- 0.155.1</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Thu, 10 Nov 2022 00:00:00 +0000</lastBuildDate>
@@ -19,7 +19,7 @@
 &lt;font size=18&gt;☃&lt;/font&gt;
 &lt;/center&gt;
 &lt;p&gt;latex作为日常使用的排版工具, 怎么在latex中插入一个unicode? 一般来讲, 应该&lt;code&gt;Ctrl+C&lt;/code&gt;, &lt;code&gt;Ctrl+V&lt;/code&gt;就可以, 我们来看看下面的代码&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\documentclass&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;[utf8]&lt;/span&gt;{article}
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\documentclass&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;[utf8]&lt;/span&gt;{article}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\begin&lt;/span&gt;{document}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;\huge&lt;/span&gt;
@@ -30,13 +30,12 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Unicode char &lt;span style=&#34;color:#66d9ef&#34;&gt;\texttt&lt;/span&gt;{U+25E6} is ◦
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然而输出的PDF中并没有包含所有的Unicode字符, 看起来这个问题还存在一定的共性&lt;a href=&#34;https://tex.stackexchange.com/questions/45796/unicode-characters-not-displaying-in-xetex&#34;&gt;unicode-characters-not-displaying-in-xetex&lt;/a&gt;, 而且似乎是个字体问题.&lt;/p&gt;
-&lt;p&gt;2022-11-10-22-08-15.png#center-medium
-&lt;img class=&#34;img-fluid&#34; src=&#34;2022-11-10-22-08-15.png#center-medium&#34; alt=&#39;&#39; /&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-08-15.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Tex Engine使用&lt;a href=&#34;https://en.wikipedia.org/wiki/XeTeX#Example&#34;&gt;xelatex&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;Tex Engine使用&lt;a href=&#34;https://en.wikipedia.org/wiki/XeTeX#Example&#34;&gt;xelatex&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;我们来试试更换为&lt;a href=&#34;https://en.wikipedia.org/wiki/GNU_FreeFont&#34;&gt;FreeMono&lt;/a&gt;字体&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\documentclass&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;[utf8]&lt;/span&gt;{article}
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-latex&#34; data-lang=&#34;latex&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\documentclass&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;[utf8]&lt;/span&gt;{article}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\usepackage&lt;/span&gt;{fontspec}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\setmainfont&lt;/span&gt;{FreeMono}
@@ -49,9 +48,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Unicode char &lt;span style=&#34;color:#66d9ef&#34;&gt;\texttt&lt;/span&gt;{U+25E6} is ◦
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;\end&lt;/span&gt;{document}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2022-11-10-22-26-48.png#center-medium
-&lt;img class=&#34;img-fluid&#34; src=&#34;2022-11-10-22-26-48.png#center-medium&#34; alt=&#39;&#39; /&gt;
-&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://Anlarry.github.io/posts/tool/xelatexunicode/2022-11-10-22-26-48.png#center-medium&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Ha!现在ᛤ已经可以正常显示了, 𓄅却变成了一个奇怪字符. 其实这是因为在FreeMono字体中缺失字符𓄅, 而ᛤ之所以能显示是因为FreeMono包含了这个字符.&lt;/p&gt;</description>
     </item>
   </channel>

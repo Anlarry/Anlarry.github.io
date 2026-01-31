@@ -4,7 +4,7 @@
     <title>CSAPP on Hi-^_^</title>
     <link>https://Anlarry.github.io/categories/csapp/</link>
     <description>Recent content in CSAPP on Hi-^_^</description>
-    <generator>Hugo -- 0.147.5</generator>
+    <generator>Hugo -- 0.155.1</generator>
     <language>en</language>
     <copyright>Jiali Wang</copyright>
     <lastBuildDate>Mon, 16 Mar 2020 21:24:00 +0800</lastBuildDate>
@@ -19,7 +19,8 @@
 &lt;blockquote&gt;
 &lt;h2 id=&#34;安装模拟器&#34;&gt;安装模拟器&lt;/h2&gt;
 &lt;p&gt;解决&lt;code&gt;undefined reference to ’matherr‘&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;参考 &lt;a href=&#34;https://blog.csdn.net/g_x_l_233/article/details/83957381&#34;&gt;Y86-64模拟器的安装与出现对&amp;rsquo;matherr&amp;rsquo;未定义引用问题的解决&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;参考 &lt;a href=&#34;https://blog.csdn.net/g_x_l_233/article/details/83957381&#34;&gt;Y86-64模拟器的安装与出现对&amp;rsquo;matherr&amp;rsquo;未定义引用问题的解决&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;part-a&#34;&gt;Part A&lt;/h2&gt;
 &lt;p&gt;在这部分要在&lt;code&gt;sim/misc&lt;/code&gt;中完成，我们要编写和模拟三个&lt;code&gt;Y86-64&lt;/code&gt;程序&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;sum.ys&lt;/code&gt;： 遍历链表求和&lt;/strong&gt;&lt;/p&gt;
