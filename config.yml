@@ -84,8 +84,6 @@ params:
     socialIcons:
         - name: github
           url: "https://github.com/Anlarry"
-        - name: twitter
-          url: "https://twitter.com/Anlarry3"
         - name: rss
           url: "https://anlarry.github.io/index.xml"
 
